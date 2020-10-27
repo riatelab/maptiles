@@ -24,4 +24,8 @@ from the terra package.
 }
 \examples{
 library(sf)
+library(maptiles)
+nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+nc_osm <- mp_get_tiles(nc, crop = TRUE)
+mp_tiles(nc_osm)
 }

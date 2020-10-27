@@ -12,6 +12,10 @@
 #' @importFrom graphics plot.new plot.window
 #' @examples
 #' library(sf)
+#' library(maptiles)
+#' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+#' nc_osm <- mp_get_tiles(nc, crop = TRUE)
+#' mp_tiles(nc_osm)
 mp_tiles <- function(x, add = FALSE, ...) {
   if (add == FALSE) {
     ext <- as.vector(ext(x))

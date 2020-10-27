@@ -5,7 +5,7 @@
 #' @param x an sf or sfc object.
 #' @param type the tile server from which to get the map. See Details for providers.
 #' For other sources use a list: type = list(src = "name of the source" ,
-#' q = "tiles address", sub = "subdomains", cit = "how to cite the tiles"). See Examples.
+#' q = "tiles address", sub = "subdomains", cit = "how to cite the tiles").
 #' @param zoom the zoom level.
 #' @param crop TRUE if results should be cropped to the specified x extent,
 #' FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.
@@ -18,15 +18,49 @@
 #' @details
 #' Zoom levels are described on the OpenStreetMap wiki:
 #' \url{http://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
+#' Providers: "OpenStreetMap.MapnikBW", "OpenStreetMap", "OpenStreetMap.DE",
+#' "OpenStreetMap.France", "OpenStreetMap.HOT", "OpenTopoMap", "Stamen.Toner",
+#' "Stamen.TonerBackground", "Stamen.TonerHybrid", "Stamen.TonerLines",
+#' "Stamen.TonerLabels", "Stamen.TonerLite", "Stamen.Watercolor",
+#' "Stamen.Terrain", "Stamen.TerrainBackground", "Stamen.TerrainLabels",
+#' "Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap", "Esri.WorldImagery",
+#' "Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
+#' "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+#' "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
+#' "CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
+#' "CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",
+#' "HikeBike", "Wikimedia", "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
+#' "Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
+#' "Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
+#' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
 #' @importFrom terra ext project rast
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @examples
-#' \dontrun{
 #' library(sf)
-#' }
+#' library(maptiles)
+#' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+#' nc_osm <- mp_get_tiles(nc, crop = TRUE)
+#' mp_tiles(nc_osm)
+#'
+#' # Download esri tiles
+#' fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
+#'                    "Specialty/DeLorme_World_Base_Map/MapServer",
+#'                    "tile/{z}/{y}/{x}.jpg",
+#'                    sep = "/")
+#' typeosm <-  list(
+#'   src = 'esri',
+#'   q = fullserver,
+#'   sub = NA,
+#'   cit = 'Tiles; Esri; Copyright: 2012 DeLorme'
+#' )
+#' nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, verbose = TRUE)
+#' # Plot the tiles
+#' mp_tiles(nc_ESRI)
+#' txt <- typeosm$cit
+#' mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 mp_get_tiles <- function(x,
                          type = "OpenStreetMap",
                          zoom = NULL,
