@@ -1,0 +1,23 @@
+Package: maptiles
+Title: Download and Display Map Tiles
+Version: 0.1.0
+Authors@R: person("Timothée", "Giraud", 
+                  email = "timothee.giraud@cnrs.fr", 
+                  role = c("cre","aut"), 
+                  comment = c(ORCID = "0000-0002-1932-3323"))
+Description: 
+    Create maps from map tiles. maptiles helps to download, compose and display map tiles. 
+License: GPL-3
+LazyData: true
+Depends: 
+    R (>= 3.5.0),
+Imports: 
+    sf (>= 0.9-5),
+    curl,
+    graphics, 
+    png, 
+    terra,
+    slippymath
+SystemRequirements: C++11, GDAL (>= 3.0.4), GEOS (>= 3.8.0), PROJ (>= 6.3.1)
+Encoding: UTF-8
+RoxygenNote: 7.1.1
