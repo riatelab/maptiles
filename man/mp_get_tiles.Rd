@@ -7,20 +7,22 @@
 mp_get_tiles(
   x,
   type = "OpenStreetMap",
-  zoom = NULL,
+  zoom,
   crop = FALSE,
   verbose = FALSE,
-  apikey = NA,
-  cachedir = FALSE,
+  apikey,
+  cachedir,
   forceDownload = FALSE
 )
 }
 \arguments{
 \item{x}{an sf or sfc object.}
 
-\item{type}{the tile server from which to get the map. See Details for providers.
-For other sources use a list: type = list(src = "name of the source" ,
-q = "tiles address", sub = "subdomains", cit = "how to cite the tiles").}
+\item{type}{the tile server from which to get the map. It can be a name
+(see Details for providers) or a named list like this one: \code{
+type = list(src = "name of the source",
+q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
+(see Examples).}
 
 \item{zoom}{the zoom level.}
 
@@ -31,11 +33,10 @@ FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
 
 \item{apikey}{Needed for Thunderforest maps.}
 
-\item{cachedir}{name of a directory used to cache tiles. If TRUE, places a
-'tile.cache' folder in the working directory. If FALSE, tiles are only
-cached in \link[base:tempdir]{tempdir}.}
+\item{cachedir}{name of a directory used to cache tiles. If not set, tiles
+are cached in a \link[base:tempdir]{tempdir} folder.}
 
-\item{forceDownload}{if TRUE, cached tiles are downloaded again.}
+\item{forceDownload}{if TRUE, existing cached tiles may be overwritten}
 }
 \value{
 A SpatRaster is returned.
@@ -71,7 +72,7 @@ nc_osm <- mp_get_tiles(nc, crop = TRUE)
 mp_tiles(nc_osm)
 
 # Download esri tiles
-fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
+fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
                    "Specialty/DeLorme_World_Base_Map/MapServer",
                    "tile/{z}/{y}/{x}.jpg",
                    sep = "/")
@@ -79,7 +80,7 @@ typeosm <-  list(
   src = 'esri',
   q = fullserver,
   sub = NA,
-  cit = 'Tiles; Esri; Copyright: 2012 DeLorme'
+  cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
 nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, verbose = TRUE)
 # Plot the tiles

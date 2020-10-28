@@ -3,18 +3,19 @@
 #' @description Get map tiles based on a spatial object extent. Maps can be
 #' fetched from various open map servers.
 #' @param x an sf or sfc object.
-#' @param type the tile server from which to get the map. See Details for providers.
-#' For other sources use a list: type = list(src = "name of the source" ,
-#' q = "tiles address", sub = "subdomains", cit = "how to cite the tiles").
+#' @param type the tile server from which to get the map. It can be a name
+#' (see Details for providers) or a named list like this one: \code{
+#' type = list(src = "name of the source",
+#' q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
+#' (see Examples).
 #' @param zoom the zoom level.
 #' @param crop TRUE if results should be cropped to the specified x extent,
 #' FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.
 #' @param verbose if TRUE, tiles filepaths, zoom level and citation are displayed.
 #' @param apikey Needed for Thunderforest maps.
-#' @param cachedir name of a directory used to cache tiles. If TRUE, places a
-#' 'tile.cache' folder in the working directory. If FALSE, tiles are only
-#' cached in \link[base:tempdir]{tempdir}.
-#' @param forceDownload if TRUE, cached tiles are downloaded again.
+#' @param cachedir name of a directory used to cache tiles. If not set, tiles
+#' are cached in a \link[base:tempdir]{tempdir} folder.
+#' @param forceDownload if TRUE, existing cached tiles may be overwritten
 #' @details
 #' Zoom levels are described on the OpenStreetMap wiki:
 #' \url{http://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
@@ -46,7 +47,7 @@
 #' mp_tiles(nc_osm)
 #'
 #' # Download esri tiles
-#' fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
+#' fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
 #'                    "Specialty/DeLorme_World_Base_Map/MapServer",
 #'                    "tile/{z}/{y}/{x}.jpg",
 #'                    sep = "/")
@@ -54,7 +55,7 @@
 #'   src = 'esri',
 #'   q = fullserver,
 #'   sub = NA,
-#'   cit = 'Tiles; Esri; Copyright: 2012 DeLorme'
+#'   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 #' )
 #' nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, verbose = TRUE)
 #' # Plot the tiles
@@ -63,11 +64,11 @@
 #' mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 mp_get_tiles <- function(x,
                          type = "OpenStreetMap",
-                         zoom = NULL,
+                         zoom,
                          crop = FALSE,
                          verbose = FALSE,
-                         apikey = NA,
-                         cachedir = FALSE,
+                         apikey,
+                         cachedir,
                          forceDownload = FALSE) {
   # test for single point (apply buffer to obtain a correct bbox)
   if (nrow(x) == 1 && st_is(x, "POINT")) {
@@ -81,7 +82,7 @@ mp_get_tiles <- function(x,
     bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(x)), 4326))
   }
   # select a default zoom level
-  if (is.null(zoom)) {
+  if (missing(zoom)) {
     gz <- slippymath::bbox_tile_query(bbx)
     zoom <- min(gz[gz$total_tiles %in% 4:10, "zoom"])
   }
@@ -96,6 +97,9 @@ mp_get_tiles <- function(x,
   # src mgmnt
   tile_grid$src <- param$src
   # query mgmnt
+  if(missing(apikey)){
+    apikey <- ""
+  }
   tile_grid$q <- sub("XXXXXX", apikey, param$q)
   # citation
   tile_grid$cit <- param$cit
@@ -107,29 +111,27 @@ mp_get_tiles <- function(x,
     ext <- "png"
   }
   tile_grid$ext <- ext
-  # tile_grid$ext <- substr(param$q, nchar(param$q)-2, nchar(param$q))
 
   # download images
   images <- get_tiles(tile_grid, verbose, cachedir, forceDownload)
   # compose images
   rout <- compose_tile_grid(tile_grid, images)
 
+  # set the projection
   terra::crs(rout) <- "epsg:3857"
-  # a <- terra::crs(mtq)
-  # ?crs
 
-  # # # reproject rout
+  # reproject rout
   rout <- terra::project(x = rout, y = st_crs(x)$wkt)
   rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
-  # #
-  # # crop management
+
+  # crop management
   if (crop == TRUE) {
     cb <- st_bbox(x)
     k <- min(c(0.052 * (cb[4] - cb[2]), 0.052 * (cb[3] - cb[1])))
     cb <- cb + c(-k, -k, k, k)
     rout <- terra::crop(rout, cb[c(1, 3, 2, 4)])
   }
-  #
+
   rout
 }
 
@@ -162,13 +164,13 @@ get_tiles <- function(tile_grid, verbose, cachedir, forceDownload) {
 # download tile according to parameters
 dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload) {
   # forceDownload will overwrite any files existing in cache
-  if (!is.logical(forceDownload)) stop("forceDownload must be TRUE or FALSE")
-  # if cachedir==F, save to temporary filepath
-  if (cachedir == FALSE) {
+  # if (!is.logical(forceDownload)) stop("forceDownload must be TRUE or FALSE")
+  # if cachedir is missing, save to temporary filepath
+  if (missing(cachedir)) {
     cachedir <- tempdir()
   } else {
     # if cachedir==T, place in working directory
-    if (cachedir == TRUE) cachedir <- paste0(getwd(), "/tile.cache")
+    # if (cachedir == TRUE) cachedir <- paste0(getwd(), "/tile.cache")
     # create the cachedir if it doesn't exist.
     if (!dir.exists(cachedir)) dir.create(cachedir)
     # uses subdirectories based on src to make the directory easier for users to navigate
@@ -206,7 +208,7 @@ compose_tile_grid <- function(tile_grid, images) {
     }
 
     # compose brick raster
-    r_img <- terra::rast(img)
+    r_img <- terra::rast(img, )
     terra::ext(r_img) <- terra::ext(bbox[c(
       "xmin", "xmax",
       "ymin", "ymax"
@@ -215,10 +217,13 @@ compose_tile_grid <- function(tile_grid, images) {
   }
   # if only one tile is needed
   if (length(bricks) == 1) {
-    return(bricks[[1]])
+    rout <- bricks[[1]]
+    rout <- terra::merge(rout, rout)
+  }else{
+    # all tiles together
+    rout <- do.call(terra::merge, bricks)
   }
-  # all tiles together
-  rout <- do.call(terra::merge, bricks)
+
   rout
 }
 
