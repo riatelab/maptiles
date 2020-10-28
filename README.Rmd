@@ -21,6 +21,7 @@ knitr::knit_hooks$set(margin = function(before, options, envir){
 # maptiles
 
 <!-- badges: start -->
+[![codecov](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg?token=R7T2PCTERH)](https://codecov.io/gh/riatelab/maptiles/)
 <!-- badges: end -->
 
 The goal of `maptiles` is to download, compose and display map tiles. 
@@ -37,7 +38,7 @@ You can install the development version of maptiles from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("rCarto/maptiles")
+devtools::install_github("riatelab/maptiles")
 ```
 ## Example
 
@@ -47,7 +48,10 @@ This is a basic example which shows you how to dowload OpenStreetMap tiles over 
 library(sf)
 library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+
+# dowload tiles and compose raster (SpatRaster)
 nc_osm <- mp_get_tiles(nc, crop = TRUE)
+# display map
 mp_tiles(nc_osm)
 plot(st_geometry(nc), col = NA, add = TRUE)
 mtext(text = "Tiles: © OpenStreetMap contributors", 
@@ -60,23 +64,25 @@ mtext(text = "Tiles: © OpenStreetMap contributors",
 
 
 ```{r example2,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, dpi = 96, out.width=852, out.height=269}
-# Download esri tiles
-fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                   "Specialty/DeLorme_World_Base_Map/MapServer",
-                   "tile/{z}/{y}/{x}.jpg",
-                   sep = "/")
+# define the query
+fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
+                    "Specialty/DeLorme_World_Base_Map/MapServer",
+                    "tile/{z}/{y}/{x}.jpg",
+                    sep = "/")
+# define the tile server parameter
 typeosm <-  list(
   src = 'esri',
   q = fullserver,
   sub = NA,
   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
+
+# dowload tiles and compose raster (SpatRaster)
 nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, 
                         cachedir = "tilesfolder", verbose = TRUE)
-# Plot the tiles
+# display map
 mp_tiles(nc_ESRI)
-txt <- typeosm$cit
-mtext(text = txt, side = 1, line = -1, adj = 1, cex = .9, font = 3)
+mtext(text = typeosm$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
 
