@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 name: R-CMD-check
 
@@ -67,7 +67,7 @@ jobs:
             libudunits2-dev \
             libgdal-dev \
             libgeos-dev \
-            libproj-dev 
+            libproj-dev
 
       - name: Install dependencies R packages
         run: |
@@ -86,7 +86,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-        
+
       - name: Test coverage
         run: covr::codecov()
         shell: Rscript {0}
