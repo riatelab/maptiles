@@ -5,10 +5,12 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/riatelab/maptiles/workflows/R-CMD-check/badge.svg)](https://github.com/riatelab/maptiles/actions)
 [![codecov](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg?token=R7T2PCTERH)](https://codecov.io/gh/riatelab/maptiles/)
 <!-- badges: end -->
 
-The goal of `maptiles` is to download, compose and display map tiles.
+The goal of `maptiles` is to download, compose and display map tiles
+with R.
 
 ## Installation
 
@@ -17,7 +19,7 @@ The goal of `maptiles` is to download, compose and display map tiles.
 <!-- install.packages("maptiles") -->
 <!-- ``` -->
 
-You can install the development version of maptiles from GitHub with:
+You can install the development version of `maptiles` from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -40,7 +42,7 @@ nc_osm <- mp_get_tiles(nc, crop = TRUE)
 # display map
 mp_tiles(nc_osm)
 plot(st_geometry(nc), col = NA, add = TRUE)
-mtext(text = "Tiles: © OpenStreetMap contributors", 
+mtext(text = mp_get_tiles_attribution("OpenStreetMap"), 
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
@@ -57,7 +59,7 @@ fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
                     "tile/{z}/{y}/{x}.jpg",
                     sep = "/")
 # define the tile server parameter
-typeosm <-  list(
+esri <-  list(
   src = 'esri',
   q = fullserver,
   sub = NA,
@@ -65,7 +67,7 @@ typeosm <-  list(
 )
 
 # dowload tiles and compose raster (SpatRaster)
-nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, 
+nc_esri <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, 
                         cachedir = "tilesfolder", verbose = TRUE)
 #> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => tilesfolder/esri/esri_7_34_50.jpg
 #> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => tilesfolder/esri/esri_7_35_50.jpg
@@ -79,11 +81,23 @@ nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE,
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme
 # display map
-mp_tiles(nc_ESRI)
-mtext(text = typeosm$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
+mp_tiles(nc_esri)
+mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
 <img src="man/figures/README-example2-1.png" width="852" height="269" />
+
+The following figure shows mini maps for most of the providers
+available:
+
+<img src="man/figures/README-front.png" width="840" height="756" />
+
+## Attribution of map tiles
+
+All maps available through `maptiles` are offered freely by various
+providers. The only counterpart from the user is to properly display an
+attribution text on the maps. `mp_get_tiles_attribution()` display a
+short credit text to add on each map produced with the downloaded tiles.
 
 ## Background
 
