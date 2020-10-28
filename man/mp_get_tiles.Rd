@@ -6,7 +6,7 @@
 \usage{
 mp_get_tiles(
   x,
-  type = "OpenStreetMap",
+  provider = "OpenStreetMap",
   zoom,
   crop = FALSE,
   verbose = FALSE,
@@ -18,9 +18,9 @@ mp_get_tiles(
 \arguments{
 \item{x}{an sf or sfc object.}
 
-\item{type}{the tile server from which to get the map. It can be a name
+\item{provider}{the tile server from which to get the map. It can be a name
 (see Details for providers) or a named list like this one: \code{
-type = list(src = "name of the source",
+provider = list(src = "name of the source",
 q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
 (see Examples).}
 
@@ -43,7 +43,7 @@ A SpatRaster is returned.
 }
 \description{
 Get map tiles based on a spatial object extent. Maps can be
-fetched from various open map servers.
+fetched from various map servers.
 }
 \details{
 Zoom levels are described on the OpenStreetMap wiki:
@@ -76,15 +76,15 @@ fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
                    "Specialty/DeLorme_World_Base_Map/MapServer",
                    "tile/{z}/{y}/{x}.jpg",
                    sep = "/")
-typeosm <-  list(
+esri <-  list(
   src = 'esri',
   q = fullserver,
   sub = NA,
   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
-nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, verbose = TRUE)
+nc_ESRI <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, verbose = TRUE)
 # Plot the tiles
 mp_tiles(nc_ESRI)
-txt <- typeosm$cit
+txt <- esri$cit
 mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 }

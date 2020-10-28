@@ -1,4 +1,4 @@
-#' @title Plot an image
+#' @title Plot map tiles
 #' @description Plot a SpatRaster object over a map. It can be used to plot tiles.
 #' @name mp_tiles
 #' @param x a SpatRaster object.

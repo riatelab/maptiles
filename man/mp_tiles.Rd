@@ -2,7 +2,7 @@
 % Please edit documentation in R/tiles.R
 \name{mp_tiles}
 \alias{mp_tiles}
-\title{Plot an image}
+\title{Plot map tiles}
 \usage{
 mp_tiles(x, add = FALSE, ...)
 }

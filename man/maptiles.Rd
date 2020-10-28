@@ -5,6 +5,7 @@
 \alias{maptiles}
 \title{Download and Display Map Tiles}
 \description{
-Create maps from map tiles. maptiles helps to download, compose and display
-map tiles.
+To create maps from tiles, maptiles downloads, composes and displays tiles
+from a large number of providers: OpenStreetMap, Stamen, Esri, CARTO,
+Thunderforest and others.
 }

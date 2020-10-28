@@ -1,11 +1,11 @@
 #' @title Get basemap tiles from map servers
 #' @name mp_get_tiles
 #' @description Get map tiles based on a spatial object extent. Maps can be
-#' fetched from various open map servers.
+#' fetched from various map servers.
 #' @param x an sf or sfc object.
-#' @param type the tile server from which to get the map. It can be a name
+#' @param provider the tile server from which to get the map. It can be a name
 #' (see Details for providers) or a named list like this one: \code{
-#' type = list(src = "name of the source",
+#' provider = list(src = "name of the source",
 #' q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
 #' (see Examples).
 #' @param zoom the zoom level.
@@ -51,19 +51,19 @@
 #'                    "Specialty/DeLorme_World_Base_Map/MapServer",
 #'                    "tile/{z}/{y}/{x}.jpg",
 #'                    sep = "/")
-#' typeosm <-  list(
+#' esri <-  list(
 #'   src = 'esri',
 #'   q = fullserver,
 #'   sub = NA,
 #'   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 #' )
-#' nc_ESRI <- mp_get_tiles(x = nc, type = typeosm, crop = TRUE, verbose = TRUE)
+#' nc_ESRI <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, verbose = TRUE)
 #' # Plot the tiles
 #' mp_tiles(nc_ESRI)
-#' txt <- typeosm$cit
+#' txt <- esri$cit
 #' mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 mp_get_tiles <- function(x,
-                         type = "OpenStreetMap",
+                         provider = "OpenStreetMap",
                          zoom,
                          crop = FALSE,
                          verbose = FALSE,
@@ -90,8 +90,8 @@ mp_get_tiles <- function(x,
   # get tile list
   tile_grid <- slippymath::bbox_to_tile_grid(bbox = bbx, zoom = zoom)
 
-  # get query parameters according to type
-  param <- get_param(type)
+  # get query parameters according to provider
+  param <- get_param(provider)
   # subdomains management
   tile_grid$tiles$s <- sample(param$sub, nrow(tile_grid$tiles), replace = T)
   # src mgmnt
@@ -228,283 +228,11 @@ compose_tile_grid <- function(tile_grid, images) {
 }
 
 # providers parameters
-get_param <- function(type) {
-  if (length(type) == 4) {
-    param <- type
+get_param <- function(provider) {
+  if (length(provider) == 4) {
+    param <- provider
   } else {
-    param <- switch(
-      type,
-      OpenStreetMap.MapnikBW = list(
-        src = "osmgrayscale",
-        q = "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
-        sub = NA,
-        cit = "\u00A9 OpenStreetMap contributors. Tiles style under CC BY-SA, www.openstreetmap.org/copyright."
-      ),
-      OpenStreetMap = list(
-        src = "OpenStreetMap",
-        q = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c"),
-        cit = "\u00A9 OpenStreetMap contributors"
-      ),
-      OpenStreetMap.DE = list(
-        src = "OpenStreetMap.DE",
-        q = "https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c"),
-        cit = "\u00A9 OpenStreetMap contributors"
-      ),
-      OpenStreetMap.France = list(
-        src = "OpenStreetMap.France",
-        q = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c"),
-        cit = "\u00A9 Openstreetmap France | \u00A9 OpenStreetMap contributors"
-      ),
-      OpenStreetMap.HOT = list(
-        src = "OpenStreetMap.HOT",
-        q = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c"),
-        cit = "\u00A9 OpenStreetMap contributors, Tiles style by OpenStreetMap France"
-      ),
-      OpenTopoMap = list(
-        src = "OpenTopoMap",
-        q = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c"),
-        cit = "Map data: \u00A9 OpenStreetMap contributors, OpenTopoMap (CC-BY-SA)"
-      ),
-      Stamen.Toner = list(
-        src = "Stamen.Toner",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TonerBackground = list(
-        src = "Stamen.TonerBackground",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TonerHybrid = list(
-        src = "Stamen.TonerHybrid",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TonerLines = list(
-        src = "Stamen.TonerLines",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TonerLabels = list(
-        src = "Stamen.TonerLabels",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TonerLite = list(
-        src = "Stamen.TonerLite",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.Watercolor = list(
-        src = "Stamen.Watercolor",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.Terrain = list(
-        src = "Stamen.Terrain",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TerrainBackground = list(
-        src = "Stamen.TerrainBK",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Stamen.TerrainLabels = list(
-        src = "Stamen.Terrainlabs",
-        q = "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "Map tiles by CC BY 3.0 \u2014 Map data \u00A9 OpenStreetMap contributors"
-      ),
-      Esri.WorldStreetMap = list(
-        src = "EsriWSM",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012"
-      ),
-      Esri.DeLorme = list(
-        src = "EsriDLor",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Copyright: \u00A92012 DeLorme"
-      ),
-      Esri.WorldTopoMap = list(
-        src = "EsriWTM",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
-      ),
-      Esri.WorldImagery = list(
-        src = "EsriWI",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
-      ),
-      Esri.WorldTerrain = list(
-        src = "EsriWT",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Source: USGS, Esri, TANA, DeLorme, and NPS"
-      ),
-      Esri.WorldShadedRelief = list(
-        src = "EsriWSR",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Source: Esri"
-      ),
-      Esri.OceanBasemap = list(
-        src = "EsriOBM",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
-      ),
-      Esri.NatGeoWorldMap = list(
-        src = "EsriNGW",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC"
-      ),
-      Esri.WorldGrayCanvas = list(
-        src = "EsriWGC",
-        q = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}.jpg",
-        sub = NA,
-        cit = "Tiles \u00A9 Esri \u2014 Esri, DeLorme, NAVTEQ"
-      ),
-      CartoDB.Positron = list(
-        src = "CartoP",
-        q = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.PositronNoLabels = list(
-        src = "CartoPNL",
-        q = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.PositronOnlyLabels = list(
-        src = "CartoPOL",
-        q = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.DarkMatter = list(
-        src = "CartoDM",
-        q = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.DarkMatterNoLabels = list(
-        src = "CartoDMNL",
-        q = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.DarkMatterOnlyLabels = list(
-        src = "CartoDMOL",
-        q = "https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.Voyager = list(
-        src = "CartoV",
-        q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.VoyagerNoLabels = list(
-        src = "CartoVNL",
-        q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      CartoDB.VoyagerOnlyLabels = list(
-        src = "CartoVOL",
-        q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png",
-        sub = c("a", "b", "c", "d"),
-        cit = "\u00A9 OpenStreetMap contributors \u00A9 CARTO"
-      ),
-      HikeBike = list(
-        src = "HikeBike",
-        q = "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png",
-        sub = NA,
-        cit = "\u00A9 OpenStreetMap contributors"
-      ),
-      Wikimedia = list(
-        src = "Wikimedia",
-        q = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
-        sub = NA,
-        cit = "Wikimedia"
-      ),
-      Thunderforest.OpenCycleMap = list(
-        src = "Tf",
-        q = "https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.Transport = list(
-        src = "Tf.Tr",
-        q = "https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.TransportDark = list(
-        src = "Tf.TrDr",
-        q = "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.SpinalMap = list(
-        src = "Tf.SP",
-        q = "https://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.Landscape = list(
-        src = "Tf.Lc",
-        q = "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.Outdoors = list(
-        src = "Tf.Out",
-        q = "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.Pioneer = list(
-        src = "Tf.Pion",
-        q = "https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.MobileAtlas = list(
-        src = "Tf.MB",
-        q = "https://tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      ),
-      Thunderforest.Neighbourhood = list(
-        src = "Tf.Nbg",
-        q = "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=XXXXXX",
-        sub = NA,
-        cit = "Maps \u00A9 www.thunderforest.com, Data \u00A9 www.osm.org/copyright"
-      )
-    )
+    param <- maptiles_providers[[provider]]
   }
   param
 }
