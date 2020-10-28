@@ -208,7 +208,7 @@ compose_tile_grid <- function(tile_grid, images) {
     }
 
     # compose brick raster
-    r_img <- terra::rast(img, )
+    r_img <- terra::rast(img)
     terra::ext(r_img) <- terra::ext(bbox[c(
       "xmin", "xmax",
       "ymin", "ymax"
