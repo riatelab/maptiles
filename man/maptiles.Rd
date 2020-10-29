@@ -6,6 +6,6 @@
 \title{Download and Display Map Tiles}
 \description{
 To create maps from tiles, maptiles downloads, composes and displays tiles
-from a large number of providers: OpenStreetMap, Stamen, Esri, CARTO,
-Thunderforest and others.
+from a large number of providers (e.g. OpenStreetMap, Stamen, Esri, CARTO,
+or Thunderforest).
 }

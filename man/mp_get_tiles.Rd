@@ -24,14 +24,14 @@ provider = list(src = "name of the source",
 q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
 (see Examples).}
 
-\item{zoom}{the zoom level.}
+\item{zoom}{the zoom level (see Details).}
 
 \item{crop}{TRUE if results should be cropped to the specified x extent,
 FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
 
 \item{verbose}{if TRUE, tiles filepaths, zoom level and citation are displayed.}
 
-\item{apikey}{Needed for Thunderforest maps.}
+\item{apikey}{API key, needed for Thunderforest servers}
 
 \item{cachedir}{name of a directory used to cache tiles. If not set, tiles
 are cached in a \link[base:tempdir]{tempdir} folder.}
@@ -48,21 +48,27 @@ fetched from various map servers.
 \details{
 Zoom levels are described on the OpenStreetMap wiki:
 \url{http://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
-Providers: "OpenStreetMap.MapnikBW", "OpenStreetMap", "OpenStreetMap.DE",
-"OpenStreetMap.France", "OpenStreetMap.HOT", "OpenTopoMap", "Stamen.Toner",
+Providers: \cr
+"OpenStreetMap.MapnikBW", "OpenStreetMap", "OpenStreetMap.DE",
+"OpenStreetMap.France", "OpenStreetMap.HOT", \cr
+"Stamen.Toner",
 "Stamen.TonerBackground", "Stamen.TonerHybrid", "Stamen.TonerLines",
 "Stamen.TonerLabels", "Stamen.TonerLite", "Stamen.Watercolor",
-"Stamen.Terrain", "Stamen.TerrainBackground", "Stamen.TerrainLabels",
+"Stamen.Terrain", "Stamen.TerrainBackground", "Stamen.TerrainLabels",\cr
 "Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap", "Esri.WorldImagery",
 "Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
-"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",\cr
+"CartoDB.Positron",
 "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
 "CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
-"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",
-"HikeBike", "Wikimedia", "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
+"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",\cr
+ "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
 "Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
 "Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
-"Thunderforest.Neighbourhood"
+"Thunderforest.Neighbourhood",\cr
+"OpenTopoMap",\cr
+"HikeBike", \cr
+"Wikimedia",\cr
 }
 \examples{
 library(sf)

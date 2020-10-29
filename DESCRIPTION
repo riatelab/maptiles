@@ -5,10 +5,9 @@ Authors@R: person("Timothée", "Giraud",
                   email = "timothee.giraud@cnrs.fr", 
                   role = c("cre","aut"), 
                   comment = c(ORCID = "0000-0002-1932-3323"))
-Description: 
-    To create maps from tiles, maptiles downloads, composes and displays tiles 
-    from a large number of providers: OpenStreetMap, Stamen, Esri, CARTO, 
-    Thunderforest and others.
+Description: To create maps from tiles, maptiles downloads, composes and
+    displays tiles from a large number of providers (e.g. OpenStreetMap, Stamen,
+    Esri, CARTO, or Thunderforest).
 License: GPL-3
 LazyData: true
 Depends: 
