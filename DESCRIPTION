@@ -11,7 +11,7 @@ Description: To create maps from tiles, maptiles downloads, composes and
 License: GPL-3
 LazyData: true
 Depends: 
-    R (>= 3.5.0),
+    R (>= 3.5.0)
 Imports: 
     sf (>= 0.9-5),
     curl,

@@ -74,7 +74,7 @@ Providers: \cr
 library(sf)
 library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
-nc_osm <- mp_get_tiles(nc, crop = TRUE)
+nc_osm <- mp_get_tiles(nc, crop = TRUE, zoom = 6)
 mp_tiles(nc_osm)
 
 # Download esri tiles
@@ -88,7 +88,8 @@ esri <-  list(
   sub = NA,
   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
-nc_ESRI <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, verbose = TRUE)
+nc_ESRI <- mp_get_tiles(x = nc, provider = esri, crop = TRUE,
+                        verbose = TRUE, zoom = 6)
 # Plot the tiles
 mp_tiles(nc_ESRI)
 txt <- esri$cit
