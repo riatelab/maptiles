@@ -122,7 +122,7 @@ data.
 ## Alternatives
 
 There are many alternative packages that pursue the same objective as 
-`maptiles`. Some focus on a specific map tiles provider (e.g. mapbox, 
+`maptiles`. Some focus on a specific map tiles provider (e.g. mapbox, google, 
 OpenStreetMap) or on a specific graphics device (`ggplot2`). The goal of `mapsf` 
 is to be flexible enough to allow the use of different providers and to have a 
 minimal number of robust and modern dependencies.
@@ -132,8 +132,10 @@ suit your needs:
 * [`ceramic`](https://github.com/hypertidy/ceramic)  
 * [`ggmap`](https://github.com/dkahle/ggmap) (`ggplot2` focused)
 * [`ggspatial`](https://github.com/paleolimbot/ggspatial) (`ggplot2` focused, based on `rosm`)
-* [`mapboxapi`](https://github.com/walkerke/mapboxapi)
+* [`mapboxapi`](https://github.com/walkerke/mapboxapi) (mapbox)
+* [`mapsapi`](https://github.com/michaeldorman/mapsapi/) (google, based on `RgoogleMaps`)
 * [`OpenStreetMap`](https://github.com/ifellows/ROSM) (require Java)
+* [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps) (google)
 * [`rosm`](https://github.com/paleolimbot/rosm)
 * ...
 

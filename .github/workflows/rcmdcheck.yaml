@@ -75,12 +75,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-#      - name: Install old version of rgdal
-#        if: runner.os != 'Windows'
-#        run: |
-#          remotes::install_version("rgdal", version = "1.4-8", repos = "http://cran.us.r-project.org")
-#        shell: Rscript {0}
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
