@@ -39,13 +39,13 @@ library(maptiles)
 # import North Carolina counties
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 # dowload tiles and compose raster (SpatRaster)
-nc_osm <- mp_get_tiles(nc, crop = TRUE)
+nc_osm <- get_tiles(nc, crop = TRUE)
 # display map
-mp_tiles(nc_osm)
+plot_tiles(nc_osm)
 # add Norh Carolina counties
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
-mtext(text = mp_get_tiles_attribution("OpenStreetMap"), 
+mtext(text = get_credit("OpenStreetMap"), 
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
@@ -69,7 +69,7 @@ esri <-  list(
   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_esri <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, 
+nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
                         cachedir = "tilesfolder", verbose = TRUE)
 #> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => tilesfolder/esri/esri_7_34_50.jpg
 #> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => tilesfolder/esri/esri_7_35_50.jpg
@@ -83,7 +83,7 @@ nc_esri <- mp_get_tiles(x = nc, provider = esri, crop = TRUE,
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme
 # display map
-mp_tiles(nc_esri)
+plot_tiles(nc_esri)
 # display credits
 mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
@@ -99,7 +99,7 @@ available:
 
 All maps available through `maptiles` are offered freely by various
 providers. The only counterpart from the user is to properly display an
-attribution text on the maps. `mp_get_tiles_attribution()` displays a
+attribution text on the maps. `get_credit()` displays a
 short credit text to add on each map using the downloaded tiles.
 
 ## Background

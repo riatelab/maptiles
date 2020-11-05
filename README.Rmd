@@ -55,13 +55,13 @@ library(maptiles)
 # import North Carolina counties
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 # dowload tiles and compose raster (SpatRaster)
-nc_osm <- mp_get_tiles(nc, crop = TRUE)
+nc_osm <- get_tiles(nc, crop = TRUE)
 # display map
-mp_tiles(nc_osm)
+plot_tiles(nc_osm)
 # add Norh Carolina counties
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
-mtext(text = mp_get_tiles_attribution("OpenStreetMap"), 
+mtext(text = get_credit("OpenStreetMap"), 
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
@@ -85,10 +85,10 @@ esri <-  list(
   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_esri <- mp_get_tiles(x = nc, provider = esri, crop = TRUE, 
+nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
                         cachedir = "tilesfolder", verbose = TRUE)
 # display map
-mp_tiles(nc_esri)
+plot_tiles(nc_esri)
 # display credits
 mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
@@ -106,7 +106,7 @@ The following figure shows mini maps for most of the tiles providers available:
 All maps available through `maptiles` are offered freely by various providers. 
 The only counterpart from the user is to properly display an attribution text 
 on the maps. 
-`mp_get_tiles_attribution()` displays a short credit text to add on each map 
+`get_credit()` displays a short credit text to add on each map 
 using the downloaded tiles. 
 
 
