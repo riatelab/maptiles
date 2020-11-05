@@ -1,5 +1,5 @@
 #' @title Get basemap tiles from map servers
-#' @name mp_get_tiles
+#' @name get_tiles
 #' @description Get map tiles based on a spatial object extent. Maps can be
 #' fetched from various map servers.
 #' @param x an sf or sfc object.
@@ -49,8 +49,8 @@
 #' library(sf)
 #' library(maptiles)
 #' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
-#' nc_osm <- mp_get_tiles(nc, crop = TRUE, zoom = 6)
-#' mp_tiles(nc_osm)
+#' nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
+#' plot_tiles(nc_osm)
 #'
 #' # Download esri tiles
 #' fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
@@ -63,13 +63,13 @@
 #'   sub = NA,
 #'   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
 #' )
-#' nc_ESRI <- mp_get_tiles(x = nc, provider = esri, crop = TRUE,
+#' nc_ESRI <- get_tiles(x = nc, provider = esri, crop = TRUE,
 #'                         verbose = TRUE, zoom = 6)
 #' # Plot the tiles
-#' mp_tiles(nc_ESRI)
+#' plot_tiles(nc_ESRI)
 #' txt <- esri$cit
 #' mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
-mp_get_tiles <- function(x,
+get_tiles <- function(x,
                          provider = "OpenStreetMap",
                          zoom,
                          crop = FALSE,
@@ -120,7 +120,7 @@ mp_get_tiles <- function(x,
   tile_grid$ext <- ext
 
   # download images
-  images <- get_tiles(tile_grid, verbose, cachedir, forceDownload)
+  images <- get_tiles_n(tile_grid, verbose, cachedir, forceDownload)
   # compose images
   rout <- compose_tile_grid(tile_grid, images)
 
@@ -144,7 +144,7 @@ mp_get_tiles <- function(x,
 
 
 # get the tiles according to the grid
-get_tiles <- function(tile_grid, verbose, cachedir, forceDownload) {
+get_tiles_n <- function(tile_grid, verbose, cachedir, forceDownload) {
   # go through tile_grid tiles and download
   images <- apply(
     X = tile_grid$tiles,

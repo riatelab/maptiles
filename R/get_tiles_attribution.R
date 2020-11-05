@@ -1,10 +1,10 @@
 #' @title Get basemap tiles attribution
-#' @name mp_get_tiles_attribution
+#' @name get_credit
 #' @description Get the attribution of map tiles.
 #' @param provider provider name
 #' @export
 #' @examples
-#' mp_get_tiles_attribution("OpenStreetMap")
-mp_get_tiles_attribution <- function(provider){
+#' get_credit("OpenStreetMap")
+get_credit <- function(provider){
   maptiles_providers[[provider]]$cit
 }

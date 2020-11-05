@@ -1,6 +1,6 @@
 #' @title Plot map tiles
 #' @description Plot a SpatRaster object over a map. It can be used to plot tiles.
-#' @name mp_tiles
+#' @name plot_tiles
 #' @param x a SpatRaster object.
 #' @param add whether to add the layer to an existing plot (TRUE) or
 #' not (FALSE).
@@ -14,9 +14,9 @@
 #' library(sf)
 #' library(maptiles)
 #' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
-#' nc_osm <- mp_get_tiles(nc, crop = TRUE)
-#' mp_tiles(nc_osm)
-mp_tiles <- function(x, add = FALSE, ...) {
+#' nc_osm <- get_tiles(nc, crop = TRUE)
+#' plot_tiles(nc_osm)
+plot_tiles <- function(x, add = FALSE, ...) {
   if (add == FALSE) {
     ext <- as.vector(ext(x))
     plot.new()
