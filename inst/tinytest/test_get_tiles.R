@@ -41,3 +41,6 @@ if(home){
   expect_silent(get_credit("OpenStreetMap"))
 }
 
+library(available)
+available("choroLayer")
+?available
