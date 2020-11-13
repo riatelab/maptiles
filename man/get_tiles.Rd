@@ -16,7 +16,8 @@ get_tiles(
 )
 }
 \arguments{
-\item{x}{an sf or sfc object.}
+\item{x}{an sf, sfc, bbox or SpatExtent object. If \code{x} is a SpatExtent it
+must express coordinates in lon/lat WGS84 (epsg:4326).}
 
 \item{provider}{the tile server from which to get the map. It can be a name
 (see Details for providers) or a named list like this one: \code{
@@ -79,19 +80,12 @@ plot_tiles(nc_osm)
 
 # Download esri tiles
 fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                   "Specialty/DeLorme_World_Base_Map/MapServer",
-                   "tile/{z}/{y}/{x}.jpg",
-                   sep = "/")
-esri <-  list(
-  src = 'esri',
-  q = fullserver,
-  sub = NA,
-  cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
-)
+                    "Specialty/DeLorme_World_Base_Map/MapServer",
+                    "tile/{z}/{y}/{x}.jpg", sep = "/")
+esri <-  list(src = 'esri', q = fullserver,
+              sub = NA, cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
 nc_ESRI <- get_tiles(x = nc, provider = esri, crop = TRUE,
-                        verbose = TRUE, zoom = 6)
+                     verbose = TRUE, zoom = 6)
 # Plot the tiles
 plot_tiles(nc_ESRI)
-txt <- esri$cit
-mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 }

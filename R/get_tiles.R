@@ -2,7 +2,8 @@
 #' @name get_tiles
 #' @description Get map tiles based on a spatial object extent. Maps can be
 #' fetched from various map servers.
-#' @param x an sf or sfc object.
+#' @param x an sf, sfc, bbox or SpatExtent object. If \code{x} is a SpatExtent it
+#' must express coordinates in lon/lat WGS84 (epsg:4326).
 #' @param provider the tile server from which to get the map. It can be a name
 #' (see Details for providers) or a named list like this one: \code{
 #' provider = list(src = "name of the source",
@@ -42,7 +43,7 @@
 #' "Wikimedia",\cr
 #' @export
 #' @return A SpatRaster is returned.
-#' @importFrom terra ext project rast
+#' @importFrom terra ext project rast gdal_version
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @examples
@@ -54,40 +55,57 @@
 #'
 #' # Download esri tiles
 #' fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-#'                    "Specialty/DeLorme_World_Base_Map/MapServer",
-#'                    "tile/{z}/{y}/{x}.jpg",
-#'                    sep = "/")
-#' esri <-  list(
-#'   src = 'esri',
-#'   q = fullserver,
-#'   sub = NA,
-#'   cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
-#' )
+#'                     "Specialty/DeLorme_World_Base_Map/MapServer",
+#'                     "tile/{z}/{y}/{x}.jpg", sep = "/")
+#' esri <-  list(src = 'esri', q = fullserver,
+#'               sub = NA, cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
 #' nc_ESRI <- get_tiles(x = nc, provider = esri, crop = TRUE,
-#'                         verbose = TRUE, zoom = 6)
+#'                      verbose = TRUE, zoom = 6)
 #' # Plot the tiles
 #' plot_tiles(nc_ESRI)
-#' txt <- esri$cit
-#' mtext(text = txt, side = 1, adj = 0, cex = .9, font = 3)
 get_tiles <- function(x,
-                         provider = "OpenStreetMap",
-                         zoom,
-                         crop = FALSE,
-                         verbose = FALSE,
-                         apikey,
-                         cachedir,
-                         forceDownload = FALSE) {
-  # test for single point (apply buffer to obtain a correct bbox)
-  if (nrow(x) == 1 && st_is(x, "POINT")) {
-    xt <- st_transform(x, 3857)
-    st_geometry(xt) <- st_buffer(st_geometry(xt), 1000)
-    crop <- FALSE
-    # use x bbox to select the tiles to get
-    bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(xt)), 4326))
-  } else {
-    # use x bbox to select the tiles to get
-    bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(x)), 4326))
+                      provider = "OpenStreetMap",
+                      zoom,
+                      crop = FALSE,
+                      verbose = FALSE,
+                      apikey,
+                      cachedir,
+                      forceDownload = FALSE) {
+
+  if (gdal_version() < "3.0.4"){
+    warning(paste0("Your GDAL version is ",gdal_version(),
+                ". You need GDAL >= 3.0.4 to use maptiles."),
+            call. = FALSE)
+    return(invisible(NULL))
   }
+
+  if(inherits(x, 'bbox')){
+    x <- st_as_sfc(x)
+  }
+
+  if(inherits(x, c('sf', 'sfc'))){
+    origin_proj <- st_crs(x)$wkt
+    # test for single point (apply buffer to obtain a correct bbox)
+    if (nrow(x) == 1 && inherits(st_geometry(x), "sfc_POINT")) {
+      xt <- st_transform(x, 3857)
+      st_geometry(xt) <- st_buffer(st_geometry(xt), 1000)
+      crop <- FALSE
+      # use x bbox to select the tiles to get
+      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(xt)), 4326))
+    } else {
+      # use x bbox to select the tiles to get
+      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(x)), 4326))
+      cb <- st_bbox(x)
+    }
+  } else if(inherits(x, "SpatExtent")){
+    origin_proj <- st_crs("epsg:4326")$wkt
+    bbx <- as.vector(x)[c(1,3,2,4)]
+    cb <- bbx
+  } else {
+    stop(paste0("x should be an sf, sfc, bbox or SpatExtent object"),
+         call. = FALSE)
+  }
+
   # select a default zoom level
   if (missing(zoom)) {
     gz <- slippymath::bbox_tile_query(bbx)
@@ -128,12 +146,11 @@ get_tiles <- function(x,
   terra::crs(rout) <- "epsg:3857"
 
   # reproject rout
-  rout <- terra::project(x = rout, y = st_crs(x)$wkt)
+  rout <- terra::project(x = rout, y = origin_proj)
   rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
 
   # crop management
   if (crop == TRUE) {
-    cb <- st_bbox(x)
     k <- min(c(0.052 * (cb[4] - cb[2]), 0.052 * (cb[3] - cb[1])))
     cb <- cb + c(-k, -k, k, k)
     rout <- terra::crop(rout, cb[c(1, 3, 2, 4)])

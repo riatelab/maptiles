@@ -17,6 +17,13 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
 plot_tiles <- function(x, add = FALSE, ...) {
+  if (gdal_version() < "3.0.4"){
+    warning(paste0("Your GDAL version is ",gdal_version(),
+                   ". You need GDAL >= 3.0.4 to use maptiles"),
+            call. = FALSE)
+    return(invisible(NULL))
+  }
+
   if (add == FALSE) {
     ext <- as.vector(ext(x))
     plot.new()
