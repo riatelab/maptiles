@@ -49,7 +49,7 @@ This is a basic example which shows you how to dowload and display OpenStreetMap
 tiles over North Carolina:
 
 
-```{r example,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, dpi = 96, out.width=852, out.height=269}
+```{r example,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, dpi = 96, fig.show='hide'}
 library(sf)
 library(maptiles)
 # import North Carolina counties
@@ -65,13 +65,18 @@ mtext(text = get_credit("OpenStreetMap"),
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
+![](man/figures/README-example-1.png){width=852px}
+
+
+
+
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to 
 add others. The following example demonstrates the setting of a map tiles server
 and how to cache the original tiles for future use:
 
 
-```{r example2,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, dpi = 96, out.width=852, out.height=269}
+```{r example2,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, fig.show='hide', dpi = 96}
 # define the query
 fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
                     "Specialty/DeLorme_World_Base_Map/MapServer",
@@ -86,18 +91,21 @@ esri <-  list(
 )
 # dowload tiles and compose raster (SpatRaster)
 nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
-                        cachedir = "tilesfolder", verbose = TRUE)
+                        cachedir = tempdir(), verbose = TRUE)
 # display map
 plot_tiles(nc_esri)
 # display credits
 mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
+![](man/figures/README-example2-1.png){width=852px}   
+
 
 
 The following figure shows mini maps for most of the tiles providers available:
 
-<img src="man/figures/README-front.png" width="840" height="756" />
+![](man/figures/README-front.png){width=840px}
+
 
 
 
@@ -123,7 +131,7 @@ data.
 
 There are many alternative packages that pursue the same objective as 
 `maptiles`. Some focus on a specific map tiles provider (e.g. mapbox, google, 
-OpenStreetMap) or on a specific graphics device (`ggplot2`). The goal of `mapsf` 
+OpenStreetMap) or on a specific graphics device (`ggplot2`). The goal of `maptiles` 
 is to be flexible enough to allow the use of different providers and to have a 
 minimal number of robust and modern dependencies.
 However, depending on the use case, one of following packages may better 
