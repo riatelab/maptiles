@@ -65,9 +65,9 @@ mtext(text = get_credit("OpenStreetMap"),
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
-![](man/figures/README-example-1.png){width=852px}
+<!-- ![](man/figures/README-example-1.png){width=852px} -->
 
-
+<img src="man/figures/README-example-1.png" width="852"/>
 
 
 
@@ -98,14 +98,16 @@ plot_tiles(nc_esri)
 mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
-![](man/figures/README-example2-1.png){width=852px}   
+<!-- ![](man/figures/README-example2-1.png){width=852px}    -->
+<img src="man/figures/README-example2-1.png" width="852"/>
 
 
 
 The following figure shows mini maps for most of the tiles providers available:
 
-![](man/figures/README-front.png){width=840px}
+<!-- ![](man/figures/README-front.png){width=840px} -->
 
+<img src="man/figures/README-front.png" width="840"/>
 
 
 

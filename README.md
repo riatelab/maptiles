@@ -49,7 +49,9 @@ mtext(text = get_credit("OpenStreetMap"),
       side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
-<img src="man/figures/README-example-1.png" width="852" />
+<!-- ![](man/figures/README-example-1.png){width=852px} -->
+
+<img src="man/figures/README-example-1.png" width="852"/>
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to
 add others. The following example demonstrates the setting of a map
@@ -71,14 +73,14 @@ esri <-  list(
 # dowload tiles and compose raster (SpatRaster)
 nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
                         cachedir = tempdir(), verbose = TRUE)
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/RtmpAMI80G/esri/esri_7_34_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/RtmpAMI80G/esri/esri_7_35_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/RtmpAMI80G/esri/esri_7_36_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/RtmpAMI80G/esri/esri_7_37_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/RtmpAMI80G/esri/esri_7_34_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/RtmpAMI80G/esri/esri_7_35_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/RtmpAMI80G/esri/esri_7_36_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/RtmpAMI80G/esri/esri_7_37_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_34_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_35_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_36_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_37_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_34_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_35_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_36_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_37_51.jpg
 #> Zoom:7
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme
@@ -88,12 +90,16 @@ plot_tiles(nc_esri)
 mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
 ```
 
-<img src="man/figures/README-example2-1.png" width="852" />
+<!-- ![](man/figures/README-example2-1.png){width=852px}    -->
+
+<img src="man/figures/README-example2-1.png" width="852"/>
 
 The following figure shows mini maps for most of the tiles providers
 available:
 
-<img src="man/figures/README-front.png" width="840" />
+<!-- ![](man/figures/README-front.png){width=840px} -->
+
+<img src="man/figures/README-front.png" width="840"/>
 
 ## Attribution of map tiles
 
