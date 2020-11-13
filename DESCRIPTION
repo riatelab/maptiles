@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.1.0
+Version: 0.2.0.0
 Authors@R: person("Timothée", "Giraud", 
                   email = "timothee.giraud@cnrs.fr", 
                   role = c("cre","aut"), 
@@ -22,6 +22,5 @@ Imports:
 Suggests:
     covr,
     tinytest
-SystemRequirements: C++11, GDAL (>= 3.0.4), GEOS (>= 3.8.0), PROJ (>= 6.3.1)
 Encoding: UTF-8
 RoxygenNote: 7.1.1
