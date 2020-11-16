@@ -15,19 +15,24 @@ Esri, CARTO, or Thunderforest).
 
 ## Installation
 
-<!-- You can install the released version of maptiles from [CRAN](https://CRAN.R-project.org) with: -->
-<!-- ``` r -->
-<!-- install.packages("maptiles") -->
-<!-- ``` -->
+You can install the released version of maptiles from
+[CRAN](https://CRAN.R-project.org/package=maptiles) with:
+
+``` r
+install.packages("maptiles")
+```
 
 You can install the development version of `maptiles` from GitHub with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("riatelab/maptiles")
+# install.packages("remotes")
+remotes::install_github("riatelab/maptiles")
 ```
 
-## Example
+**Note:** `maptiles` uses [`terra`](https://github.com/rspatial/terra)
+which requires a recent version of GDAL (&gt;= 3.0.4).
+
+## Demo
 
 This is a basic example which shows you how to dowload and display
 OpenStreetMap tiles over North Carolina:
@@ -37,7 +42,8 @@ library(sf)
 #> Linking to GEOS 3.7.1, GDAL 3.1.2, PROJ 7.1.0
 library(maptiles)
 # import North Carolina counties
-nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+nc <- st_read(system.file("shape/nc.shp", package="sf"), 
+              quiet = TRUE)
 # dowload tiles and compose raster (SpatRaster)
 nc_osm <- get_tiles(nc, crop = TRUE)
 # display map
@@ -46,7 +52,8 @@ plot_tiles(nc_osm)
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
 mtext(text = get_credit("OpenStreetMap"), 
-      side = 1, line = -1, adj = 1, cex = .9, font = 3)
+      side = 1, line = -1, adj = 1, cex = .9, 
+      font = 3)
 ```
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
@@ -59,10 +66,12 @@ tiles server and how to cache the original tiles for future use:
 
 ``` r
 # define the query
-fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                    "Specialty/DeLorme_World_Base_Map/MapServer",
-                    "tile/{z}/{y}/{x}.jpg",
-                    sep = "/")
+fullserver <- paste(
+  "https://server.arcgisonline.com/ArcGIS/rest/services",
+  "Specialty/DeLorme_World_Base_Map/MapServer",
+  "tile/{z}/{y}/{x}.jpg",
+  sep = "/"
+)
 # define the tile server parameter
 esri <-  list(
   src = 'esri',
@@ -72,22 +81,23 @@ esri <-  list(
 )
 # dowload tiles and compose raster (SpatRaster)
 nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
-                        cachedir = tempdir(), verbose = TRUE)
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_34_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_35_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_36_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_37_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_34_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_35_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_36_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/RtmpCwiDPQ/esri/esri_7_37_51.jpg
+                     cachedir = tempdir(), verbose = TRUE)
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/RtmpVZUBPe/esri/esri_7_34_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/RtmpVZUBPe/esri/esri_7_35_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/RtmpVZUBPe/esri/esri_7_36_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/RtmpVZUBPe/esri/esri_7_37_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/RtmpVZUBPe/esri/esri_7_34_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/RtmpVZUBPe/esri/esri_7_35_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/RtmpVZUBPe/esri/esri_7_36_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/RtmpVZUBPe/esri/esri_7_37_51.jpg
 #> Zoom:7
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme
 # display map
 plot_tiles(nc_esri)
 # display credits
-mtext(text = esri$cit, side = 1, line = -1, adj = 1, cex = .9, font = 3)
+mtext(text = esri$cit, side = 1, line = -1, 
+      adj = 1, cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
@@ -133,7 +143,7 @@ packages may better suit your needs:
 -   [`mapboxapi`](https://github.com/walkerke/mapboxapi) (mapbox)
 -   [`mapsapi`](https://github.com/michaeldorman/mapsapi/) (google,
     based on `RgoogleMaps`)
--   [`OpenStreetMap`](https://github.com/ifellows/ROSM) (require Java)
+-   [`OpenStreetMap`](https://github.com/ifellows/ROSM) (requires Java)
 -   [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps)
     (google)
 -   [`rosm`](https://github.com/paleolimbot/rosm)
