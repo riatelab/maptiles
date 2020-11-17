@@ -82,14 +82,14 @@ esri <-  list(
 # dowload tiles and compose raster (SpatRaster)
 nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
                      cachedir = tempdir(), verbose = TRUE)
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/RtmpVZUBPe/esri/esri_7_34_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/RtmpVZUBPe/esri/esri_7_35_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/RtmpVZUBPe/esri/esri_7_36_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/RtmpVZUBPe/esri/esri_7_37_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/RtmpVZUBPe/esri/esri_7_34_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/RtmpVZUBPe/esri/esri_7_35_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/RtmpVZUBPe/esri/esri_7_36_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/RtmpVZUBPe/esri/esri_7_37_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/Rtmpscelyh/esri/esri_7_34_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/Rtmpscelyh/esri/esri_7_35_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/Rtmpscelyh/esri/esri_7_36_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/Rtmpscelyh/esri/esri_7_37_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/Rtmpscelyh/esri/esri_7_34_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/Rtmpscelyh/esri/esri_7_35_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/Rtmpscelyh/esri/esri_7_36_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/Rtmpscelyh/esri/esri_7_37_51.jpg
 #> Zoom:7
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme
@@ -110,6 +110,14 @@ available:
 <!-- ![](man/figures/README-front.png){width=840px} -->
 
 <img src="man/figures/README-front.png" width="840"/>
+
+## Projection
+
+Original tiles use a projection known as “Web Mercator”, “WGS84 / Pseudo
+Mercator”, “Google Mercator”, “EPSG:3857” or “EPSG:900913”. In most
+cases `get_tiles()` uses the projection of its `x` argument to reproject
+the tiles. If you wish to avoid any deformation induced by the
+reprojection process, use “EPSG:3857” for `x` projection.
 
 ## Attribution of map tiles
 

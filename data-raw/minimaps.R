@@ -25,3 +25,21 @@ for (i in 1:length(providers)){
            line = 1.5, cex = 1.5, bg = "white", fg = "black")
 }
 dev.off()
+
+
+library(sf)
+library(maptiles)
+apikey <- "xxx"
+for (i in 1:length(providers)){
+  t <- get_tiles(nc, provider = providers[[i]], zoom = 7,
+                 cachedir = "./tiles", crop = T, apikey = apikey)
+  png(sprintf("gif/tile%03d.png", i), width = 827, height = 318)
+  par(mar = c(0,0,0,0))
+  plot_tiles(t)
+  library(mapsf)
+  tc_title(txt = providers[[i]], pos = "center",tab = TRUE, inner = TRUE,
+           line = 1.5, cex = 1.5, bg = "white", fg = "black")
+  tc_credits(txt = get_credit(providers[[i]]), pos = "rightbottom", cex = .8)
+  dev.off()
+}
+

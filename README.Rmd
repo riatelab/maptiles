@@ -118,7 +118,13 @@ The following figure shows mini maps for most of the tiles providers available:
 
 <img src="man/figures/README-front.png" width="840"/>
 
+## Projection
 
+Original tiles use a projection known as "Web Mercator", 
+"WGS84 / Pseudo Mercator", "Google Mercator", "EPSG:3857" or "EPSG:900913". 
+In most cases `get_tiles()` uses the projection of its `x` argument to 
+reproject the tiles. If you wish to avoid any deformation induced by the 
+reprojection process, use "EPSG:3857" for `x` projection.
 
 ## Attribution of map tiles
 
