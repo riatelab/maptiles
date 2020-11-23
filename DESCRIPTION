@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.1.1
+Version: 0.1.2.0
 Authors@R: person("Timothée", "Giraud", 
                   email = "timothee.giraud@cnrs.fr", 
                   role = c("cre","aut"), 
