@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![](https://www.r-pkg.org/badges/version/maptiles)](https://cran.r-project.org/package=maptiles)
 [![R-CMD-check](https://github.com/riatelab/maptiles/workflows/R-CMD-check/badge.svg)](https://github.com/riatelab/maptiles/actions)
 [![codecov](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg?token=R7T2PCTERH)](https://codecov.io/gh/riatelab/maptiles/)
 <!-- badges: end -->
@@ -82,14 +83,14 @@ esri <-  list(
 # dowload tiles and compose raster (SpatRaster)
 nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
                      cachedir = tempdir(), verbose = TRUE)
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/Rtmpscelyh/esri/esri_7_34_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/Rtmpscelyh/esri/esri_7_35_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/Rtmpscelyh/esri/esri_7_36_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/Rtmpscelyh/esri/esri_7_37_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/Rtmpscelyh/esri/esri_7_34_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/Rtmpscelyh/esri/esri_7_35_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/Rtmpscelyh/esri/esri_7_36_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/Rtmpscelyh/esri/esri_7_37_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_34_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_35_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_36_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_37_50.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_34_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_35_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_36_51.jpg
+#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_37_51.jpg
 #> Zoom:7
 #> Data and map tiles sources:
 #> Tiles: Esri; Copyright: 2012 DeLorme

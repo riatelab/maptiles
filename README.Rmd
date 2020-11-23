@@ -21,6 +21,7 @@ knitr::knit_hooks$set(margin = function(before, options, envir){
 # maptiles
 
 <!-- badges: start -->
+[![](https://www.r-pkg.org/badges/version/maptiles)](https://cran.r-project.org/package=maptiles)
 [![R-CMD-check](https://github.com/riatelab/maptiles/workflows/R-CMD-check/badge.svg)](https://github.com/riatelab/maptiles/actions)
 [![codecov](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg?token=R7T2PCTERH)](https://codecov.io/gh/riatelab/maptiles/)
 <!-- badges: end -->
