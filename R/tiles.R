@@ -23,18 +23,9 @@ plot_tiles <- function(x, add = FALSE, ...) {
             call. = FALSE)
     return(invisible(NULL))
   }
-
-  if (add == FALSE) {
-    ext <- as.vector(ext(x))
-    plot.new()
-    plot.window(
-      xlim = ext[1:2], ylim = ext[3:4],
-      xaxs = "i", yaxs = "i", asp = TRUE
-    )
-  }
   ops <- list(...)
   ops$x <- x
-  ops$add <- TRUE
+  ops$add <- add
   # Default opts
   ops$maxcell <- ifelse(is.null(ops$maxcell), terra::ncell(x), ops$maxcell)
   ops$bgalpha <- ifelse(is.null(ops$bgalpha), 0, ops$bgalpha)
