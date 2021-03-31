@@ -16,7 +16,6 @@ Description: To create maps from tiles, 'maptiles' downloads, composes and
 URL: https://github.com/riatelab/maptiles/
 BugReports: https://github.com/riatelab/maptiles/issues/
 License: GPL-3
-LazyData: true
 Depends: 
     R (>= 3.5.0)
 Imports: 
