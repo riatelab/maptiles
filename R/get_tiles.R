@@ -15,7 +15,7 @@
 #' @param verbose if TRUE, tiles filepaths, zoom level and citation are displayed.
 #' @param apikey API key, needed for Thunderforest servers
 #' @param cachedir name of a directory used to cache tiles. If not set, tiles
-#' are cached in a \link[base:tempdir]{tempdir} folder.
+#' are cached in a \link[base:tempfile]{tempdir} folder.
 #' @param forceDownload if TRUE, existing cached tiles may be overwritten
 #' @details
 #' Zoom levels are described on the OpenStreetMap wiki:
