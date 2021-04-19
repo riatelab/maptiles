@@ -17,18 +17,23 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
 plot_tiles <- function(x, add = FALSE, ...) {
-  if (gdal_version() < "3.0.4"){
-    warning(paste0("Your GDAL version is ",gdal_version(),
-                   ". You need GDAL >= 3.0.4 to use maptiles"),
-            call. = FALSE)
-    return(invisible(NULL))
-  }
+# no need to check for that here
+#  if (gdal() < "3.0.4"){
+#    warning(paste0("Your GDAL version is ",gdal(),
+#                   ". You need GDAL >= 3.0.4 to use maptiles"),
+#            call. = FALSE)
+#    return(invisible(NULL))
+#  }
   ops <- list(...)
   ops$x <- x
   ops$add <- add
   # Default opts
   ops$maxcell <- ifelse(is.null(ops$maxcell), terra::ncell(x), ops$maxcell)
   ops$bgalpha <- ifelse(is.null(ops$bgalpha), 0, ops$bgalpha)
-  ops$interpolate <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
+#  ops$interpolate <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
+
+# argument "interpolate" is now "smooth" (for consistency with terra::plot)
+  ops$smooth <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
+  ops$interpolate <- NULL
   do.call(terra::plotRGB, ops)
 }

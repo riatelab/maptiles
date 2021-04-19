@@ -43,7 +43,7 @@
 #' "Wikimedia",\cr
 #' @export
 #' @return A SpatRaster is returned.
-#' @importFrom terra ext project rast gdal_version
+#' @importFrom terra ext project rast as.polygons 'RGB<-' gdal
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @examples
@@ -71,17 +71,26 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-
-  if (gdal_version() < "3.0.4"){
-    warning(paste0("Your GDAL version is ",gdal_version(),
+   # gdal_version is obsolete.
+  if (gdal() < "3.0.4"){
+    warning(paste0("Your GDAL version is ",gdal(),
                    ". You need GDAL >= 3.0.4 to use maptiles."),
             call. = FALSE)
     return(invisible(NULL))
   }
 
   if(inherits(x, 'bbox')){
-    x <- st_as_sfc(x)
+    x <- sf::st_as_sfc(x)
   }
+
+	if(inherits(x, 'SpatRaster')){
+		x <- terra::as.polygons(x, extent=TRUE)
+		x <- terra::project(x, "epsg:4326")
+		x <- terra::ext(x)
+	} else if(inherits(x, 'SpatVector')){
+		x <- terra::project(x, "epsg:4326")
+		x <- terra::ext(x)
+	}
 
   if(inherits(x, c('sf', 'sfc'))){
     origin_proj <- st_crs(x)$wkt
@@ -155,6 +164,9 @@ get_tiles <- function(x,
     cb <- cb + c(-k, -k, k, k)
     rout <- terra::crop(rout, cb[c(1, 3, 2, 4)])
   }
+
+  # set R, G, B channels, such that plot(rout) will go to plotRGB
+  terra::RGB(rout) <- 1:3 
 
   rout
 }
