@@ -12,21 +12,28 @@ providers <- list("OpenStreetMap.MapnikBW", "OpenStreetMap",
                   "Thunderforest.Transport", "Thunderforest.TransportDark", "Thunderforest.SpinalMap",
                   "Thunderforest.Landscape", "Thunderforest.Pioneer",
                   "Thunderforest.MobileAtlas", "Thunderforest.Neighbourhood")
-apikey <- "xxx"
+length(providers)
+providers <- names(maptiles_providers)
+apikey <- "771d5c68149f44f886782535746dc075"
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
-png("man/figures/README-front.png", width = 210*4, height = 84*9)
-par(mar = c(0,0,0,0), mfrow = c(9,4))
+library(mapsf)
+
+png("man/figures/README-front.png", width = 210*7, height = 84*7)
+par(mar = c(0,0,0,0), mfrow = c(7,7))
 for (i in 1:length(providers)){
-  t <- get_tiles(nc, provider = providers[[i]], zoom = 5, cachedir = "./tiles", crop = T, apikey = apikey)
+  t <- get_tiles(nc, provider = providers[[i]],
+                 zoom = 5, cachedir = "./tiles",
+                 crop = T, apikey = apikey)
   plot_tiles(t)
-  library(mapsf)
-  mp_title(txt = providers[[i]], pos = "center",tab = TRUE, inner = TRUE,
+  mf_title(txt = providers[[i]], pos = "center",tab = TRUE, inner = TRUE,
            line = 1.5, cex = 1.5, bg = "white", fg = "black")
 }
 dev.off()
 
 
+6*7
+46/9
 library(sf)
 library(maptiles)
 apikey <- "xxx"
