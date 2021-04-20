@@ -28,4 +28,5 @@ library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE)
 plot_tiles(nc_osm)
+terra::plot(nc_osm)
 }

@@ -16,9 +16,10 @@
 #' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
+#' terra::plot(nc_osm)
 plot_tiles <- function(x, add = FALSE, ...) {
-  if (gdal_version() < "3.0.4"){
-    warning(paste0("Your GDAL version is ",gdal_version(),
+  if (gdal() < "3.0.4"){
+    warning(paste0("Your GDAL version is ",gdal(),
                    ". You need GDAL >= 3.0.4 to use maptiles"),
             call. = FALSE)
     return(invisible(NULL))
@@ -29,6 +30,7 @@ plot_tiles <- function(x, add = FALSE, ...) {
   # Default opts
   ops$maxcell <- ifelse(is.null(ops$maxcell), terra::ncell(x), ops$maxcell)
   ops$bgalpha <- ifelse(is.null(ops$bgalpha), 0, ops$bgalpha)
-  ops$interpolate <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
+  ops$smooth <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
+  ops$interpolate <- NULL
   do.call(terra::plotRGB, ops)
 }

@@ -5,6 +5,7 @@ if(home){
   suppressPackageStartupMessages(library(terra))
   nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
   nc <- st_transform(nc, 3857)
+  nc.sv <- vect(nc)
   nc1 <- nc[1,]
   st_geometry(nc1) <- st_centroid(st_geometry(nc1))
   bb <- st_bbox(c(xmin = -81.74, ymin = 36.23,
@@ -16,6 +17,11 @@ if(home){
   expect_true(methods::is(get_tiles(x = bb), "SpatRaster"))
   # test SpatExtent input
   expect_true(methods::is(get_tiles(x = se), "SpatRaster"))
+  # test SpatVector input
+  a <- get_tiles(x = nc.sv)
+  expect_true(methods::is(a, "SpatRaster"))
+  # test SpatRaster input
+  expect_true(methods::is(get_tiles(x = a), "SpatRaster"))
   # test verbosity
   suppressMessages(expect_message(get_tiles(x = nc, verbose=TRUE)))
   # test crop
