@@ -1,7 +1,8 @@
 Package: maptiles
 Title: Download and Display Map Tiles
 Version: 0.1.2.0
-Authors@R: c(person("Timothée", "Giraud",
+Authors@R: c(person(given = "Timothée", 
+                    family = "Giraud",
                     email = "timothee.giraud@cnrs.fr", 
                     role = c("cre","aut"), 
                     comment = c(ORCID = "0000-0002-1932-3323")), 
@@ -9,7 +10,12 @@ Authors@R: c(person("Timothée", "Giraud",
                     family = "Hernangómez",
                     role = c("ctb"),
                     email = "diego.hernangomezherrero@gmail.com",
-                    comment = c(ORCID = "0000-0001-8457-4658")))
+                    comment = c(ORCID = "0000-0001-8457-4658")), 
+             person(given = "Robert J.", 
+                    family = "Hijmans", 
+                    role = c("ctb"),  
+			        email = "r.hijmans@gmail.com", 
+			        comment = c(ORCID = "0000-0001-5872-2872")))
 Description: To create maps from tiles, 'maptiles' downloads, composes and
     displays tiles from a large number of providers (e.g. 'OpenStreetMap',
     'Stamen', 'Esri', 'CARTO', or 'Thunderforest').
