@@ -14,7 +14,7 @@ providers <- list("OpenStreetMap.MapnikBW", "OpenStreetMap",
                   "Thunderforest.MobileAtlas", "Thunderforest.Neighbourhood")
 length(providers)
 providers <- names(maptiles_providers)
-apikey <- "771d5c68149f44f886782535746dc075"
+apikey <- "xx"
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
 library(mapsf)
