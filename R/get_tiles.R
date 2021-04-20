@@ -2,7 +2,8 @@
 #' @name get_tiles
 #' @description Get map tiles based on a spatial object extent. Maps can be
 #' fetched from various map servers.
-#' @param x an sf, sfc, bbox or SpatExtent object. If \code{x} is a SpatExtent it
+#' @param x an sf, sfc, bbox, SpatRaster, SpatVerctor or SpatExtent object.
+#' If \code{x} is a SpatExtent it
 #' must express coordinates in lon/lat WGS84 (epsg:4326).
 #' @param provider the tile server from which to get the map. It can be a name
 #' (see Details for providers) or a named list like this one: \code{
@@ -80,11 +81,11 @@ get_tiles <- function(x,
   }
 
   if(inherits(x, 'bbox')){
-    x <- sf::st_as_sfc(x)
+    x <- st_as_sfc(x)
   }
 
 	if(inherits(x, 'SpatRaster')){
-		x <- terra::as.polygons(x, extent=TRUE)
+		x <- terra::as.polygons(x, extent = TRUE)
 		x <- terra::project(x, "epsg:4326")
 		x <- terra::ext(x)
 	} else if(inherits(x, 'SpatVector')){
@@ -111,7 +112,8 @@ get_tiles <- function(x,
     bbx <- as.vector(x)[c(1,3,2,4)]
     cb <- bbx
   } else {
-    stop(paste0("x should be an sf, sfc, bbox or SpatExtent object"),
+    stop(paste0("x should be an sf, sfc, bbox, SpatRaster,",
+                " SpatVector or SpatExtent object"),
          call. = FALSE)
   }
 
@@ -166,7 +168,7 @@ get_tiles <- function(x,
   }
 
   # set R, G, B channels, such that plot(rout) will go to plotRGB
-  terra::RGB(rout) <- 1:3 
+  terra::RGB(rout) <- 1:3
 
   rout
 }

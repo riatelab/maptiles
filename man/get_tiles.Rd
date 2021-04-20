@@ -16,7 +16,8 @@ get_tiles(
 )
 }
 \arguments{
-\item{x}{an sf, sfc, bbox or SpatExtent object. If \code{x} is a SpatExtent it
+\item{x}{an sf, sfc, bbox, SpatRaster, SpatVerctor or SpatExtent object.
+If \code{x} is a SpatExtent it
 must express coordinates in lon/lat WGS84 (epsg:4326).}
 
 \item{provider}{the tile server from which to get the map. It can be a name
@@ -35,7 +36,7 @@ FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
 \item{apikey}{API key, needed for Thunderforest servers}
 
 \item{cachedir}{name of a directory used to cache tiles. If not set, tiles
-are cached in a \link[base:tempdir]{tempdir} folder.}
+are cached in a \link[base:tempfile]{tempdir} folder.}
 
 \item{forceDownload}{if TRUE, existing cached tiles may be overwritten}
 }
