@@ -73,7 +73,7 @@ get_tiles <- function(x,
                       cachedir,
                       forceDownload = FALSE) {
    # gdal_version is obsolete.
-  if (gdal() < "3.0.4"){
+  if (gdal() < "2.2.3"){
     warning(paste0("Your GDAL version is ",gdal(),
                    ". You need GDAL >= 3.0.4 to use maptiles."),
             call. = FALSE)
@@ -168,7 +168,7 @@ get_tiles <- function(x,
   }
 
   # set R, G, B channels, such that plot(rout) will go to plotRGB
-  terra::RGB(rout) <- 1:3
+  RGB(rout)<- 1:3
 
   rout
 }

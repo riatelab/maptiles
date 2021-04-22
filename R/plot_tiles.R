@@ -16,11 +16,9 @@
 #' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
-#' terra::plot(nc_osm)
 plot_tiles <- function(x, add = FALSE, ...) {
-  if (gdal() < "3.0.4"){
-    warning(paste0("Your GDAL version is ",gdal(),
-                   ". You need GDAL >= 3.0.4 to use maptiles"),
+   if (!inherits(x, 'SpatRaster')){
+    warning(paste0("x should be a SpatRaster"),
             call. = FALSE)
     return(invisible(NULL))
   }
