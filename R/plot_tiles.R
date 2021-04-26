@@ -17,7 +17,7 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
 plot_tiles <- function(x, add = FALSE, ...) {
-   if (!inherits(x, 'SpatRaster')){
+  if (!inherits(x, 'SpatRaster')){
     warning(paste0("x should be a SpatRaster"),
             call. = FALSE)
     return(invisible(NULL))
@@ -28,7 +28,17 @@ plot_tiles <- function(x, add = FALSE, ...) {
   # Default opts
   ops$maxcell <- ifelse(is.null(ops$maxcell), terra::ncell(x), ops$maxcell)
   ops$bgalpha <- ifelse(is.null(ops$bgalpha), 0, ops$bgalpha)
-  ops$smooth <- ifelse(is.null(ops$interpolate), TRUE, ops$interpolate)
-  ops$interpolate <- NULL
+  ops$smooth <- ifelse(is.null(ops$smooth), TRUE, ops$smooth)
+  # if(nozo == TRUE){
+  #   tsp <- dim(ops$x)[2:1]
+  #   dsp <- dev.size("px")
+  #   dsi <- dev.size("in")
+  #   dd <- ((dsp - tsp)/ 2) / (dsp/dsi)
+  #   dd <- c(dd[2:1], dd[2:1]) / 0.2
+  #   if(min(dd)>=0){
+  #     ops$smooth <- F
+  #     ops$mar <- dd
+  #   }
+  # }
   do.call(terra::plotRGB, ops)
 }

@@ -72,10 +72,10 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-   # gdal_version is obsolete.
+  # gdal_version is obsolete.
   if (gdal() < "2.2.3"){
     warning(paste0("Your GDAL version is ",gdal(),
-                   ". You need GDAL >= 3.0.4 to use maptiles."),
+                   ". You need GDAL >= 2.2.3 to use maptiles."),
             call. = FALSE)
     return(invisible(NULL))
   }
@@ -84,14 +84,14 @@ get_tiles <- function(x,
     x <- st_as_sfc(x)
   }
 
-	if(inherits(x, 'SpatRaster')){
-		x <- terra::as.polygons(x, extent = TRUE)
-		x <- terra::project(x, "epsg:4326")
-		x <- terra::ext(x)
-	} else if(inherits(x, 'SpatVector')){
-		x <- terra::project(x, "epsg:4326")
-		x <- terra::ext(x)
-	}
+  if(inherits(x, 'SpatRaster')){
+    x <- terra::as.polygons(x, extent = TRUE)
+    x <- terra::project(x, "epsg:4326")
+    x <- terra::ext(x)
+  } else if(inherits(x, 'SpatVector')){
+    x <- terra::project(x, "epsg:4326")
+    x <- terra::ext(x)
+  }
 
   if(inherits(x, c('sf', 'sfc'))){
     origin_proj <- st_crs(x)$wkt

@@ -54,12 +54,14 @@ This is a basic example which shows you how to dowload and display OpenStreetMap
 tiles over North Carolina:
 
 
-```{r example,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, dpi = 96, fig.show='hide'}
+```{r example,fig.ext="png", margin = TRUE, fig.width=827/96, fig.height = 318/96, dpi = 96, fig.show='hide'}
 library(sf)
 library(maptiles)
 # import North Carolina counties
-nc <- st_read(system.file("shape/nc.shp", package="sf"), 
+nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
               quiet = TRUE)
+# Project to EPSG:3857
+nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
 nc_osm <- get_tiles(nc, crop = TRUE)
 # display map
@@ -74,7 +76,7 @@ mtext(text = get_credit("OpenStreetMap"),
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
 
-<img src="man/figures/README-example-1.png" width="852"/>
+<img src="man/figures/README-example-1.png" width="827" height="318"/>
 
 
 
@@ -83,33 +85,24 @@ add others. The following example demonstrates the setting of a map tiles server
 and how to cache the original tiles for future use:
 
 
-```{r example2,fig.ext="png", margin = TRUE, fig.width=852/96, fig.height = 269/96, fig.show='hide', dpi = 96}
-# define the query
-fullserver <- paste(
-  "https://server.arcgisonline.com/ArcGIS/rest/services",
-  "Specialty/DeLorme_World_Base_Map/MapServer",
-  "tile/{z}/{y}/{x}.jpg",
-  sep = "/"
-)
-# define the tile server parameter
-esri <-  list(
-  src = 'esri',
-  q = fullserver,
-  sub = NA,
-  cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
-)
+```{r example2,fig.ext="png", margin = TRUE, fig.width=827/96, fig.height = 318/96, fig.show='hide', dpi = 96}
+# define the tile server parameters
+osmnolbl <- list(src = 'osmnolabel',
+                 q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+                 sub = c('a','b', 'c'), 
+                 cit = '© OpenStreetMap contributors.')
 # dowload tiles and compose raster (SpatRaster)
-nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
-                     cachedir = tempdir(), verbose = TRUE)
+nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE, 
+                         cachedir = tempdir(), verbose = TRUE)
 # display map
-plot_tiles(nc_esri)
+plot_tiles(nc_osmnolbl)
 # display credits
-mtext(text = esri$cit, side = 1, line = -1, 
+mtext(text = osmnolbl$cit, side = 1, line = -1, 
       adj = 1, cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
-<img src="man/figures/README-example2-1.png" width="852"/>
+<img src="man/figures/README-example2-1.png" width="827" height="318"/>
 
 
 

@@ -43,8 +43,10 @@ library(sf)
 #> Linking to GEOS 3.7.1, GDAL 3.1.2, PROJ 7.1.0
 library(maptiles)
 # import North Carolina counties
-nc <- st_read(system.file("shape/nc.shp", package="sf"), 
+nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
               quiet = TRUE)
+# Project to EPSG:3857
+nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
 nc_osm <- get_tiles(nc, crop = TRUE)
 # display map
@@ -59,51 +61,42 @@ mtext(text = get_credit("OpenStreetMap"),
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
 
-<img src="man/figures/README-example-1.png" width="852"/>
+<img src="man/figures/README-example-1.png" width="827" height="318"/>
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to
 add others. The following example demonstrates the setting of a map
 tiles server and how to cache the original tiles for future use:
 
 ``` r
-# define the query
-fullserver <- paste(
-  "https://server.arcgisonline.com/ArcGIS/rest/services",
-  "Specialty/DeLorme_World_Base_Map/MapServer",
-  "tile/{z}/{y}/{x}.jpg",
-  sep = "/"
-)
-# define the tile server parameter
-esri <-  list(
-  src = 'esri',
-  q = fullserver,
-  sub = NA,
-  cit = 'Tiles: Esri; Copyright: 2012 DeLorme'
-)
+# define the tile server parameters
+osmnolbl <- list(src = 'osmnolabel',
+                 q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+                 sub = c('a','b', 'c'), 
+                 cit = '© OpenStreetMap contributors.')
 # dowload tiles and compose raster (SpatRaster)
-nc_esri <- get_tiles(x = nc, provider = esri, crop = TRUE, 
-                     cachedir = tempdir(), verbose = TRUE)
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/34.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_34_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/35.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_35_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/36.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_36_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/50/37.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_37_50.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/34.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_34_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/35.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_35_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/36.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_36_51.jpg
-#> https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/7/51/37.jpg => /tmp/Rtmp1qCGHY/esri/esri_7_37_51.jpg
+nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE, 
+                         cachedir = tempdir(), verbose = TRUE)
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_34_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_35_50.png
+#> https://c.tiles.wmflabs.org/osm-no-labels/7/36/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_36_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_37_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_34_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_35_51.png
+#> https://b.tiles.wmflabs.org/osm-no-labels/7/36/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_36_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
-#> Tiles: Esri; Copyright: 2012 DeLorme
+#> © OpenStreetMap contributors.
 # display map
-plot_tiles(nc_esri)
+plot_tiles(nc_osmnolbl)
 # display credits
-mtext(text = esri$cit, side = 1, line = -1, 
+mtext(text = osmnolbl$cit, side = 1, line = -1, 
       adj = 1, cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
 
-<img src="man/figures/README-example2-1.png" width="852"/>
+<img src="man/figures/README-example2-1.png" width="827" height="318"/>
 
 The following figure shows mini maps for most of the tiles providers
 available:
