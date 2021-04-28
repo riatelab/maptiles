@@ -1,3 +1,9 @@
+# maptiles 0.1.3
+
+## Minor changes
+Lower gdal dependancy
+
+
 # maptiles 0.1.2
 
 ## Minor changes
