@@ -79,14 +79,16 @@ nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
 
-# Download esri tiles
-fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                    "Specialty/DeLorme_World_Base_Map/MapServer",
-                    "tile/{z}/{y}/{x}.jpg", sep = "/")
-esri <-  list(src = 'esri', q = fullserver,
-              sub = NA, cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
-nc_ESRI <- get_tiles(x = nc, provider = esri, crop = TRUE,
-                     verbose = TRUE, zoom = 6)
+# Download tiles from OSM, no labels
+osmnolbl <- list(
+  src = 'osmnolabel',
+  q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+  sub = c('a','b', 'c'),
+  cit = '© OpenStreetMap contributors.'
+)
+# dowload tiles and compose raster (SpatRaster)
+nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE,
+                         zoom = 6, verbose = TRUE)
 # Plot the tiles
-plot_tiles(nc_ESRI)
+plot_tiles(nc_osmnolbl)
 }
