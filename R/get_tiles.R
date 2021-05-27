@@ -260,6 +260,11 @@ compose_tile_grid <- function(tile_grid, images) {
 
     # compose brick raster
     r_img <- terra::rast(img)
+
+    if (is.null(terra::RGB(r_img))) {
+      terra::RGB(r_img) <- c(1,2,3)
+      }
+
     terra::ext(r_img) <- terra::ext(bbox[c(
       "xmin", "xmax",
       "ymin", "ymax"
@@ -272,9 +277,41 @@ compose_tile_grid <- function(tile_grid, images) {
     rout <- terra::merge(rout, rout)
   }else{
     # all tiles together
-    rout <- do.call(terra::merge, bricks)
-  }
 
+    # function to use gdal warp approach
+    warp_method <- function(){
+      # wrapped with try catch - if gdal warp fails defaults to terr::merge
+      out_ras <- tryCatch({
+        save_ras <- function(ras, .img){
+          name <- paste(tools::file_path_sans_ext(.img),
+                        '.tif', sep = "")
+          if (!file.exists(name)){
+            terra::writeRaster(ras, name)
+          }
+          return(name)
+        }
+
+        ras_files <- mapply(save_ras, bricks, images)
+
+        merge_path <- tempfile(fileext = '.tif')
+        sf::gdal_utils(util = "warp",
+                       source = as.character(ras_files),
+                       destination = merge_path)
+
+        outras <- terra::rast(merge_path)
+        return(outras)
+      },
+      error = function(e) {
+        warning(
+          "\nReceived error from gdalwarp.",
+          "Attempting merge using terra::merge")
+        outras <- do.call(terra::merge, bricks)
+        return(outras)
+      }
+      )
+    }
+    rout <- warp_method()
+  }
   rout
 }
 
