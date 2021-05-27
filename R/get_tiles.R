@@ -259,7 +259,7 @@ compose_tile_grid <- function(tile_grid, images) {
     }
 
     # compose brick raster
-    r_img <- terra::rast(img)
+    r_img <- suppressWarnings(terra::rast(img))
 
     if (is.null(terra::RGB(r_img))) {
       terra::RGB(r_img) <- c(1,2,3)

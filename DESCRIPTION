@@ -30,6 +30,7 @@ Imports:
     graphics, 
     png, 
     terra,
+    tools, 
     slippymath
 Suggests:
     covr,
