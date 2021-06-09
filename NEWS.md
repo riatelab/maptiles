@@ -1,4 +1,4 @@
-# maptiles 0.1.3
+# maptiles 0.2.0
 
 ## Minor changes
 * Suppress warnings for png files
