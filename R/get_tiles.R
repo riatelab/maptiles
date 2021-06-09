@@ -47,6 +47,7 @@
 #' @importFrom terra ext project rast as.polygons 'RGB<-' gdal
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
+#' @importFrom tools file_path_sans_ext
 #' @examples
 #' library(sf)
 #' library(maptiles)
@@ -283,7 +284,7 @@ compose_tile_grid <- function(tile_grid, images) {
       # wrapped with try catch - if gdal warp fails defaults to terr::merge
       out_ras <- tryCatch({
         save_ras <- function(ras, .img){
-          name <- paste(tools::file_path_sans_ext(.img),
+          name <- paste(file_path_sans_ext(.img),
                         '.tif', sep = "")
           if (!file.exists(name)){
             terra::writeRaster(ras, name)
