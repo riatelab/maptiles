@@ -159,8 +159,16 @@ get_tiles <- function(x,
   # set the projection
   terra::crs(rout) <- "epsg:3857"
 
-  # reproject rout
-  rout <- terra::project(x = rout, y = origin_proj)
+  # use predefine destination raster
+  if(st_crs("epsg:3857")$wkt!=origin_proj){
+    temprast <- rast(rout)
+    temprast <- project(temprast, origin_proj)
+    dim(temprast) <- dim(temprast)[c(2,1,3)]
+    terra::res(temprast) <- signif(terra::res(temprast), 3)
+    rout <- terra::project(rout, temprast)
+    rout <- terra::trim(rout)
+  }
+
   rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
 
   # crop management
@@ -264,7 +272,7 @@ compose_tile_grid <- function(tile_grid, images) {
 
     if (is.null(terra::RGB(r_img))) {
       terra::RGB(r_img) <- c(1,2,3)
-      }
+    }
 
     terra::ext(r_img) <- terra::ext(bbox[c(
       "xmin", "xmax",
