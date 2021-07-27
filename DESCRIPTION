@@ -29,6 +29,7 @@ Imports:
     sf (>= 0.9-5),
     curl,
     graphics, 
+    grDevices,
     png, 
     terra,
     tools, 

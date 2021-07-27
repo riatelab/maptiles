@@ -4,10 +4,12 @@
 \alias{plot_tiles}
 \title{Plot map tiles}
 \usage{
-plot_tiles(x, add = FALSE, ...)
+plot_tiles(x, pixel = TRUE, add = FALSE, ...)
 }
 \arguments{
 \item{x}{a SpatRaster object.}
+
+\item{pixel}{pixel perfect}
 
 \item{add}{whether to add the layer to an existing plot (TRUE) or
 not (FALSE).}

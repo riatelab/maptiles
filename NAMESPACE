@@ -3,6 +3,7 @@
 export(get_credit)
 export(get_tiles)
 export(plot_tiles)
+importFrom(grDevices,dev.size)
 importFrom(graphics,plot.new)
 importFrom(graphics,plot.window)
 importFrom(sf,"st_geometry<-")
