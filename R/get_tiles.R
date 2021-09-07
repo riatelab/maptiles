@@ -163,9 +163,6 @@ get_tiles <- function(x,
   if(st_crs("epsg:3857")$wkt!=origin_proj){
     temprast <- rast(rout)
     temprast <- project(temprast, origin_proj)
-    if(packageVersion("terra") == '1.3.4'){
-      dim(temprast) <- dim(temprast)[c(2,1,3)]
-    }
     terra::res(temprast) <- signif(terra::res(temprast), 3)
     rout <- terra::project(rout, temprast)
     rout <- terra::trim(rout)
