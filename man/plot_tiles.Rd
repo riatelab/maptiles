@@ -4,7 +4,7 @@
 \alias{plot_tiles}
 \title{Plot map tiles}
 \usage{
-plot_tiles(x, pixel = TRUE, add = FALSE, ...)
+plot_tiles(x, pixel = FALSE, add = FALSE, ...)
 }
 \arguments{
 \item{x}{a SpatRaster object.}
