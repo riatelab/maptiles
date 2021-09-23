@@ -50,6 +50,7 @@ if(home){
   x <- get_tiles(x = nc)
   expect_silent(plot_tiles(x, add = FALSE))
   expect_silent(plot_tiles(x, add = TRUE))
+  expect_silent(plot_tiles(x, adjust = TRUE))
   # test credits
   expect_silent(get_credit("OpenStreetMap"))
 }

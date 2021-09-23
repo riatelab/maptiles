@@ -4,10 +4,14 @@
 \alias{plot_tiles}
 \title{Plot map tiles}
 \usage{
-plot_tiles(x, add = FALSE, ...)
+plot_tiles(x, adjust = FALSE, add = FALSE, ...)
 }
 \arguments{
 \item{x}{a SpatRaster object.}
+
+\item{adjust}{if TRUE, plot the raster without zoom-in or zoom-out in the
+graphic device: add margins if the raster is smaller than the graphic device,
+zoom-in if the raster is larger than the graphic device.}
 
 \item{add}{whether to add the layer to an existing plot (TRUE) or
 not (FALSE).}

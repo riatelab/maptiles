@@ -1,3 +1,11 @@
+# maptiles 0.3.0
+
+## Minor changes
+* Change projection management, faster with 3857 now
+* Add adjust argument to plot_tiles() to plot the raster without zoom-in or zoom-out in the graphic device
+
+
+
 # maptiles 0.2.0
 
 ## Minor changes
