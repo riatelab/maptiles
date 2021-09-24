@@ -50,3 +50,25 @@ for (i in 1:length(providers)){
   dev.off()
 }
 
+maptiles_providers$Stamen.Toner
+names(maptiles_providers)
+n <- c("Stamen.Toner", "Stamen.TonerBackground",      "Stamen.TonerHybrid"      ,
+       "Stamen.TonerLines"         ,   "Stamen.TonerLabels"       ,
+       "Stamen.TonerLite"  ,       "Stamen.Terrain"           ,
+       "Stamen.TerrainBackground"  ,   "Stamen.TerrainLabels" )
+
+
+for(i in names(maptiles_providers)){
+  print(maptiles_providers[[i]]$cit)
+}
+
+for(i in n){
+  maptiles_providers[["Stamen.Watercolor"]]$cit <- "Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors"
+}
+
+library(maptiles)
+get_credit("Stamen.Watercolor")
+maptiles_providers[n]
+
+save("maptiles_providers",file =  "R/sysdata.rda")
+

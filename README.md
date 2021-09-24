@@ -76,14 +76,14 @@ osmnolbl <- list(src = 'osmnolabel',
 # dowload tiles and compose raster (SpatRaster)
 nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE, 
                          cachedir = tempdir(), verbose = TRUE)
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_34_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_35_50.png
-#> https://c.tiles.wmflabs.org/osm-no-labels/7/36/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_36_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/50.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_37_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_34_51.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_35_51.png
-#> https://b.tiles.wmflabs.org/osm-no-labels/7/36/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_36_51.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/51.png => /tmp/Rtmpq85OHv/osmnolabel/osmnolabel_7_37_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_34_50.png
+#> https://c.tiles.wmflabs.org/osm-no-labels/7/35/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_35_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/36/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_36_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_37_50.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_34_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_35_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/36/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_36_51.png
+#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors.
