@@ -302,7 +302,7 @@ compose_tile_grid <- function(tile_grid, images) {
         ras_files <- mapply(save_ras, bricks, images)
 
         merge_path <- tempfile(fileext = '.tif')
-        sf::gdal_utils(util = "warp",
+        sf::gdal_utils(util = "warp", options = c("-srcnodata", "None"),
                        source = as.character(ras_files),
                        destination = merge_path)
 
