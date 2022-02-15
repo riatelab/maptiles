@@ -146,6 +146,8 @@ get_tiles <- function(x,
   # extension management
   if (length(grep("jpg", param$q)) > 0) {
     ext <- "jpg"
+  } else if (length(grep("jpeg", param$q)) > 0) {
+    ext <- "jpeg"
   } else if (length(grep("png", param$q)) > 0) {
     ext <- "png"
   }
