@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# maptiles
+# maptiles <img src="man/figures/logo.png" align="right" width="140"/>
 
 <!-- badges: start -->
 
@@ -31,7 +31,7 @@ remotes::install_github("riatelab/maptiles")
 ```
 
 **Note:** `maptiles` uses [`terra`](https://github.com/rspatial/terra)
-which requires a recent version of GDAL (&gt;= 3.0.4).
+which requires a recent version of GDAL (>= 3.0.4).
 
 ## Demo
 
@@ -40,11 +40,11 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.7.1, GDAL 3.1.2, PROJ 7.1.0
+#> Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.1.0; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
-              quiet = TRUE)
+                  quiet = TRUE)
 # Project to EPSG:3857
 nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
@@ -69,28 +69,28 @@ tiles server and how to cache the original tiles for future use:
 
 ``` r
 # define the tile server parameters
-osmnolbl <- list(src = 'osmnolabel',
-                 q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
-                 sub = c('a','b', 'c'), 
-                 cit = '© OpenStreetMap contributors.')
+osmpos <- list(src = 'CARTO.POSITRON',
+               q = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+               sub = c('a','b', 'c', 'd'), 
+               cit = '© OpenStreetMap contributors © CARTO.')
 # dowload tiles and compose raster (SpatRaster)
-nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE, 
-                         cachedir = tempdir(), verbose = TRUE)
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_34_50.png
-#> https://c.tiles.wmflabs.org/osm-no-labels/7/35/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_35_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/36/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_36_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/50.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_37_50.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/34/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_34_51.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/35/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_35_51.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/36/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_36_51.png
-#> https://a.tiles.wmflabs.org/osm-no-labels/7/37/51.png => /tmp/RtmpTstEb7/osmnolabel/osmnolabel_7_37_51.png
+nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
+                       cachedir = tempdir(), verbose = TRUE)
+#> https://c.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
-#> © OpenStreetMap contributors.
+#> © OpenStreetMap contributors © CARTO.
 # display map
-plot_tiles(nc_osmnolbl)
+plot_tiles(nc_osmpos)
 # display credits
-mtext(text = osmnolbl$cit, side = 1, line = -1, 
+mtext(text = osmpos$cit, side = 1, line = -1, 
       adj = 1, cex = .9, font = 3)
 ```
 

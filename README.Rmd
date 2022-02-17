@@ -18,8 +18,8 @@ knitr::knit_hooks$set(margin = function(before, options, envir){
 })
 ```
 
-# maptiles
- 
+# maptiles <img src="man/figures/logo.png" align="right" width="140"/>
+
 <!-- badges: start -->
 [![](https://www.r-pkg.org/badges/version/maptiles)](https://cran.r-project.org/package=maptiles)
 [![R-CMD-check](https://github.com/riatelab/maptiles/workflows/R-CMD-check/badge.svg)](https://github.com/riatelab/maptiles/actions)
@@ -59,7 +59,7 @@ library(sf)
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
-              quiet = TRUE)
+                  quiet = TRUE)
 # Project to EPSG:3857
 nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
@@ -87,17 +87,17 @@ and how to cache the original tiles for future use:
 
 ```{r example2,fig.ext="png", margin = TRUE, fig.width=827/96, fig.height = 318/96, fig.show='hide', dpi = 96}
 # define the tile server parameters
-osmnolbl <- list(src = 'osmnolabel',
-                 q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
-                 sub = c('a','b', 'c'), 
-                 cit = '© OpenStreetMap contributors.')
+osmpos <- list(src = 'CARTO.POSITRON',
+               q = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+               sub = c('a','b', 'c', 'd'), 
+               cit = '© OpenStreetMap contributors © CARTO.')
 # dowload tiles and compose raster (SpatRaster)
-nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE, 
-                         cachedir = tempdir(), verbose = TRUE)
+nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
+                       cachedir = tempdir(), verbose = TRUE)
 # display map
-plot_tiles(nc_osmnolbl)
+plot_tiles(nc_osmpos)
 # display credits
-mtext(text = osmnolbl$cit, side = 1, line = -1, 
+mtext(text = osmpos$cit, side = 1, line = -1, 
       adj = 1, cex = .9, font = 3)
 ```
 
