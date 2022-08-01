@@ -229,6 +229,9 @@ dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload) {
     cachedir <- subdir
   }
 
+  # apply coerces to the same length character, need to ensure no whitespace in numbers
+  x <- trimws(x)
+
   outfile <- paste0(cachedir, "/", src, "_", z, "_", x[1], "_", x[2], ".", ext)
   if (!file.exists(outfile) | isTRUE(forceDownload)) {
     q <- gsub(pattern = "{s}", replacement = x[3], x = q, fixed = TRUE)

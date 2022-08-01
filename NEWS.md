@@ -1,3 +1,8 @@
+# maptiles 0.3.1
+
+## Bug fixes
+* Fix issue that stopped downloading tile sets that span different orders of magnitude
+
 # maptiles 0.3.0
 
 ## Minor changes
