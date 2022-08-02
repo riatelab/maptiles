@@ -1,7 +1,10 @@
-# maptiles 0.3.1
+# maptiles 0.4.0
 
 ## Bug fixes
 * Fix issue that stopped downloading tile sets that span different orders of magnitude
+* Fix error message from GDAL for raster with nodata values 
+* Allow 'jpeg' tile extension 
+
 
 # maptiles 0.3.0
 

@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.4.0.0
+Version: 0.4.0
 Authors@R: c(person(given = "Timothée", 
                     family = "Giraud",
                     email = "timothee.giraud@cnrs.fr", 
@@ -38,4 +38,4 @@ Suggests:
     covr,
     tinytest
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
