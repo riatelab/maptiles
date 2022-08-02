@@ -5,9 +5,15 @@
 
 <!-- badges: start -->
 
-[![](https://www.r-pkg.org/badges/version/maptiles)](https://cran.r-project.org/package=maptiles)
-[![R-CMD-check](https://github.com/riatelab/maptiles/workflows/R-CMD-check/badge.svg)](https://github.com/riatelab/maptiles/actions)
-[![codecov](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg?token=R7T2PCTERH)](https://codecov.io/gh/riatelab/maptiles/)
+[![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg)](https://app.codecov.io/gh/riatelab/maptiles?branch=main)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
+![](https://cranlogs.r-pkg.org/badges/grand-total/maptiles) [![Project
+Status: Active – The project has reached a stable, usable state and is
+being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
 To create maps from tiles, `maptiles` downloads, composes and displays
@@ -31,7 +37,7 @@ remotes::install_github("riatelab/maptiles")
 ```
 
 **Note:** `maptiles` uses [`terra`](https://github.com/rspatial/terra)
-which requires a recent version of GDAL (>= 3.0.4).
+which requires a recent version of GDAL (\>= 3.0.4).
 
 ## Demo
 
@@ -40,7 +46,7 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.1.0; sf_use_s2() is TRUE
+#> Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.2.1; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
@@ -76,14 +82,14 @@ osmpos <- list(src = 'CARTO.POSITRON',
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
                        cachedir = tempdir(), verbose = TRUE)
-#> https://c.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://c.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpzdhF4m/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+#> https://b.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://a.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/Rtmpy66gTT/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors © CARTO.
