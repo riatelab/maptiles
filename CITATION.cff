@@ -1,0 +1,177 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.2
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "maptiles" in publications use:'
+type: software
+license: GPL-3.0-only
+title: 'maptiles: Download and Display Map Tiles'
+version: 0.4.0
+abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
+  from a large number of providers (e.g. 'OpenStreetMap', 'Stamen', 'Esri', 'CARTO',
+  or 'Thunderforest').
+authors:
+- family-names: Giraud
+  given-names: Timothée
+  email: timothee.giraud@cnrs.fr
+  orcid: https://orcid.org/0000-0002-1932-3323
+preferred-citation:
+  type: manual
+  title: 'maptiles: Download and Display Map Tiles'
+  authors:
+  - family-names: Giraud
+    given-names: Timothée
+    email: timothee.giraud@cnrs.fr
+    orcid: https://orcid.org/0000-0002-1932-3323
+  version: 0.4.0
+  abstract: To create maps from tiles, 'maptiles' downloads, composes and displays
+    tiles from a large number of providers (e.g. 'OpenStreetMap', 'Stamen', 'Esri',
+    'CARTO', or 'Thunderforest').
+  repository: https://CRAN.R-project.org/package=maptiles
+  repository-code: https://github.com/riatelab/maptiles/issues/
+  url: https://github.com/riatelab/maptiles/
+  contact:
+  - family-names: Giraud
+    given-names: Timothée
+    email: timothee.giraud@cnrs.fr
+    orcid: https://orcid.org/0000-0002-1932-3323
+  license: GPL-3.0-only
+  year: '2022'
+repository: https://CRAN.R-project.org/package=maptiles
+repository-code: https://github.com/riatelab/maptiles/issues/
+url: https://github.com/riatelab/maptiles/
+contact:
+- family-names: Giraud
+  given-names: Timothée
+  email: timothee.giraud@cnrs.fr
+  orcid: https://orcid.org/0000-0002-1932-3323
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 3.5.0'
+- type: software
+  title: sf
+  abstract: 'sf: Simple Features for R'
+  notes: Imports
+  authors:
+  - family-names: Pebesma
+    given-names: Edzer
+    email: edzer.pebesma@uni-muenster.de
+    orcid: https://orcid.org/0000-0001-8049-7069
+  year: '2022'
+  url: https://CRAN.R-project.org/package=sf
+  version: '>= 0.9-5'
+- type: software
+  title: curl
+  abstract: 'curl: A Modern and Flexible Web Client for R'
+  notes: Imports
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2022'
+  url: https://CRAN.R-project.org/package=curl
+- type: software
+  title: graphics
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: grDevices
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: png
+  abstract: 'png: Read and write PNG images'
+  notes: Imports
+  authors:
+  - family-names: Urbanek
+    given-names: Simon
+    email: Simon.Urbanek@r-project.org
+  year: '2022'
+  url: https://CRAN.R-project.org/package=png
+- type: software
+  title: terra
+  abstract: 'terra: Spatial Data Analysis'
+  notes: Imports
+  authors:
+  - family-names: Hijmans
+    given-names: Robert J.
+    email: r.hijmans@gmail.com
+    orcid: https://orcid.org/0000-0001-5872-2872
+  year: '2022'
+  url: https://CRAN.R-project.org/package=terra
+- type: software
+  title: tools
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: slippymath
+  abstract: 'slippymath: Slippy Map Tile Tools'
+  notes: Imports
+  authors:
+  - family-names: McBain
+    given-names: Miles
+    email: miles.mcbain@gmail.com
+    orcid: https://orcid.org/0000-0003-2865-2548
+  - family-names: Sumner
+    given-names: Michael
+    email: mdsumner@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=slippymath
+- type: software
+  title: covr
+  abstract: 'covr: Test Coverage for Packages'
+  notes: Suggests
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    email: james.f.hester@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=covr
+- type: software
+  title: tinytest
+  abstract: 'tinytest: Lightweight and Feature Complete Unit Testing Framework'
+  notes: Suggests
+  authors:
+  - family-names: van der Loo
+    given-names: Mark
+    email: mark.vanderloo@gmail.com
+    orcid: https://orcid.org/0000-0002-9807-4686
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tinytest

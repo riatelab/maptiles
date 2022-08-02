@@ -3,3 +3,7 @@
 ^README\.Rmd$
 .github
 data-raw
+^\.github$
+^codecov\.yml$
+^codemeta\.json$
+^CITATION\.cff$
