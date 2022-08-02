@@ -1,5 +1,5 @@
 
-home <- length(unclass(packageVersion("maptiles"))[[1]]) == 4
+home <- length(unclass(packageVersion("maptiles"))[[1]]) == 3
 if(home){
   suppressPackageStartupMessages(library(sf))
   suppressPackageStartupMessages(library(terra))
