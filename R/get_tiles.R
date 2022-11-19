@@ -56,17 +56,17 @@
 #' plot_tiles(nc_osm)
 #'
 #' # Download tiles from OSM, no labels
-#' osmnolbl <- list(
-#'   src = 'osmnolabel',
-#'   q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+#' osm <- list(
+#'   src = 'OSM',
+#'   q = '"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"',
 #'   sub = c('a','b', 'c'),
 #'   cit = '© OpenStreetMap contributors.'
 #' )
 #' # dowload tiles and compose raster (SpatRaster)
-#' nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE,
-#'                          zoom = 6, verbose = TRUE)
+#' nc_osm2 <- get_tiles(x = nc, provider = osm, crop = TRUE,
+#'                      zoom = 6, verbose = TRUE)
 #' # Plot the tiles
-#' plot_tiles(nc_osmnolbl)
+#' plot_tiles(nc_osm2)
 get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,
@@ -155,6 +155,11 @@ get_tiles <- function(x,
 
   # download images
   images <- get_tiles_n(tile_grid, verbose, cachedir, forceDownload)
+  if(is.null(images)){
+    message("A problem occurred while downloading the tiles.","\n",
+            "Please check the tile provider address.")
+    return(invisible(NULL))
+  }
   # compose images
   rout <- compose_tile_grid(tile_grid, images)
 
@@ -238,10 +243,15 @@ dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload) {
     q <- gsub(pattern = "{x}", replacement = x[1], x = q, fixed = TRUE)
     q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
     q <- gsub(pattern = "{z}", replacement = z, x = q, fixed = TRUE)
+
+    e <- try({curl::curl_download(url = q, destfile = outfile)}, silent = TRUE)
+    if (inherits(e,"try-error")){
+      outfile <- NULL
+    }
+
     if (verbose) {
       message(q, " => ", outfile)
     }
-    curl::curl_download(url = q, destfile = outfile)
   }
   outfile
 }

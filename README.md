@@ -82,14 +82,14 @@ osmpos <- list(src = 'CARTO.POSITRON',
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
                        cachedir = tempdir(), verbose = TRUE)
-#> https://b.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/Rtmphc35PX/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpuG7Vzk/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors © CARTO.
@@ -144,18 +144,17 @@ different providers and to have a minimal number of robust and modern
 dependencies. However, depending on the use case, one of following
 packages may better suit your needs:
 
--   [`ceramic`](https://github.com/hypertidy/ceramic)  
--   [`ggmap`](https://github.com/dkahle/ggmap) (`ggplot2` focused)
--   [`ggspatial`](https://github.com/paleolimbot/ggspatial) (`ggplot2`
-    focused, based on `rosm`)
--   [`mapboxapi`](https://github.com/walkerke/mapboxapi) (mapbox)
--   [`mapsapi`](https://github.com/michaeldorman/mapsapi/) (google,
-    based on `RgoogleMaps`)
--   [`OpenStreetMap`](https://github.com/ifellows/ROSM) (requires Java)
--   [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps)
-    (google)
--   [`rosm`](https://github.com/paleolimbot/rosm)
--   …
+- [`ceramic`](https://github.com/hypertidy/ceramic)  
+- [`ggmap`](https://github.com/dkahle/ggmap) (`ggplot2` focused)
+- [`ggspatial`](https://github.com/paleolimbot/ggspatial) (`ggplot2`
+  focused, based on `rosm`)
+- [`mapboxapi`](https://github.com/walkerke/mapboxapi) (mapbox)
+- [`mapsapi`](https://github.com/michaeldorman/mapsapi/) (google, based
+  on `RgoogleMaps`)
+- [`OpenStreetMap`](https://github.com/ifellows/ROSM) (requires Java)
+- [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps) (google)
+- [`rosm`](https://github.com/paleolimbot/rosm)
+- …
 
 ## Note
 

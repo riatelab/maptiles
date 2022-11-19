@@ -80,15 +80,15 @@ nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
 
 # Download tiles from OSM, no labels
-osmnolbl <- list(
-  src = 'osmnolabel',
-  q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+osm <- list(
+  src = 'OSM',
+  q = '"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"',
   sub = c('a','b', 'c'),
   cit = '© OpenStreetMap contributors.'
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE,
-                         zoom = 6, verbose = TRUE)
+nc_osm2 <- get_tiles(x = nc, provider = osm, crop = TRUE,
+                     zoom = 6, verbose = TRUE)
 # Plot the tiles
-plot_tiles(nc_osmnolbl)
+plot_tiles(nc_osm2)
 }

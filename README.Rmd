@@ -83,7 +83,6 @@ mtext(text = get_credit("OpenStreetMap"),
 <img src="man/figures/README-example-1.png" width="827" height="318"/>
 
 
-
 `maptiles` gives access to a lot of tiles servers, but it is possible to 
 add others. The following example demonstrates the setting of a map tiles server
 and how to cache the original tiles for future use:
