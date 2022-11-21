@@ -21,6 +21,10 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
 plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
+  if(is.null(x)){
+    message("x is NULL")
+    return(invisible(NULL))
+  }
   if (!inherits(x, 'SpatRaster')){
     warning(paste0("x should be a SpatRaster"),
             call. = FALSE)
