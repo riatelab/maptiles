@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.2.2 (2022-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -168,11 +168,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1231.75KB",
-  "releaseNotes": "https://github.com/riatelab/maptiles/blob/master/NEWS.md",
-  "readme": "https://github.com/riatelab/maptiles/blob/main/README.md",
-  "contIntegration": ["https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/riatelab/maptiles?branch=main"],
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": ["r", "rspatial", "map", "tiles"],
-  "relatedLink": "https://CRAN.R-project.org/package=maptiles"
+  "fileSize": "1230.016KB"
 }
