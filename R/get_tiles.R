@@ -87,16 +87,25 @@ get_tiles <- function(x,
     x <- st_as_sfc(x)
   }
 
-  if(inherits(x, 'SpatRaster')){
+  if (inherits(x, 'SpatRaster')) {
+    origin_proj <- terra::crs(x)
+    cb <- terra::ext(x)[c(1,3,2,4)]
     x <- terra::as.polygons(x, extent = TRUE)
     x <- terra::project(x, "epsg:4326")
-    x <- terra::ext(x)
-  } else if(inherits(x, 'SpatVector')){
+    bbx <- terra::ext(x)[c(1,3,2,4)]
+  } else if (inherits(x, 'SpatVector')) {
+    origin_proj <- terra::crs(x)
+    cb <- terra::ext(x)[c(1,3,2,4)]
+    if (length(unique(cb)) < 3) {
+      xt <- terra::project(x, "epsg:3857")
+      xt <- terra::buffer(xt, 1000)
+	  x <- terra::project(xt, x)
+      cb <- terra::ext(x)[c(1,3,2,4)]
+	}
+    x <- terra::as.polygons(terra::ext(x), crs=terra::crs(x))
     x <- terra::project(x, "epsg:4326")
-    x <- terra::ext(x)
-  }
-
-  if(inherits(x, c('sf', 'sfc'))){
+    bbx <- terra::ext(x)[c(1,3,2,4)]
+   } else if(inherits(x, c('sf', 'sfc'))){
     origin_proj <- st_crs(x)$wkt
     # test for single point (apply buffer to obtain a correct bbox)
     if (nrow(x) == 1 && inherits(st_geometry(x), "sfc_POINT")) {
@@ -111,7 +120,7 @@ get_tiles <- function(x,
       cb <- st_bbox(x)
     }
   } else if(inherits(x, "SpatExtent")){
-    origin_proj <- st_crs("epsg:4326")$wkt
+	origin_proj <- st_crs("epsg:4326")$wkt
     bbx <- as.vector(x)[c(1,3,2,4)]
     cb <- bbx
   } else {
@@ -178,7 +187,7 @@ get_tiles <- function(x,
   rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
 
   # crop management
-  if (crop == TRUE) {
+  if (crop) {
     k <- min(c(0.052 * (cb[4] - cb[2]), 0.052 * (cb[3] - cb[1])))
     cb <- cb + c(-k, -k, k, k)
     rout <- terra::crop(rout, cb[c(1, 3, 2, 4)])
