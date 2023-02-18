@@ -9,6 +9,8 @@ get_tiles(
   provider = "OpenStreetMap",
   zoom,
   crop = FALSE,
+  project = TRUE,
+  prvcrs = "epsg:3857",
   verbose = FALSE,
   apikey,
   cachedir,
@@ -30,6 +32,10 @@ q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
 
 \item{crop}{TRUE if results should be cropped to the specified x extent,
 FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
+
+\item{project}{if TRUE, the output is projected to the crs of x.}
+
+\item{prvcrs}{the crs used by the provider}
 
 \item{verbose}{if TRUE, tiles filepaths, zoom level and citation are displayed.}
 

@@ -13,6 +13,8 @@
 #' @param zoom the zoom level (see Details).
 #' @param crop TRUE if results should be cropped to the specified x extent,
 #' FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.
+#' @param project if TRUE, the output is projected to the crs of x.
+#' @param prvcrs the crs used by the provider
 #' @param verbose if TRUE, tiles filepaths, zoom level and citation are displayed.
 #' @param apikey API key, needed for Thunderforest servers
 #' @param cachedir name of a directory used to cache tiles. If not set, tiles
@@ -71,6 +73,8 @@ get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,
                       crop = FALSE,
+					  project = TRUE,
+					  prvcrs = "epsg:3857",
                       verbose = FALSE,
                       apikey,
                       cachedir,
@@ -87,40 +91,43 @@ get_tiles <- function(x,
     x <- st_as_sfc(x)
   }
 
+  lonlat <- "epsg:4326"
   if (inherits(x, 'SpatRaster')) {
     origin_proj <- terra::crs(x)
     cb <- terra::ext(x)[c(1,3,2,4)]
-    x <- terra::as.polygons(x, extent = TRUE)
-    x <- terra::project(x, "epsg:4326")
+	if (!terra::is.lonlat(x)) {
+		x <- terra::as.polygons(x, extent = TRUE)
+		x <- terra::project(x, lonlat)
+	}
     bbx <- terra::ext(x)[c(1,3,2,4)]
   } else if (inherits(x, 'SpatVector')) {
     origin_proj <- terra::crs(x)
     cb <- terra::ext(x)[c(1,3,2,4)]
     if (length(unique(cb)) < 3) {
-      xt <- terra::project(x, "epsg:3857")
-      xt <- terra::buffer(xt, 1000)
-	  x <- terra::project(xt, x)
+      x <- terra::buffer(x, 1000)
       cb <- terra::ext(x)[c(1,3,2,4)]
 	}
-    x <- terra::as.polygons(terra::ext(x), crs=terra::crs(x))
-    x <- terra::project(x, "epsg:4326")
+	if (!terra::is.lonlat(x)) {
+		x <- terra::as.polygons(x, extent=TRUE)
+		x <- terra::project(x, lonlat)
+	}
     bbx <- terra::ext(x)[c(1,3,2,4)]
    } else if(inherits(x, c('sf', 'sfc'))){
     origin_proj <- st_crs(x)$wkt
     # test for single point (apply buffer to obtain a correct bbox)
     if (nrow(x) == 1 && inherits(st_geometry(x), "sfc_POINT")) {
-      xt <- st_transform(x, 3857)
+      xt <- st_transform(x, prvcrs)
       st_geometry(xt) <- st_buffer(st_geometry(xt), 1000)
       crop <- FALSE
       # use x bbox to select the tiles to get
-      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(xt)), 4326))
+      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(xt)), lonlat))
     } else {
       # use x bbox to select the tiles to get
-      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(x)), 4326))
+      bbx <- st_bbox(st_transform(st_as_sfc(st_bbox(x)), lonlat))
       cb <- st_bbox(x)
     }
   } else if(inherits(x, "SpatExtent")){
-	origin_proj <- st_crs("epsg:4326")$wkt
+	origin_proj <- st_crs(lonlat)$wkt
     bbx <- as.vector(x)[c(1,3,2,4)]
     cb <- bbx
   } else {
@@ -173,24 +180,35 @@ get_tiles <- function(x,
   rout <- compose_tile_grid(tile_grid, images)
 
   # set the projection
-  terra::crs(rout) <- "epsg:3857"
+  terra::crs(rout) <- prvcrs
 
+  othercrs <- (prvcrs != origin_proj)
   # use predefine destination raster
-  if(st_crs("epsg:3857")$wkt!=origin_proj){
+  if (project && othercrs){
     temprast <- rast(rout)
     temprast <- project(temprast, origin_proj)
     terra::res(temprast) <- signif(terra::res(temprast), 3)
     rout <- terra::project(rout, temprast)
     rout <- terra::trim(rout)
+
+	rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
   }
-
-  rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
-
-  # crop management
   if (crop) {
-    k <- min(c(0.052 * (cb[4] - cb[2]), 0.052 * (cb[3] - cb[1])))
-    cb <- cb + c(-k, -k, k, k)
-    rout <- terra::crop(rout, cb[c(1, 3, 2, 4)])
+	# get new bounding box
+	if ((!project) && othercrs) {
+		v <- terra::as.polygons(terra::ext(cb[c(1,3,2,4)]), crs=origin_proj)
+		if (terra::is.lonlat(v)) {
+			# the corners of an extent are not sufficient for projection
+			v <- terra::densify(v, 100000)
+		}
+		v <- terra::project(v, prvcrs)
+		cb <- terra::ext(v)[c(1,3,2,4)]
+	}
+  # crop management
+   # not sure about this. But 'snap="out"' may do the same thing.
+   # k <- min(c(0.052 * (cb[4] - cb[2]), 0.052 * (cb[3] - cb[1])))
+   # cb <- cb + c(-k, -k, k, k)
+    rout <- terra::crop(rout, cb[c(1, 3, 2, 4)], snap="out")
   }
 
   # set R, G, B channels, such that plot(rout) will go to plotRGB
