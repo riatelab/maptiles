@@ -67,7 +67,7 @@ mtext(text = get_credit("OpenStreetMap"),
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
 
-<img src="man/figures/README-example-1.png" width="827" height="318"/>
+<img src="man/figures/README-example-1.png" width="808" height="303"/>
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to
 add others. The following example demonstrates the setting of a map
@@ -82,14 +82,14 @@ osmpos <- list(src = 'CARTO.POSITRON',
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
                        cachedir = tempdir(), verbose = TRUE)
-#> https://b.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpFGXOix/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://a.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors © CARTO.
@@ -102,7 +102,7 @@ mtext(text = osmpos$cit, side = 1, line = -1,
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
 
-<img src="man/figures/README-example2-1.png" width="827" height="318"/>
+<img src="man/figures/README-example2-1.png" width="808" height="303"/>
 
 The following figure shows mini maps for most of the tiles providers
 available:

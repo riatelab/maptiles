@@ -58,7 +58,7 @@ This is a basic example which shows you how to dowload and display OpenStreetMap
 tiles over North Carolina:
 
 
-```{r example,fig.ext="png", margin = TRUE, fig.width=827/96, fig.height = 318/96, dpi = 96, fig.show='hide'}
+```{r example,fig.ext="png", margin = TRUE, fig.width=808/96, fig.height = 303/96, dpi = 96, fig.show='hide'}
 library(sf)
 library(maptiles)
 # import North Carolina counties
@@ -80,7 +80,7 @@ mtext(text = get_credit("OpenStreetMap"),
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
 
-<img src="man/figures/README-example-1.png" width="827" height="318"/>
+<img src="man/figures/README-example-1.png" width="808" height="303"/>
 
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to 
@@ -88,7 +88,7 @@ add others. The following example demonstrates the setting of a map tiles server
 and how to cache the original tiles for future use:
 
 
-```{r example2,fig.ext="png", margin = TRUE, fig.width=827/96, fig.height = 318/96, fig.show='hide', dpi = 96}
+```{r example2,fig.ext="png", margin = TRUE, fig.width=808/96, fig.height = 303/96, fig.show='hide', dpi = 96}
 # define the tile server parameters
 osmpos <- list(src = 'CARTO.POSITRON',
                q = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
@@ -105,7 +105,7 @@ mtext(text = osmpos$cit, side = 1, line = -1,
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
-<img src="man/figures/README-example2-1.png" width="827" height="318"/>
+<img src="man/figures/README-example2-1.png" width="808" height="303"/>
 
 
 
