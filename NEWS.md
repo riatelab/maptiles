@@ -1,3 +1,17 @@
+# maptiles 0.5.0
+
+## fix
+* do not discard the crs of SpatRaster and SpatVector (@rhijmans #19)
+* no buffer is applied on input sf* object extent when crop = TRUE anymore
+
+## feat
+* add a project argument to get_tiles() to output SpatRaster in its original projection (part of @rhijmans #20)
+
+## test
+* better test suite
+
+
+
 # maptiles 0.4.0
 
 ## Bug fixes
