@@ -60,8 +60,8 @@
 #' # Download tiles from OSM, no labels
 #' osm <- list(
 #'   src = 'OSM',
-#'   q = '"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"',
-#'   sub = c('a','b', 'c'),
+#'   q = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+#'   sub = NA,
 #'   cit = '© OpenStreetMap contributors.'
 #' )
 #' # dowload tiles and compose raster (SpatRaster)
