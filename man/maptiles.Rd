@@ -3,9 +3,29 @@
 \docType{package}
 \name{maptiles}
 \alias{maptiles}
+\alias{maptiles-package}
 \title{Download and Display Map Tiles}
 \description{
 To create maps from tiles, maptiles downloads, composes and displays tiles
 from a large number of providers (e.g. OpenStreetMap, Stamen, Esri, CARTO,
 or Thunderforest).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/riatelab/maptiles/}
+  \item Report bugs at \url{https://github.com/riatelab/maptiles/issues/}
+}
+
+}
+\author{
+\strong{Maintainer}: Timothée Giraud \email{timothee.giraud@cnrs.fr} (\href{https://orcid.org/0000-0002-1932-3323}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Diego Hernangómez (\href{https://orcid.org/0000-0001-8457-4658}{ORCID}) [contributor]
+  \item Robert J. Hijmans (\href{https://orcid.org/0000-0001-5872-2872}{ORCID}) [contributor]
+  \item Hugh A. Graham [contributor]
+}
+
 }

@@ -213,6 +213,21 @@ get_param <- function(provider) {
     param <- provider
   } else {
     param <- maptiles_providers[[provider]]
+    stamen_provider <- c("Stamen.Toner", "Stamen.TonerBackground",
+                         "Stamen.TonerHybrid", "Stamen.TonerLines",
+                         "Stamen.TonerLabels", "Stamen.TonerLite",
+                         "Stamen.Watercolor", "Stamen.Terrain",
+                         "Stamen.TerrainBackground",
+                         "Stamen.TerrainLabels")
+    if(provider %in% stamen_provider){
+      warning(paste0("Stamen is not providing tiles anymore.\n",
+                     "Please use 'Stadia.", provider, "' instead.\n",
+                     "Do not forget to fill the apikey argument",
+                     "(see https://stadiamaps.com/stamen/)."),
+              call. = FALSE)
+
+    }
+    param <- maptiles_providers[[provider]]
   }
   param
 }

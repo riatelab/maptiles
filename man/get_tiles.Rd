@@ -55,7 +55,7 @@ fetched from various map servers.
 Zoom levels are described on the OpenStreetMap wiki:
 \url{https://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
 Providers: \cr
-"OpenStreetMap.MapnikBW", "OpenStreetMap", "OpenStreetMap.DE",
+"OpenStreetMap", "OpenStreetMap.DE",
 "OpenStreetMap.France", "OpenStreetMap.HOT", \cr
 "Stamen.Toner",
 "Stamen.TonerBackground", "Stamen.TonerHybrid", "Stamen.TonerLines",
@@ -72,9 +72,6 @@ Providers: \cr
 "Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
 "Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
 "Thunderforest.Neighbourhood",\cr
-"OpenTopoMap",\cr
-"HikeBike", \cr
-"Wikimedia",\cr
 }
 \examples{
 library(sf)
@@ -83,7 +80,7 @@ nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
 
-# Download tiles from OSM, no labels
+# Download tiles from OSM
 osm <- list(
   src = 'OSM',
   q = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
