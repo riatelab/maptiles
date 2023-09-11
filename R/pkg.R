@@ -6,4 +6,4 @@
 #' from a large number of providers (e.g. OpenStreetMap, Stamen, Esri, CARTO,
 #' or Thunderforest).
 #' @docType package
-NULL
+"_PACKAGE"
