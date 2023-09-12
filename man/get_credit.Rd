@@ -7,7 +7,8 @@
 get_credit(provider)
 }
 \arguments{
-\item{provider}{provider name}
+\item{provider}{provider name or provider object
+(as produced by \link{create_provider}).}
 }
 \description{
 Get the attribution of map tiles.
