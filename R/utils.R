@@ -211,7 +211,7 @@ warp_method <- function(bricks, images, forceDownload){
 
 # providers parameters
 get_param <- function(provider) {
-  if (length(provider) == 4) {
+  if (is.list(provider) && length(provider) == 4) {
     param <- provider
   } else {
     stamen_provider <- c("Stamen.Toner", "Stamen.TonerBackground",
@@ -233,3 +233,5 @@ get_param <- function(provider) {
   }
   param
 }
+
+
