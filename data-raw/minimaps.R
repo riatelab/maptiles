@@ -1,74 +1,36 @@
-providers <- list("OpenStreetMap.MapnikBW", "OpenStreetMap",
-                  "OpenStreetMap.France", "OpenStreetMap.HOT", "OpenTopoMap",
-                  "Stamen.Toner", "Stamen.TonerBackground", "Stamen.TonerLite",
-                  "Stamen.Watercolor", "Stamen.Terrain", "Stamen.TerrainBackground",
-                  "Esri.WorldStreetMap", "Esri.DeLorme",
-                  "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
-                  "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
-                  "Esri.WorldGrayCanvas", "CartoDB.Positron", "CartoDB.PositronNoLabels",
-                  "CartoDB.DarkMatter", "CartoDB.DarkMatterNoLabels",
+providers <- list("OpenStreetMap", "OpenStreetMap.France",
+                  "OpenStreetMap.HOT", "OpenTopoMap",
+                  "Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
+                   "Stadia.Stamen.TonerLite", "Stadia.Stamen.Watercolor",
+                  "Stadia.Stamen.Terrain", "Stadia.Stamen.TerrainBackground",
+
+                  "Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap",
+                  "Esri.WorldImagery", "Esri.WorldTerrain", "Esri.WorldShadedRelief",
+                  "Esri.OceanBasemap", "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",
+                  "CartoDB.Positron", "CartoDB.PositronNoLabels",
+                  "CartoDB.DarkMatter",
                   "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
-                  "HikeBike", "Wikimedia", "Thunderforest.OpenCycleMap",
-                  "Thunderforest.Transport", "Thunderforest.TransportDark", "Thunderforest.SpinalMap",
-                  "Thunderforest.Landscape", "Thunderforest.Pioneer",
-                  "Thunderforest.MobileAtlas", "Thunderforest.Neighbourhood")
-length(providers)
-providers <- names(maptiles_providers)
-apikey <- "xx"
+                  "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
+                  "Thunderforest.TransportDark", "Thunderforest.SpinalMap",
+                  "Thunderforest.Landscape",
+                  "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
+                  "Thunderforest.Neighbourhood")
+library(sf)
+library(maptiles)
+stadiakey = "xxx"
+thunderkey = "xxx"
 nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
 library(mapsf)
-
-png("man/figures/README-front.png", width = 210*7, height = 84*7)
-par(mar = c(0,0,0,0), mfrow = c(7,7))
+png("man/figures/README-front.png", width = 202*4, height = 76*8)
+par(mar = c(0,0,0,0), mfrow = c(8,4))
 for (i in 1:length(providers)){
   t <- get_tiles(nc, provider = providers[[i]],
-                 zoom = 5, cachedir = "./tiles",
-                 crop = T, apikey = apikey)
+                 zoom = 5, cachedir = "tiles",
+                 crop = T, apikey = thunderkey)
   plot_tiles(t)
   mf_title(txt = providers[[i]], pos = "center",tab = TRUE, inner = TRUE,
-           line = 1.5, cex = 1.5, bg = "white", fg = "black")
+           line = 1.5, cex = 1.5, bg = "white", fg = "black", font = 2)
 }
 dev.off()
-
-
-6*7
-46/9
-library(sf)
-library(maptiles)
-apikey <- "xxx"
-for (i in 1:length(providers)){
-  t <- get_tiles(nc, provider = providers[[i]], zoom = 7,
-                 cachedir = "./tiles", crop = T, apikey = apikey)
-  png(sprintf("gif/tile%03d.png", i), width = 827, height = 318)
-  par(mar = c(0,0,0,0))
-  plot_tiles(t)
-  library(mapsf)
-  tc_title(txt = providers[[i]], pos = "center",tab = TRUE, inner = TRUE,
-           line = 1.5, cex = 1.5, bg = "white", fg = "black")
-  tc_credits(txt = get_credit(providers[[i]]), pos = "rightbottom", cex = .8)
-  dev.off()
-}
-
-maptiles_providers$Stamen.Toner
-names(maptiles_providers)
-n <- c("Stamen.Toner", "Stamen.TonerBackground",      "Stamen.TonerHybrid"      ,
-       "Stamen.TonerLines"         ,   "Stamen.TonerLabels"       ,
-       "Stamen.TonerLite"  ,       "Stamen.Terrain"           ,
-       "Stamen.TerrainBackground"  ,   "Stamen.TerrainLabels" )
-
-
-for(i in names(maptiles_providers)){
-  print(maptiles_providers[[i]]$cit)
-}
-
-for(i in n){
-  maptiles_providers[["Stamen.Watercolor"]]$cit <- "Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors"
-}
-
-library(maptiles)
-get_credit("Stamen.Watercolor")
-maptiles_providers[n]
-
-save("maptiles_providers",file =  "R/sysdata.rda")
 

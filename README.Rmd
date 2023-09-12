@@ -74,8 +74,8 @@ plot_tiles(nc_osm)
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
 mtext(text = get_credit("OpenStreetMap"), 
-      side = 1, line = -1, adj = 1, cex = .9, 
-      font = 3)
+      side = 1, line = -1, adj = 1, 
+      cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
@@ -90,18 +90,21 @@ and how to cache the original tiles for future use:
 
 ```{r example2,fig.ext="png", margin = TRUE, fig.width=808/96, fig.height = 303/96, fig.show='hide', dpi = 96}
 # define the tile server parameters
-osmpos <- list(src = 'CARTO.POSITRON',
-               q = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-               sub = c('a','b', 'c', 'd'), 
-               cit = '© OpenStreetMap contributors © CARTO.')
+osmpos <- create_provider(
+  name = 'CARTO.POSITRON',
+  url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+  sub = c('a', 'b', 'c', 'd'), 
+  citation = '© OpenStreetMap contributors © CARTO '
+)
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
                        cachedir = tempdir(), verbose = TRUE)
 # display map
 plot_tiles(nc_osmpos)
 # display credits
-mtext(text = osmpos$cit, side = 1, line = -1, 
-      adj = 1, cex = .9, font = 3)
+mtext(text = get_credit(osmpos), 
+      side = 1, line = -1, adj = 1, 
+      cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
@@ -113,7 +116,7 @@ The following figure shows mini maps for most of the tiles providers available:
 
 <!-- ![](man/figures/README-front.png){width=840px} -->
 
-<img src="man/figures/README-front.png" width="840"/>
+<img src="man/figures/README-front.png" width="808"/>
 
 ## Projection
 
@@ -128,7 +131,7 @@ reprojection process, use "EPSG:3857" for `x` projection.
 All maps available through `maptiles` are offered freely by various providers. 
 The only counterpart from the user is to properly display an attribution text 
 on the maps. 
-`get_credit()` displays a short credit text to add on each map 
+`get_credit()` displays a short attribution text to add on each map 
 using the downloaded tiles. 
 
 

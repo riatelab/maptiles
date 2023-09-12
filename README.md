@@ -46,7 +46,7 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.2.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
@@ -61,8 +61,8 @@ plot_tiles(nc_osm)
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
 mtext(text = get_credit("OpenStreetMap"), 
-      side = 1, line = -1, adj = 1, cex = .9, 
-      font = 3)
+      side = 1, line = -1, adj = 1, 
+      cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
@@ -75,29 +75,32 @@ tiles server and how to cache the original tiles for future use:
 
 ``` r
 # define the tile server parameters
-osmpos <- list(src = 'CARTO.POSITRON',
-               q = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-               sub = c('a','b', 'c', 'd'), 
-               cit = '© OpenStreetMap contributors © CARTO.')
+osmpos <- create_provider(
+  name = 'CARTO.POSITRON',
+  url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+  sub = c('a', 'b', 'c', 'd'), 
+  citation = '© OpenStreetMap contributors © CARTO '
+)
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
                        cachedir = tempdir(), verbose = TRUE)
-#> https://d.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://c.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpcQkElZ/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://a.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://c.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://b.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://b.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
-#> © OpenStreetMap contributors © CARTO.
+#> © OpenStreetMap contributors © CARTO
 # display map
 plot_tiles(nc_osmpos)
 # display credits
-mtext(text = osmpos$cit, side = 1, line = -1, 
-      adj = 1, cex = .9, font = 3)
+mtext(text = get_credit(osmpos), 
+      side = 1, line = -1, adj = 1, 
+      cex = .9, font = 3)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->
@@ -109,7 +112,7 @@ available:
 
 <!-- ![](man/figures/README-front.png){width=840px} -->
 
-<img src="man/figures/README-front.png" width="840"/>
+<img src="man/figures/README-front.png" width="808"/>
 
 ## Projection
 
@@ -123,8 +126,8 @@ reprojection process, use “EPSG:3857” for `x` projection.
 
 All maps available through `maptiles` are offered freely by various
 providers. The only counterpart from the user is to properly display an
-attribution text on the maps. `get_credit()` displays a short credit
-text to add on each map using the downloaded tiles.
+attribution text on the maps. `get_credit()` displays a short
+attribution text to add on each map using the downloaded tiles.
 
 ## Background
 
