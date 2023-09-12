@@ -62,7 +62,7 @@ get_bbox_and_proj <- function(x){
 }
 
 # get the tiles according to the grid
-get_tiles_n <- function(tile_grid, verbose, cachedir, forceDownload) {
+get_tiles_n <- function(tile_grid, verbose, cachedir, forceDownload, apikey) {
   # go through tile_grid tiles and download
   images <- apply(
     X = tile_grid$tiles,
@@ -74,7 +74,8 @@ get_tiles_n <- function(tile_grid, verbose, cachedir, forceDownload) {
     q = tile_grid$q,
     verbose = verbose,
     cachedir = cachedir,
-    forceDownload = forceDownload
+    forceDownload = forceDownload,
+    apikey = tile_grid$apikey
   )
 
   if (verbose) {
@@ -87,7 +88,7 @@ get_tiles_n <- function(tile_grid, verbose, cachedir, forceDownload) {
 }
 
 # download tile according to parameters
-dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload) {
+dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload, apikey) {
   # if cachedir is missing, save to temporary filepath
   if (missing(cachedir)) {
     cachedir <- tempdir()
@@ -109,14 +110,15 @@ dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload) {
     q <- gsub(pattern = "{x}", replacement = x[1], x = q, fixed = TRUE)
     q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
     q <- gsub(pattern = "{z}", replacement = z, x = q, fixed = TRUE)
+    ano_q <- q
+    q <- gsub(pattern = "{apikey}", replacement = apikey, x = q, fixed = TRUE)
 
     e <- try({curl::curl_download(url = q, destfile = outfile)}, silent = TRUE)
     if (inherits(e,"try-error")){
       outfile <- NULL
     }
-
     if (verbose) {
-      message(q, " => ", outfile)
+      message(ano_q, " => ", outfile)
     }
   }
   outfile
@@ -222,7 +224,7 @@ get_param <- function(provider) {
     if(provider %in% stamen_provider){
       warning(paste0("Stamen is not providing tiles anymore.\n",
                      "Please use 'Stadia.", provider, "' instead.\n",
-                     "Do not forget to fill the apikey argument",
+                     "Do not forget to fill the apikey argument ",
                      "(see https://stadiamaps.com/stamen/)."),
               call. = FALSE)
 

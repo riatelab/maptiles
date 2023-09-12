@@ -106,14 +106,15 @@ get_tiles <- function(x,
   # get query parameters according to provider
   param <- get_param(provider)
   # subdomains management
-  tile_grid$tiles$s <- sample(param$sub, nrow(tile_grid$tiles), replace = T)
+  tile_grid$tiles$s <- sample(param$sub, nrow(tile_grid$tiles), replace = TRUE)
   # src mgmnt
   tile_grid$src <- param$src
   # query mgmnt
   if(missing(apikey)){
     apikey <- ""
   }
-  tile_grid$q <- sub("XXXXXX", apikey, param$q)
+  tile_grid$apikey <- apikey
+  tile_grid$q <- sub("XXXXXX", "{apikey}", param$q, perl = TRUE)
   # citation
   tile_grid$cit <- param$cit
 
