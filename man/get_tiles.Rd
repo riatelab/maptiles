@@ -17,15 +17,13 @@ get_tiles(
 )
 }
 \arguments{
-\item{x}{an sf, sfc, bbox, SpatRaster, SpatVerctor or SpatExtent object.
+\item{x}{an sf, sfc, bbox, SpatRaster, SpatVector or SpatExtent object.
 If \code{x} is a SpatExtent it
 must express coordinates in lon/lat WGS84 (epsg:4326).}
 
-\item{provider}{the tile server from which to get the map. It can be a name
-(see Details for providers) or a named list like this one: \code{
-provider = list(src = "name of the source",
-q = "server address", sub = "subdomains", cit = "how to cite the tiles")}
-(see Examples).}
+\item{provider}{the tile server from which to get the map. It can be one of
+the builtin providers (see Details for the list) or a named list produced
+by \link{create_provider} (see Examples).}
 
 \item{zoom}{the zoom level (see Details).}
 
@@ -35,14 +33,16 @@ FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
 \item{project}{if TRUE, the output is projected to the crs of x.
 If FALSE the output uses "EPSG:3857" (Web Mercator).}
 
-\item{verbose}{if TRUE, tiles filepaths, zoom level and citation are displayed.}
+\item{verbose}{if TRUE, tiles filepaths, zoom level and
+attribution are displayed.}
 
-\item{apikey}{API key, needed for Thunderforest servers}
+\item{apikey}{API key, needed for Thunderforest or Stadia servers for
+example.}
 
 \item{cachedir}{name of a directory used to cache tiles. If not set, tiles
 are cached in a \link[base:tempfile]{tempdir} folder.}
 
-\item{forceDownload}{if TRUE, existing cached tiles may be overwritten}
+\item{forceDownload}{if TRUE, existing cached tiles may be overwritten.}
 }
 \value{
 A SpatRaster is returned.
@@ -55,23 +55,25 @@ fetched from various map servers.
 Zoom levels are described on the OpenStreetMap wiki:
 \url{https://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
 Providers: \cr
-"OpenStreetMap", "OpenStreetMap.DE",
-"OpenStreetMap.France", "OpenStreetMap.HOT", \cr
-"Stamen.Toner",
-"Stamen.TonerBackground", "Stamen.TonerHybrid", "Stamen.TonerLines",
-"Stamen.TonerLabels", "Stamen.TonerLite", "Stamen.Watercolor",
-"Stamen.Terrain", "Stamen.TerrainBackground", "Stamen.TerrainLabels",\cr
-"Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap", "Esri.WorldImagery",
-"Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
-"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",\cr
-"CartoDB.Positron",
-"CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
-"CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
-"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",\cr
- "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
+"OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
+"OpenStreetMap.HOT", "OpenTopoMap", \cr
+"Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
+"Stadia.Stamen.TonerLines", "Stadia.Stamen.TonerLabels",
+"Stadia.Stamen.TonerLite",
+"Stadia.Stamen.Watercolor", "Stadia.Stamen.Terrain",
+"Stadia.Stamen.TerrainBackground",
+"Stadia.Stamen.TerrainLabels", \cr
+"Esri.WorldStreetMap", "Esri.DeLorme",
+"Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
+"Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
+"Esri.WorldGrayCanvas", "CartoDB.Positron", "CartoDB.PositronNoLabels", \cr
+"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter", "CartoDB.DarkMatterNoLabels",
+"CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
+"CartoDB.VoyagerOnlyLabels", \cr
+"Thunderforest.OpenCycleMap", "Thunderforest.Transport",
 "Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
 "Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
-"Thunderforest.Neighbourhood",\cr
+"Thunderforest.Neighbourhood"
 }
 \examples{
 library(sf)
