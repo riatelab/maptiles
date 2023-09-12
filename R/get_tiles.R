@@ -56,18 +56,19 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 #' plot_tiles(nc_osm)
 #'
-#' # Download tiles from OSM
-#' osm <- list(
-#'   src = 'OSM',
-#'   q = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-#'   sub = NA,
-#'   cit = '© OpenStreetMap contributors.'
+#' # Download tiles from a custom url
+#' osm_tiles <- create_provider(
+#'   name = 'osm_tiles',
+#'   url = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+#'   citation = '© OpenStreetMap contributors.'
 #' )
 #' # dowload tiles and compose raster (SpatRaster)
-#' nc_osm2 <- get_tiles(x = nc, provider = osm, crop = TRUE,
-#'                      zoom = 6, verbose = TRUE)
+#' nc_osm2 <- get_tiles(x = nc, provider = osm_tiles, crop = FALSE,
+#'                      zoom = 6, project = FALSE, verbose = TRUE)
 #' # Plot the tiles
 #' plot_tiles(nc_osm2)
+#' # Add attribution
+#' mtext(get_credit(osm), side = 1, line = -1)
 get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,
