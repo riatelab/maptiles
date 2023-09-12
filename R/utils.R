@@ -168,44 +168,44 @@ compose_tile_grid <- function(tile_grid, images, forceDownload) {
     rout <- terra::merge(rout, rout)
   }else{
     # all tiles together
-
-    # function to use gdal warp approach
-    warp_method <- function(){
-      # wrapped with try catch - if gdal warp fails defaults to terr::merge
-      out_ras <- tryCatch({
-        save_ras <- function(ras, .img){
-          name <- paste(file_path_sans_ext(.img),
-                        '.tif', sep = "")
-          if (!file.exists(name) | isTRUE(forceDownload)){
-            terra::writeRaster(ras, name, overwrite = TRUE)
-          }
-          return(name)
-        }
-
-        ras_files <- mapply(save_ras, bricks, images)
-
-        merge_path <- tempfile(fileext = '.tif')
-        sf::gdal_utils(util = "warp", options = c("-srcnodata", "None"),
-                       source = as.character(ras_files),
-                       destination = merge_path)
-
-        outras <- terra::rast(merge_path)
-        return(outras)
-      },
-      error = function(e) {
-        warning(
-          "\nReceived error from gdalwarp.",
-          "Attempting merge using terra::merge")
-        outras <- do.call(terra::merge, bricks)
-        return(outras)
-      }
-      )
-    }
-    rout <- warp_method()
+    rout <- warp_method(bricks, images, forceDownload)
   }
   rout
 }
 
+
+
+warp_method <- function(bricks, images, forceDownload){
+  # wrapped with try catch - if gdal warp fails defaults to terr::merge
+  out_ras <- tryCatch({
+    save_ras <- function(ras, .img){
+      name <- paste(file_path_sans_ext(.img),
+                    '.tif', sep = "")
+      if (!file.exists(name) | isTRUE(forceDownload)){
+        terra::writeRaster(ras, name, overwrite = TRUE)
+      }
+      return(name)
+    }
+
+    ras_files <- mapply(save_ras, bricks, images)
+
+    merge_path <- tempfile(fileext = '.tif')
+    sf::gdal_utils(util = "warp", options = c("-srcnodata", "None"),
+                   source = as.character(ras_files),
+                   destination = merge_path)
+
+    outras <- terra::rast(merge_path)
+    return(outras)
+  },
+  error = function(e) {
+    warning(
+      "\nReceived error from gdalwarp.",
+      "Attempting merge using terra::merge")
+    outras <- do.call(terra::merge, bricks)
+    return(outras)
+  }
+  )
+}
 
 
 
@@ -214,7 +214,6 @@ get_param <- function(provider) {
   if (length(provider) == 4) {
     param <- provider
   } else {
-    param <- maptiles_providers[[provider]]
     stamen_provider <- c("Stamen.Toner", "Stamen.TonerBackground",
                          "Stamen.TonerHybrid", "Stamen.TonerLines",
                          "Stamen.TonerLabels", "Stamen.TonerLite",
@@ -222,8 +221,9 @@ get_param <- function(provider) {
                          "Stamen.TerrainBackground",
                          "Stamen.TerrainLabels")
     if(provider %in% stamen_provider){
+      provider <- paste0("Stadia.", provider)
       warning(paste0("Stamen is not providing tiles anymore.\n",
-                     "Please use 'Stadia.", provider, "' instead.\n",
+                     "Please use '", provider, "' instead.\n",
                      "Do not forget to fill the apikey argument ",
                      "(see https://stadiamaps.com/stamen/)."),
               call. = FALSE)
