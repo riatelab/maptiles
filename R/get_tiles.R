@@ -68,7 +68,7 @@
 #' # Plot the tiles
 #' plot_tiles(nc_osm2)
 #' # Add attribution
-#' mtext(get_credit(osm), side = 1, line = -1)
+#' mtext(get_credit(osm_tiles), side = 1, line = -1)
 get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,
