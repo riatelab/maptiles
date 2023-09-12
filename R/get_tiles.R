@@ -136,7 +136,7 @@ get_tiles <- function(x,
     return(invisible(NULL))
   }
   # compose images
-  rout <- compose_tile_grid(tile_grid, images)
+  rout <- compose_tile_grid(tile_grid, images, forceDownload)
 
   # set the projection
   webmercator <- "epsg:3857"

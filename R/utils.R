@@ -125,7 +125,7 @@ dl_t <- function(x, z, ext, src, q, verbose, cachedir, forceDownload, apikey) {
 }
 
 # compose tiles
-compose_tile_grid <- function(tile_grid, images) {
+compose_tile_grid <- function(tile_grid, images, forceDownload) {
   bricks <- vector("list", nrow(tile_grid$tiles))
   for (i in seq_along(bricks)) {
     bbox <- slippymath::tile_bbox(
@@ -176,8 +176,8 @@ compose_tile_grid <- function(tile_grid, images) {
         save_ras <- function(ras, .img){
           name <- paste(file_path_sans_ext(.img),
                         '.tif', sep = "")
-          if (!file.exists(name)){
-            terra::writeRaster(ras, name)
+          if (!file.exists(name) | isTRUE(forceDownload)){
+            terra::writeRaster(ras, name, overwrite = TRUE)
           }
           return(name)
         }
