@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.4.1
+# CITATION file created with {cffr} R package, v0.5.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -8,7 +8,7 @@ message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.5.0
+version: 0.6.0
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stamen', 'Esri', 'CARTO',
   or 'Thunderforest').
@@ -55,7 +55,7 @@ references:
   title: curl
   abstract: 'curl: A Modern and Flexible Web Client for R'
   notes: Imports
-  url: https://curl.se/libcurl/
+  url: https://jeroen.r-universe.dev/curl
   repository: https://CRAN.R-project.org/package=curl
   authors:
   - family-names: Ooms
@@ -100,7 +100,7 @@ references:
   title: terra
   abstract: 'terra: Spatial Data Analysis'
   notes: Imports
-  url: https://rspatial.org/terra/
+  url: https://rspatial.org/
   repository: https://CRAN.R-project.org/package=terra
   authors:
   - family-names: Hijmans
