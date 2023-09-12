@@ -145,10 +145,9 @@ if(home) {
   # test zoom and provider
   input <- nc_sf
   x <- get_tiles(x = input,
-                 provider = "Stamen.Watercolor",
+                 provider = "Esri.WorldStreetMap",
                  zoom = 2)
   expect_inherits(x, "SpatRaster")
-
   # test custom server
   fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
                      "Specialty/DeLorme_World_Base_Map/MapServer",
@@ -165,7 +164,7 @@ if(home) {
                      "Specialty/DeLorme_World_Base_Map/MapServer",
                      "tile/{z}/{y}/{x}.jpg", sep = "/")
   esrix <- list(src = 'esrix', q = fullserver, sub = NA,
-               cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
+                cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
   input <- nc_sf
   expect_message(get_tiles(x = input, provider = esrix, crop = TRUE, verbose = FALSE))
 
