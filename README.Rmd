@@ -36,7 +36,7 @@ Thunderforest).
 
 ## Installation
 
-You can install the released version of maptiles from [CRAN](https://CRAN.R-project.org/package=maptiles) with:
+You can install the released version of `maptiles` from [CRAN](https://CRAN.R-project.org/package=maptiles) with:
 
 ``` r
 install.packages("maptiles")
