@@ -2,7 +2,7 @@ home <- length(unclass(packageVersion("maptiles"))[[1]]) == 4
 
 suppressPackageStartupMessages(library(sf))
 suppressPackageStartupMessages(library(terra))
-nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc_sf <- nc
 nc_sfc <- st_geometry(nc_sf)
 nc_bbox <- st_bbox(nc_sf)
@@ -92,7 +92,7 @@ expect_inherits(x[[3]], "bbox")
 
 
 
-if(home) {
+if (home) {
   # test full fun
   input <- nc_sf
   x <- get_tiles(input)
@@ -134,7 +134,7 @@ if(home) {
 
   # test verbosity
   input <- nc_sf
-  suppressMessages(expect_message(get_tiles(x = input, verbose=TRUE)))
+  suppressMessages(expect_message(get_tiles(x = input, verbose = TRUE)))
 
   # test crop
   input <- nc_sf
@@ -149,24 +149,25 @@ if(home) {
                  zoom = 2)
   expect_inherits(x, "SpatRaster")
   # test custom server
-  fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                     "Specialty/DeLorme_World_Base_Map/MapServer",
-                     "tile/{z}/{y}/{x}.jpg", sep = "/")
-  esri <- list(src = 'esri', q = fullserver, sub = NA,
-               cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
+  fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
+                      "Specialty/DeLorme_World_Base_Map/MapServer",
+                      "tile/{z}/{y}/{x}.jpg", sep = "/")
+  esri <- list(src = "esri", q = fullserver, sub = NA,
+               cit = "Tiles: Esri; Copyright: 2012 DeLorme")
   input <- nc_sf
   x <- get_tiles(x = input, provider = esri, crop = TRUE, verbose = FALSE)
   expect_inherits(x, "SpatRaster")
 
 
   # test error custom server
-  fullserver = paste("https://server.arcgisonline.com/ArcGIS/rest/servixces",
-                     "Specialty/DeLorme_World_Base_Map/MapServer",
-                     "tile/{z}/{y}/{x}.jpg", sep = "/")
-  esrix <- list(src = 'esrix', q = fullserver, sub = NA,
-                cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
+  fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/servixces",
+                      "Specialty/DeLorme_World_Base_Map/MapServer",
+                      "tile/{z}/{y}/{x}.jpg", sep = "/")
+  esrix <- list(src = "esrix", q = fullserver, sub = NA,
+                cit = "Tiles: Esri; Copyright: 2012 DeLorme")
   input <- nc_sf
-  expect_message(get_tiles(x = input, provider = esrix, crop = TRUE, verbose = FALSE))
+  expect_message(get_tiles(x = input, provider = esrix, crop = TRUE,
+                           verbose = FALSE))
 
 
   # test cachedir

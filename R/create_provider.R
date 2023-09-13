@@ -40,6 +40,6 @@
 #'   ),
 #'   citation = "IGN, BD ORTHO®"
 #' )
-create_provider <- function(name, url, sub = NA, citation){
+create_provider <- function(name, url, sub = NA, citation) {
   return(list(src = name, q = url, sub = sub, cit = citation))
 }

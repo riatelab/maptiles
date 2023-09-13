@@ -67,30 +67,35 @@ Providers: \cr
 "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
 "Esri.WorldGrayCanvas", "CartoDB.Positron", "CartoDB.PositronNoLabels", \cr
-"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter", "CartoDB.DarkMatterNoLabels",
+"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
+"CartoDB.DarkMatterNoLabels",
 "CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
 "CartoDB.VoyagerOnlyLabels", \cr
 "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
-"Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
-"Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
+"Thunderforest.TransportDark", "Thunderforest.SpinalMap",
+"Thunderforest.Landscape",
+"Thunderforest.Outdoors", "Thunderforest.Pioneer",
+"Thunderforest.MobileAtlas",
 "Thunderforest.Neighbourhood"
 }
 \examples{
 library(sf)
 library(maptiles)
-nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
 
 # Download tiles from a custom url
 osm_tiles <- create_provider(
-  name = 'osm_tiles',
-  url = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-  citation = '© OpenStreetMap contributors.'
+  name = "osm_tiles",
+  url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  citation = "© OpenStreetMap contributors."
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_osm2 <- get_tiles(x = nc, provider = osm_tiles, crop = FALSE,
-                     zoom = 6, project = FALSE, verbose = TRUE)
+nc_osm2 <- get_tiles(
+  x = nc, provider = osm_tiles, crop = FALSE,
+  zoom = 6, project = FALSE, verbose = TRUE
+)
 # Plot the tiles
 plot_tiles(nc_osm2)
 # Add attribution

@@ -11,10 +11,10 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-knitr::knit_hooks$set(margin = function(before, options, envir){
-  if (before){
-    par(mar=c(0,0,0,0))
-  } 
+knitr::knit_hooks$set(margin = function(before, options, envir) {
+  if (before) {
+    par(mar = c(0, 0, 0, 0))
+  }
 })
 ```
 
@@ -62,8 +62,9 @@ tiles over North Carolina:
 library(sf)
 library(maptiles)
 # import North Carolina counties
-nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
-                  quiet = TRUE)
+nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"),
+  quiet = TRUE
+)
 # Project to EPSG:3857
 nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
@@ -73,9 +74,11 @@ plot_tiles(nc_osm)
 # add Norh Carolina counties
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
-mtext(text = get_credit("OpenStreetMap"), 
-      side = 1, line = -1, adj = 1, 
-      cex = .9, font = 3)
+mtext(
+  text = get_credit("OpenStreetMap"),
+  side = 1, line = -1, adj = 1,
+  cex = .9, font = 3
+)
 ```
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
@@ -91,20 +94,24 @@ and how to cache the original tiles for future use:
 ```{r example2,fig.ext="png", margin = TRUE, fig.width=808/96, fig.height = 303/96, fig.show='hide', dpi = 96}
 # define the tile server parameters
 osmpos <- create_provider(
-  name = 'CARTO.POSITRON',
-  url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-  sub = c('a', 'b', 'c', 'd'), 
-  citation = '© OpenStreetMap contributors © CARTO '
+  name = "CARTO.POSITRON",
+  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c", "d"),
+  citation = "© OpenStreetMap contributors © CARTO "
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
-                       cachedir = tempdir(), verbose = TRUE)
+nc_osmpos <- get_tiles(
+  x = nc, provider = osmpos, crop = TRUE,
+  cachedir = tempdir(), verbose = TRUE
+)
 # display map
 plot_tiles(nc_osmpos)
 # display credits
-mtext(text = get_credit(osmpos), 
-      side = 1, line = -1, adj = 1, 
-      cex = .9, font = 3)
+mtext(
+  text = get_credit(osmpos),
+  side = 1, line = -1, adj = 1,
+  cex = .9, font = 3
+)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->

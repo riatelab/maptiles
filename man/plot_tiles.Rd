@@ -20,7 +20,7 @@ not (FALSE).}
 \code{\link[terra:plotRGB]{plotRGB}}}
 }
 \description{
-Plot a SpatRaster object over a map. It can be used to plot tiles.
+Plot map tiles.
 }
 \note{
 This function is a wrapper for \code{\link[terra:plotRGB]{plotRGB}}
@@ -29,7 +29,7 @@ from the terra package.
 \examples{
 library(sf)
 library(maptiles)
-nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE)
 plot_tiles(nc_osm)
 }

@@ -49,8 +49,9 @@ library(sf)
 #> Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
-nc_raw <- st_read(system.file("shape/nc.shp", package="sf"), 
-                  quiet = TRUE)
+nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"),
+  quiet = TRUE
+)
 # Project to EPSG:3857
 nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
@@ -60,9 +61,11 @@ plot_tiles(nc_osm)
 # add Norh Carolina counties
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
-mtext(text = get_credit("OpenStreetMap"), 
-      side = 1, line = -1, adj = 1, 
-      cex = .9, font = 3)
+mtext(
+  text = get_credit("OpenStreetMap"),
+  side = 1, line = -1, adj = 1,
+  cex = .9, font = 3
+)
 ```
 
 <!-- ![](man/figures/README-example-1.png){width=852px} -->
@@ -76,31 +79,35 @@ tiles server and how to cache the original tiles for future use:
 ``` r
 # define the tile server parameters
 osmpos <- create_provider(
-  name = 'CARTO.POSITRON',
-  url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-  sub = c('a', 'b', 'c', 'd'), 
-  citation = '© OpenStreetMap contributors © CARTO '
+  name = "CARTO.POSITRON",
+  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c", "d"),
+  citation = "© OpenStreetMap contributors © CARTO "
 )
 # dowload tiles and compose raster (SpatRaster)
-nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
-                       cachedir = tempdir(), verbose = TRUE)
-#> https://c.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://b.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://b.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpKcM8Te/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+nc_osmpos <- get_tiles(
+  x = nc, provider = osmpos, crop = TRUE,
+  cachedir = tempdir(), verbose = TRUE
+)
+#> https://a.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://a.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://b.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/Rtmp4RoWtF/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors © CARTO
 # display map
 plot_tiles(nc_osmpos)
 # display credits
-mtext(text = get_credit(osmpos), 
-      side = 1, line = -1, adj = 1, 
-      cex = .9, font = 3)
+mtext(
+  text = get_credit(osmpos),
+  side = 1, line = -1, adj = 1,
+  cex = .9, font = 3
+)
 ```
 
 <!-- ![](man/figures/README-example2-1.png){width=852px}    -->

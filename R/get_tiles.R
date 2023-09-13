@@ -36,12 +36,15 @@
 #' "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 #' "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
 #' "Esri.WorldGrayCanvas", "CartoDB.Positron", "CartoDB.PositronNoLabels", \cr
-#' "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter", "CartoDB.DarkMatterNoLabels",
+#' "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
+#' "CartoDB.DarkMatterNoLabels",
 #' "CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
 #' "CartoDB.VoyagerOnlyLabels", \cr
 #' "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
-#' "Thunderforest.TransportDark", "Thunderforest.SpinalMap", "Thunderforest.Landscape",
-#' "Thunderforest.Outdoors", "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
+#' "Thunderforest.TransportDark", "Thunderforest.SpinalMap",
+#' "Thunderforest.Landscape",
+#' "Thunderforest.Outdoors", "Thunderforest.Pioneer",
+#' "Thunderforest.MobileAtlas",
 #' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
@@ -52,19 +55,21 @@
 #' @examples
 #' library(sf)
 #' library(maptiles)
-#' nc <- st_read(system.file("shape/nc.shp", package="sf"), quiet = TRUE)
+#' nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 #' nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 #' plot_tiles(nc_osm)
 #'
 #' # Download tiles from a custom url
 #' osm_tiles <- create_provider(
-#'   name = 'osm_tiles',
-#'   url = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-#'   citation = '© OpenStreetMap contributors.'
+#'   name = "osm_tiles",
+#'   url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+#'   citation = "© OpenStreetMap contributors."
 #' )
 #' # dowload tiles and compose raster (SpatRaster)
-#' nc_osm2 <- get_tiles(x = nc, provider = osm_tiles, crop = FALSE,
-#'                      zoom = 6, project = FALSE, verbose = TRUE)
+#' nc_osm2 <- get_tiles(
+#'   x = nc, provider = osm_tiles, crop = FALSE,
+#'   zoom = 6, project = FALSE, verbose = TRUE
+#' )
 #' # Plot the tiles
 #' plot_tiles(nc_osm2)
 #' # Add attribution
@@ -79,10 +84,14 @@ get_tiles <- function(x,
                       cachedir,
                       forceDownload = FALSE) {
   # gdal_version is obsolete.
-  if (gdal() < "2.2.3"){
-    warning(paste0("Your GDAL version is ",gdal(),
-                   ". You need GDAL >= 2.2.3 to use maptiles."),
-            call. = FALSE)
+  if (gdal() < "2.2.3") {
+    warning(
+      paste0(
+        "Your GDAL version is ", gdal(),
+        ". You need GDAL >= 2.2.3 to use maptiles."
+      ),
+      call. = FALSE
+    )
     return(invisible(NULL))
   }
 
@@ -113,7 +122,7 @@ get_tiles <- function(x,
   # src mgmnt
   tile_grid$src <- param$src
   # query mgmnt
-  if(missing(apikey)){
+  if (missing(apikey)) {
     apikey <- ""
   }
   tile_grid$apikey <- apikey
@@ -133,9 +142,11 @@ get_tiles <- function(x,
 
   # download images
   images <- get_tiles_n(tile_grid, verbose, cachedir, forceDownload)
-  if(is.null(images)){
-    message("A problem occurred while downloading the tiles.","\n",
-            "Please check the tile provider address.")
+  if (is.null(images)) {
+    message(
+      "A problem occurred while downloading the tiles.", "\n",
+      "Please check the tile provider address."
+    )
     return(invisible(NULL))
   }
   # compose images
@@ -146,7 +157,7 @@ get_tiles <- function(x,
   terra::crs(rout) <- webmercator
 
   # use predefine destination raster
-  if(project && st_crs(webmercator)$wkt != origin_proj){
+  if (project && st_crs(webmercator)$wkt != origin_proj) {
     temprast <- rast(rout)
     temprast <- project(temprast, origin_proj)
     terra::res(temprast) <- signif(terra::res(temprast), 3)
@@ -160,12 +171,11 @@ get_tiles <- function(x,
 
   # crop management
   if (crop) {
-    rout <- terra::crop(rout, cb[c(1, 3, 2, 4)], snap="out")
+    rout <- terra::crop(rout, cb[c(1, 3, 2, 4)], snap = "out")
   }
 
   # set R, G, B channels, such that plot(rout) will go to plotRGB
-  RGB(rout)<- 1:3
+  RGB(rout) <- 1:3
 
   return(rout)
 }
-

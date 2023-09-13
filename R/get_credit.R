@@ -6,13 +6,12 @@
 #' @export
 #' @examples
 #' get_credit("OpenStreetMap")
-get_credit <- function(provider){
+get_credit <- function(provider) {
   if (is.list(provider) && length(provider) == 4) {
     return(provider$cit)
   }
-  if(is.character(provider) && provider %in% names(maptiles_providers)){
+  if (is.character(provider) && provider %in% names(maptiles_providers)) {
     return(maptiles_providers[[provider]]$cit)
   }
   return(NULL)
 }
-
