@@ -53,12 +53,12 @@
 #' st_bbox st_as_sfc st_crs
 #' @importFrom tools file_path_sans_ext
 #' @examples
+#' \dontrun{
 #' library(sf)
 #' library(maptiles)
 #' nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 #' nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 #' plot_tiles(nc_osm)
-#'
 #' # Download tiles from a custom url
 #' osm_tiles <- create_provider(
 #'   name = "osm_tiles",
@@ -74,6 +74,7 @@
 #' plot_tiles(nc_osm2)
 #' # Add attribution
 #' mtext(get_credit(osm_tiles), side = 1, line = -1)
+#' }
 get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,

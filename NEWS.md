@@ -1,3 +1,11 @@
+# maptiles 0.6.1
+
+## fix
+- deactivate get_tiles() example due to unpredictable download time leading to 
+CRAN note/rejection...
+
+
+
 # maptiles 0.6.0
 
 ## fix

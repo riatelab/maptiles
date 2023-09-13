@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/riatelab/maptiles/",
   "issueTracker": "https://github.com/riatelab/maptiles/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -168,5 +168,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1154.585KB"
+  "fileSize": "1154.742KB"
 }

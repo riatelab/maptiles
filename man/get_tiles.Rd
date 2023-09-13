@@ -79,12 +79,12 @@ Providers: \cr
 "Thunderforest.Neighbourhood"
 }
 \examples{
+\dontrun{
 library(sf)
 library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
-
 # Download tiles from a custom url
 osm_tiles <- create_provider(
   name = "osm_tiles",
@@ -100,4 +100,5 @@ nc_osm2 <- get_tiles(
 plot_tiles(nc_osm2)
 # Add attribution
 mtext(get_credit(osm_tiles), side = 1, line = -1)
+}
 }
