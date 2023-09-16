@@ -42,7 +42,7 @@
 #'   citation = "IGN, BD ORTHO®"
 #' )
 #'
-#' # Find tilematrixset and style values
+#' # Find TileMatrixSet and Style values
 #'
 #' layer <- "ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO"
 #' path <- "https://wxs.ign.fr/ortho/geoportail/wmts?"
