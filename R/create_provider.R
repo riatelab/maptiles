@@ -12,6 +12,7 @@
 #' @return a list is returned. This list can be used by \link{get_tiles}.
 #' @export
 #' @examples
+#' \dontrun{
 #' statdia_toner <- create_provider(
 #'   name = "stadia_stamen_toner",
 #'   url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
@@ -27,19 +28,33 @@
 #'   name = "orthophoto_IGN",
 #'   url = paste0(
 #'     "https://wxs.ign.fr/ortho/geoportail/wmts?",
-#'     "&REQUEST=GetTile",
-#'     "&SERVICE=WMTS",
-#'     "&VERSION=1.0.0",
-#'     "&STYLE=normal",
-#'     "&TILEMATRIXSET=PM",
-#'     "&FORMAT=image/jpeg",
-#'     "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO",
-#'     "&TILEMATRIX={z}",
-#'     "&TILEROW={y}",
-#'     "&TILECOL={x}"
+#'     "request=GetTile",
+#'     "&service=WMTS",
+#'     "&version=1.0.0",
+#'     "&style=normal",
+#'     "&tilematrixset=PM",
+#'     "&format=image/jpeg",
+#'     "&layer=ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO",
+#'     "&tilematrix={z}",
+#'     "&tilerow={y}",
+#'     "&tilecol={x}"
 #'   ),
 #'   citation = "IGN, BD ORTHO®"
 #' )
+#'
+#' # Find tilematrixset and style values
+#'
+#' layer <- "ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO"
+#' path <- "https://wxs.ign.fr/ortho/geoportail/wmts?"
+#' param_info <- "service=wmts&request=GetCapabilities&version=1.0.0"
+#' url <- paste0("WMTS:", path, param_info, ",layer=", layer)
+#'
+#' tmp <- tempfile(fileext = ".xml")
+#' sf::gdal_utils("translate",
+#'                url, tmp,
+#'                options = c("-of", "WMTS"))
+#' readLines(tmp)
+#' }
 create_provider <- function(name, url, sub = NA, citation) {
   return(list(src = name, q = url, sub = sub, cit = citation))
 }
