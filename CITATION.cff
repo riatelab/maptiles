@@ -8,9 +8,9 @@ message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.6.1
+version: 0.7.0
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
-  from a large number of providers (e.g. 'OpenStreetMap', 'Stamen', 'Esri', 'CARTO',
+  from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
   or 'Thunderforest').
 authors:
 - family-names: Giraud

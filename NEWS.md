@@ -1,3 +1,12 @@
+# maptiles 0.7.0
+
+## fix
+- update tests with valid provider
+
+## feat
+- improve doc in create_provider() for wms inspection (#)
+- add *.webp tile extension support
+
 # maptiles 0.6.1
 
 ## fix
