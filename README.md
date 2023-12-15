@@ -10,9 +10,9 @@
 coverage](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg)](https://app.codecov.io/gh/riatelab/maptiles?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
-![](https://cranlogs.r-pkg.org/badges/grand-total/maptiles) [![Project
-Status: Active – The project has reached a stable, usable state and is
-being actively
+![](https://cranlogs.r-pkg.org/badges/maptiles) [![Project Status:
+Active – The project has reached a stable, usable state and is being
+actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
@@ -35,9 +35,6 @@ You can install the development version of `maptiles` from GitHub with:
 # install.packages("remotes")
 remotes::install_github("riatelab/maptiles")
 ```
-
-**Note:** `maptiles` uses [`terra`](https://github.com/rspatial/terra)
-which requires a recent version of GDAL (\>= 3.0.4).
 
 ## Demo
 
@@ -89,14 +86,14 @@ nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,
   cachedir = tempdir(), verbose = TRUE
 )
-#> https://d.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://c.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://c.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://c.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://b.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/Rtmpv1krFe/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
+#> https://a.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
+#> https://b.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
+#> https://a.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
+#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
+#> https://c.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
+#> https://d.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
 #> Zoom:7
 #> Data and map tiles sources:
 #> © OpenStreetMap contributors © CARTO
