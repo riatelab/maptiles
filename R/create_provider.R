@@ -12,7 +12,6 @@
 #' @return a list is returned. This list can be used by \link{get_tiles}.
 #' @export
 #' @examples
-#' \dontrun{
 #' statdia_toner <- create_provider(
 #'   name = "stadia_stamen_toner",
 #'   url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
@@ -48,10 +47,10 @@
 #' path <- "https://wxs.ign.fr/ortho/geoportail/wmts?"
 #' param_info <- "service=wmts&request=GetCapabilities&version=1.0.0"
 #' url <- paste0("WMTS:", path, param_info, ",layer=", layer)
-#'
+#' \dontrun{
 #' tmp <- tempfile(fileext = ".xml")
-#' sf::gdal_utils("translate",
-#'                url, tmp,
+#' sf::gdal_utils(util = "translate",
+#'                source = url, destination = tmp,
 #'                options = c("-of", "WMTS"))
 #' readLines(tmp)
 #' }
