@@ -148,26 +148,29 @@ if (home) {
                  provider = "Esri.WorldStreetMap",
                  zoom = 2)
   expect_inherits(x, "SpatRaster")
+
   # test custom server
-  fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-                      "Specialty/DeLorme_World_Base_Map/MapServer",
-                      "tile/{z}/{y}/{x}.jpg", sep = "/")
-  esri <- list(src = "esri", q = fullserver, sub = NA,
-               cit = "Tiles: Esri; Copyright: 2012 DeLorme")
+  opentopomap <- create_provider(
+    name = "otm",
+    url = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    sub = c("a", "b", "c"),
+    citation = "map data: © OpenStreetMap contributors, SRTM | map style: © OpenTopoMap (CC-BY-SA)"
+  )
   input <- nc_sf
-  x <- get_tiles(x = input, provider = esri, crop = TRUE, verbose = FALSE)
+  x <- get_tiles(x = input, provider = opentopomap, crop = TRUE)
   expect_inherits(x, "SpatRaster")
 
 
   # test error custom server
-  fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/servixces",
-                      "Specialty/DeLorme_World_Base_Map/MapServer",
-                      "tile/{z}/{y}/{x}.jpg", sep = "/")
-  esrix <- list(src = "esrix", q = fullserver, sub = NA,
-                cit = "Tiles: Esri; Copyright: 2012 DeLorme")
+  opentopomapx <- create_provider(
+    name = "otm",
+    url = "https://{s}.tile.opentopyyyyyyyyyomap.org/{z}/{x}/{y}.png",
+    sub = c("a", "b", "c"),
+    citation = "map data: © OpenStreetMap contributors, SRTM | map style: © OpenTopoMap (CC-BY-SA)"
+  )
   input <- nc_sf
-  expect_message(get_tiles(x = input, provider = esrix, crop = TRUE,
-                           verbose = FALSE))
+  expect_message(get_tiles(x = input, provider = opentopomapx, crop = TRUE,
+                           forceDownload = TRUE))
 
 
   # test cachedir
