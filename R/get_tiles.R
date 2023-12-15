@@ -138,6 +138,8 @@ get_tiles <- function(x,
     ext <- "jpeg"
   } else if (length(grep("png", param$q)) > 0) {
     ext <- "png"
+  } else if (length(grep("webp", param$q)) > 0) {
+    ext <- "webp"
   }
   tile_grid$ext <- ext
 
