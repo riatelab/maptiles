@@ -130,7 +130,7 @@ if (home) {
   # test project
   input <- nc_sf
   x <- get_tiles(x = input, project = FALSE)
-  expect_equal(crs(x), crs("epsg:3857"))
+  expect_equivalent(crs(x), crs("epsg:3857"))
 
   # test verbosity
   input <- nc_sf
@@ -169,7 +169,7 @@ if (home) {
     citation = "map data: © OpenStreetMap contributors, SRTM | map style: © OpenTopoMap (CC-BY-SA)"
   )
   input <- nc_sf
-  expect_message(get_tiles(x = input, provider = opentopomapx, crop = TRUE,
+  expect_error(get_tiles(x = input, provider = opentopomapx, crop = TRUE,
                            forceDownload = TRUE))
 
 

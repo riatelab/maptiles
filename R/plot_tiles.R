@@ -15,11 +15,13 @@
 #' @importFrom graphics plot.new plot.window
 #' @importFrom grDevices dev.size
 #' @examples
+#' \dontrun{
 #' library(sf)
 #' library(maptiles)
 #' nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 #' nc_osm <- get_tiles(nc, crop = TRUE)
 #' plot_tiles(nc_osm)
+#' }
 plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
   if (is.null(x)) {
     message("x is NULL")

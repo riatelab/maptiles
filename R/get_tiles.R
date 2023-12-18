@@ -48,7 +48,7 @@
 #' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
-#' @importFrom terra ext project rast as.polygons 'RGB<-' gdal
+#' @importFrom terra ext project rast as.polygons 'RGB<-' gdal writeRaster
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @importFrom tools file_path_sans_ext
@@ -84,101 +84,51 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-  # gdal_version is obsolete.
-  if (gdal() < "2.2.3") {
-    warning(
-      paste0(
-        "Your GDAL version is ", gdal(),
-        ". You need GDAL >= 2.2.3 to use maptiles."
-      ),
-      call. = FALSE
-    )
-    return(invisible(NULL))
-  }
+  # test gdal version
+  test_gdal_version()
 
   # test input valididy
   test_input(x)
 
-
-  # get bbox and origin proj
+  # get input bbox, input crs and bbox in lonlat
   res <- get_bbox_and_proj(x)
-  bbx <- res$bbx
-  cb <- res$cb
-  origin_proj <- res$origin_proj
-
-
-  # select a default zoom level
-  if (missing(zoom)) {
-    gz <- slippymath::bbox_tile_query(bbx)
-    zoom <- min(gz[gz$total_tiles %in% 4:10, "zoom"])
-  }
-
-  # get tile list
-  tile_grid <- slippymath::bbox_to_tile_grid(bbox = bbx, zoom = zoom)
 
   # get query parameters according to provider
   param <- get_param(provider)
-  # subdomains management
-  tile_grid$tiles$s <- sample(param$sub, nrow(tile_grid$tiles), replace = TRUE)
-  # src mgmnt
-  tile_grid$src <- param$src
-  # query mgmnt
-  if (missing(apikey)) {
-    apikey <- ""
-  }
-  tile_grid$apikey <- apikey
-  tile_grid$q <- sub("XXXXXX", "{apikey}", param$q, perl = TRUE)
-  # citation
-  tile_grid$cit <- param$cit
 
-  # extension management
-  if (length(grep("jpg", param$q)) > 0) {
-    ext <- "jpg"
-  } else if (length(grep("jpeg", param$q)) > 0) {
-    ext <- "jpeg"
-  } else if (length(grep("png", param$q)) > 0) {
-    ext <- "png"
-  } else if (length(grep("webp", param$q)) > 0) {
-    ext <- "webp"
-  }
-  tile_grid$ext <- ext
+  # get zoom level
+  zoom <- get_zoom(zoom, res$bbox_lonlat)
+
+  # get cache directory
+  cachedir <- get_cachedir(cachedir, param$src)
+
+  # get file name
+  filename <- get_filename(res$bbox_input, zoom, crop, project, cachedir,
+                           param$q)
+
+  # check if result already exist
+  ras <- check_cached_raster(filename, forceDownload, verbose, cachedir,
+                             zoom, param)
+  if(!is.null(ras)){return(ras)}
+
+  # get tile list
+  tile_grid <- slippymath::bbox_to_tile_grid(res$bbox_lonlat, zoom)
 
   # download images
-  images <- get_tiles_n(tile_grid, verbose, cachedir, forceDownload)
-  if (is.null(images)) {
-    message(
-      "A problem occurred while downloading the tiles.", "\n",
-      "Please check the tile provider address."
-    )
-    return(invisible(NULL))
-  }
+  images <- download_tiles(tile_grid, param, zoom,  apikey, verbose,
+                           cachedir, forceDownload)
+
   # compose images
-  rout <- compose_tile_grid(tile_grid, images, forceDownload)
+  ras <- compose_tiles(tile_grid, images, forceDownload, param$ext)
 
-  # set the projection
-  webmercator <- "epsg:3857"
-  terra::crs(rout) <- webmercator
 
-  # use predefine destination raster
-  if (project && st_crs(webmercator)$wkt != origin_proj) {
-    temprast <- rast(rout)
-    temprast <- project(temprast, origin_proj)
-    terra::res(temprast) <- signif(terra::res(temprast), 3)
-    rout <- terra::project(rout, temprast)
-    rout <- terra::trim(rout)
-  } else {
-    cb <- st_bbox(st_transform(st_as_sfc(bbx), webmercator))
-  }
+  # project if needed
+  ras <- project_and_crop_raster(ras, project, res, crop)
 
-  rout <- terra::clamp(rout, lower = 0, upper = 255, values = TRUE)
+  # cache raster
+  writeRaster(ras, filename, overwrite = TRUE)
 
-  # crop management
-  if (crop) {
-    rout <- terra::crop(rout, cb[c(1, 3, 2, 4)], snap = "out")
-  }
-
-  # set R, G, B channels, such that plot(rout) will go to plotRGB
-  RGB(rout) <- 1:3
-
-  return(rout)
+  return(ras)
 }
+
+
