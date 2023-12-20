@@ -8,7 +8,8 @@
 #' \code{\link[terra:plotRGB]{plotRGB}}
 #' @param adjust if TRUE, plot the raster without zoom-in or zoom-out in the
 #' graphic device: add margins if the raster is smaller than the graphic device,
-#' zoom-in if the raster is larger than the graphic device.
+#' zoom-in if the raster is larger than the graphic device. This feature does
+#' not work with an unprojected (lon/lat) raster.
 #' @note This function is a wrapper for \code{\link[terra:plotRGB]{plotRGB}}
 #' from the terra package.
 #' @export
@@ -38,27 +39,28 @@ plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
   # Add margins if the raster is smaller than the device
   # Zoom-in if the raster is larger than the device
   if (adjust == TRUE && add == FALSE) {
-    tsp <- dim(ops$x)[2:1]
-    dsp <- dev.size("px")
-    dsi <- dev.size("in")
-    dd <- ((dsp - tsp) / 2) / (dsp / dsi)
-    dd <- c(dd[2:1], dd[2:1]) / 0.2
-    if (min(dd) >= 0) {
-      ops$mar <- dd
+    if (!terra::is.lonlat(ops$x)){
+      message(paste0("The 'adjust' feature does not work with",
+                     " an unprojected (lon/lat) raster."))
     } else {
-      et <- terra::ext(ops$x)
-      rt <- terra::res(ops$x)[1]
-      wp <- (tsp[1] - dsp[1]) / 2
-      hp <- (tsp[2] - dsp[2]) / 2
-      et[1:4] <- c(
-        et[1] + wp * rt,
-        et[2] - wp * rt,
-        et[3] + hp * rt,
-        et[4] - hp * rt
-      )
-      ops$ext <- et
+      tsp <- dim(ops$x)[2:1]
+      dsp <- dev.size("px")
+      dsi <- dev.size("in")
+      dd <- ((dsp - tsp) / 2) / (dsp / dsi)
+      dd <- c(dd[2:1], dd[2:1]) / 0.2
+      if (min(dd) >= 0) {
+        ops$mar <- dd
+      } else {
+        et <- terra::ext(ops$x)
+        rt <- terra::res(ops$x)[1]
+        wp <- (tsp[1] - dsp[1]) / 2
+        hp <- (tsp[2] - dsp[2]) / 2
+        et[1:4] <- c(et[1] + wp * rt, et[2] - wp * rt,
+                     et[3] + hp * rt, et[4] - hp * rt)
+        ops$ext <- et
+      }
+      ops$smooth <- FALSE
     }
-    ops$smooth <- FALSE
   }
   do.call(terra::plotRGB, ops)
 }

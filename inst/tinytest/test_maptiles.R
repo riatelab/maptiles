@@ -109,6 +109,8 @@ expect_inherits(x[[3]], "bbox")
 # get_extension() ----
 q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.jpeg"
 expect_equal(maptiles:::get_extension(q), "jpeg")
+q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.jpg"
+expect_equal(maptiles:::get_extension(q), "jpg")
 q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.webp"
 expect_equal(maptiles:::get_extension(q), "webp")
 
@@ -175,6 +177,13 @@ expect_message(maptiles:::get_cached_raster(filename = pth,
 
 # get_credit() ----
 expect_equal(get_credit("OpenStreetMap"), "© OpenStreetMap contributors")
+osmouaich <- create_provider(
+  name = "osmouaich",
+  url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  citation = "ouaich ouaich yo"
+)
+expect_equal(get_credit(osmouaich), "ouaich ouaich yo")
+expect_null(get_credit("Wuwu"))
 
 
 
@@ -243,7 +252,7 @@ if (home){
   x <- get_tiles(x = input, crop = TRUE)
   expect_inherits(x, "SpatRaster")
   expect_equivalent(st_bbox(input), st_bbox(x), tolerance = 0.001)
-
+  expect_message(get_tiles(x = input, crop = TRUE, verbose = TRUE))
 
   # create_provider() ----
   osm <- create_provider(
@@ -258,12 +267,17 @@ if (home){
 
   # plot_tiles() ----
   input <- nc_sf
-  x <- get_tiles(x = input, zoom = 4, crop = TRUE)
+  x <- get_tiles(x = input, zoom = 4, project = F, crop = TRUE)
   expect_error(plot_tiles(NULL))
   expect_error(plot_tiles(input))
   expect_silent(plot_tiles(x, add = FALSE))
   expect_silent(plot_tiles(x, add = TRUE))
   expect_silent(plot_tiles(x, adjust = TRUE))
+  x <- get_tiles(x = input, zoom = 4, project = T, crop = TRUE)
+  expect_message(plot_tiles(x, adjust = TRUE))
+  x <- get_tiles(x = input, zoom = 4, project = FALSE)
+  expect_message(plot_tiles(x, adjust = TRUE))
+
 }
 
 
