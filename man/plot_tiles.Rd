@@ -16,7 +16,7 @@ zoom-in if the raster is larger than the graphic device.}
 \item{add}{whether to add the layer to an existing plot (TRUE) or
 not (FALSE).}
 
-\item{...}{bgalpha, interpolate, or other arguments passed to be passed to
+\item{...}{bgalpha, smooth, or other arguments passed to be passed to
 \code{\link[terra:plotRGB]{plotRGB}}}
 }
 \description{

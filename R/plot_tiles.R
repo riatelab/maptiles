@@ -4,7 +4,7 @@
 #' @param x a SpatRaster object.
 #' @param add whether to add the layer to an existing plot (TRUE) or
 #' not (FALSE).
-#' @param ... bgalpha, interpolate, or other arguments passed to be passed to
+#' @param ... bgalpha, smooth, or other arguments passed to be passed to
 #' \code{\link[terra:plotRGB]{plotRGB}}
 #' @param adjust if TRUE, plot the raster without zoom-in or zoom-out in the
 #' graphic device: add margins if the raster is smaller than the graphic device,
@@ -23,15 +23,8 @@
 #' plot_tiles(nc_osm)
 #' }
 plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
-  if (is.null(x)) {
-    message("x is NULL")
-    return(invisible(NULL))
-  }
   if (!inherits(x, "SpatRaster")) {
-    warning(paste0("x should be a SpatRaster"),
-      call. = FALSE
-    )
-    return(invisible(NULL))
+    stop(paste0("x should be a SpatRaster"), call. = FALSE)
   }
   ops <- list(...)
   ops$x <- x
