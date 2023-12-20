@@ -2,13 +2,9 @@
 test_gdal_version <- function(){
   v <- gdal()
   if (v < "2.2.3") {
-    stop(
-      paste0(
-        "Your GDAL version is ", v,
-        ". You need GDAL >= 2.2.3 to use maptiles."
-      ),
-      call. = FALSE
-    )
+    stop(paste0("Your GDAL version is ", v,
+                ". You need GDAL >= 2.2.3 to use maptiles."),
+         call. = FALSE)
   }
   return(invisible(NULL))
 }
@@ -16,17 +12,11 @@ test_gdal_version <- function(){
 
 # test if input is correct
 test_input <- function(x) {
-  allowed_classes <- c(
-    "sf", "sfc", "bbox",
-    "SpatRaster", "SpatVector", "SpatExtent"
-  )
-  if (!inherits(x, allowed_classes)) {
-    stop(
-      paste0(
-        "x should be an sf, sfc, bbox, SpatRaster, ",
-        "SpatVector or SpatExtent object"
-      ),
-      call. = FALSE
+  ok_classes <- c("sf", "sfc", "bbox","SpatRaster", "SpatVector", "SpatExtent")
+  if (!inherits(x, ok_classes)) {
+    stop(paste0("x should be an sf, sfc, bbox, SpatRaster, ",
+                "SpatVector or SpatExtent object"),
+         call. = FALSE
     )
   }
   return(invisible(NULL))
@@ -79,8 +69,7 @@ get_bbox_and_proj <- function(x) {
   bbox_input <- st_bbox(obj = bbox_input, crs = st_crs(crs_input))
   bbox_lonlat <- st_bbox(bbox_lonlat, crs = lonlat)
 
-  return(list(crs_input = crs_input,
-              bbox_input = bbox_input,
+  return(list(crs_input = crs_input, bbox_input = bbox_input,
               bbox_lonlat = bbox_lonlat))
 }
 
@@ -147,22 +136,15 @@ get_zoom <- function(zoom, bbox_lonlat){
 get_cachedir <- function(cachedir, src){
   if (missing(cachedir)) {
     cachedir <- tempdir()
-  } else {
-    # create the cachedir if it doesn't exist.
-    if (!dir.exists(cachedir)) {
-      dir.create(cachedir)
-    }
-    # uses subdirectories based on src to make the directory easier
-    # for users to navigate
-    subdir <- paste0(cachedir, "/", src)
-    if (!dir.exists(subdir)) {
-      dir.create(subdir)
-    }
-    cachedir <- subdir
+  }
+  cachedir <- file.path(cachedir, src)
+  if (!dir.exists(cachedir)) {
+    dir.create(cachedir, recursive = TRUE)
   }
   return(cachedir)
 }
 
+# create a filename with hash
 get_filename <- function(bbox, zoom, crop, project, cachedir, url){
   filename <- digest::digest(paste0(bbox, zoom, crop, project, cachedir, url),
                              algo = "md5", serialize = FALSE)
@@ -170,12 +152,17 @@ get_filename <- function(bbox, zoom, crop, project, cachedir, url){
   full_filename
 }
 
-# Use cache raster
-check_cached_raster <- function(filename, forceDownload, verbose, cachedir, zoom, param){
+# display info if verbose
+display_infos <- function(verbose, zoom, citation, cachedir){
   if (verbose) {
-    message("Zoom: ", zoom, "\n","Source(s): ",param$cit , "\n",
+    message("Zoom: ", zoom, "\n","Source(s): ", citation, "\n",
             "Cache directory: ", cachedir)
   }
+  return(invisible(NULL))
+}
+
+# Use cache raster
+get_cached_raster <- function(filename, forceDownload, verbose){
   if(file.exists(filename) && isFALSE(forceDownload)){
     if (verbose) {
       message("The resulting raster is a previously cached raster.")
@@ -188,10 +175,11 @@ check_cached_raster <- function(filename, forceDownload, verbose, cachedir, zoom
 
 
 # get the tiles according to the grid
-download_tiles <- function(tile_grid, param, zoom, apikey, verbose,
+download_tiles <- function(tile_grid, param, apikey, verbose,
                            cachedir, forceDownload) {
   images <- vector("list", length = nrow(tile_grid$tiles))
   if (missing(apikey)){apikey <- ""}
+  zoom <- tile_grid$zoom
   ext <- param$ext
   src <- param$src
   cpt <- 0
@@ -217,7 +205,7 @@ download_tiles <- function(tile_grid, param, zoom, apikey, verbose,
       }
       cpt <- cpt + 1
     }
-     images[[i]] <- outfile
+    images[[i]] <- outfile
   }
   if (verbose){
     ntiles <- length(images)
@@ -230,13 +218,15 @@ download_tiles <- function(tile_grid, param, zoom, apikey, verbose,
 }
 
 # compose tiles
-compose_tiles <- function(tile_grid, images, forceDownload, ext) {
+compose_tiles <- function(tile_grid, images) {
   bricks <- vector("list", nrow(tile_grid$tiles))
+  ext <- unique(tools::file_ext(images))[1]
   for (i in seq_along(bricks)) {
     bbox <- slippymath::tile_bbox(x = tile_grid$tiles$x[i],
                                   y = tile_grid$tiles$y[i],
                                   zoom = tile_grid$zoom)
     img <- images[[i]]
+
     # special for png tiles
     if (ext == "png") {
       img <- png::readPNG(img) * 255
@@ -252,19 +242,19 @@ compose_tiles <- function(tile_grid, images, forceDownload, ext) {
       }
     }
 
+    # warning is: [rast] unknown extent
     r_img <- suppressWarnings(terra::rast(img))
-
+    # add RGB info
     if (is.null(terra::RGB(r_img))) {
       terra::RGB(r_img) <- c(1, 2, 3)
     }
-
+    # add extent
     terra::ext(r_img) <- terra::ext(bbox[c("xmin", "xmax","ymin", "ymax")])
     bricks[[i]] <- r_img
   }
   # if only one tile is needed
   if (length(bricks) == 1) {
     rout <- bricks[[1]]
-    rout <- terra::merge(rout, rout)
   } else {
     # all tiles together
     rout <- do.call(terra::merge, bricks)
@@ -294,8 +284,7 @@ project_and_crop_raster <- function(ras, project, res, crop){
 
   # crop management
   if (crop) {
-    ras <- terra::crop(x = ras, y = bbox_output[c(1, 3, 2, 4)],
-                        snap = "out")
+    ras <- terra::crop(x = ras, y = bbox_output[c(1, 3, 2, 4)], snap = "out")
   }
   # set R, G, B channels, such that plot(ras) will go to plotRGB
   RGB(ras) <- 1:3
