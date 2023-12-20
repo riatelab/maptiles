@@ -11,7 +11,8 @@ plot_tiles(x, adjust = FALSE, add = FALSE, ...)
 
 \item{adjust}{if TRUE, plot the raster without zoom-in or zoom-out in the
 graphic device: add margins if the raster is smaller than the graphic device,
-zoom-in if the raster is larger than the graphic device.}
+zoom-in if the raster is larger than the graphic device. This feature does
+not work with an unprojected (lon/lat) raster.}
 
 \item{add}{whether to add the layer to an existing plot (TRUE) or
 not (FALSE).}

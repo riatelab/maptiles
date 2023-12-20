@@ -111,7 +111,7 @@ get_tiles <- function(x,
 
   # get cached raster if it already exists
   ras <- get_cached_raster(filename, forceDownload, verbose)
-  if(!is.null(ras)){return(ras)}
+  if (!is.null(ras)) {return(ras)}
 
   # get tile list
   tile_grid <- slippymath::bbox_to_tile_grid(res$bbox_lonlat, zoom)
@@ -132,5 +132,3 @@ get_tiles <- function(x,
 
   return(ras)
 }
-
-

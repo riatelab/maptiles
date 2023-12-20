@@ -1,5 +1,5 @@
 # test if gdal version is obsolete.
-test_gdal_version <- function(){
+test_gdal_version <- function() {
   v <- gdal()
   if (v < "2.2.3") {
     stop(paste0("Your GDAL version is ", v,
@@ -12,12 +12,11 @@ test_gdal_version <- function(){
 
 # test if input is correct
 test_input <- function(x) {
-  ok_classes <- c("sf", "sfc", "bbox","SpatRaster", "SpatVector", "SpatExtent")
+  ok_classes <- c("sf", "sfc", "bbox", "SpatRaster", "SpatVector", "SpatExtent")
   if (!inherits(x, ok_classes)) {
     stop(paste0("x should be an sf, sfc, bbox, SpatRaster, ",
                 "SpatVector or SpatExtent object"),
-         call. = FALSE
-    )
+         call. = FALSE)
   }
   return(invisible(NULL))
 }
@@ -74,7 +73,7 @@ get_bbox_and_proj <- function(x) {
 }
 
 # get fle extension from url
-get_extension <- function(q){
+get_extension <- function(q) {
   # extension management
   if (length(grep(".jpg", q)) > 0) {
     ext <- "jpg"
@@ -123,7 +122,7 @@ get_param <- function(provider) {
 }
 
 # get zoom
-get_zoom <- function(zoom, bbox_lonlat){
+get_zoom <- function(zoom, bbox_lonlat) {
   # select a default zoom level
   if (missing(zoom)) {
     gz <- slippymath::bbox_tile_query(bbox_lonlat)
@@ -133,7 +132,7 @@ get_zoom <- function(zoom, bbox_lonlat){
 }
 
 # cache directory
-get_cachedir <- function(cachedir, src){
+get_cachedir <- function(cachedir, src) {
   if (missing(cachedir)) {
     cachedir <- tempdir()
   }
@@ -145,7 +144,7 @@ get_cachedir <- function(cachedir, src){
 }
 
 # create a filename with hash
-get_filename <- function(bbox, zoom, crop, project, cachedir, url){
+get_filename <- function(bbox, zoom, crop, project, cachedir, url) {
   filename <- digest::digest(paste0(bbox, zoom, crop, project, cachedir, url),
                              algo = "md5", serialize = FALSE)
   full_filename <- file.path(cachedir, paste0(filename, ".tif"))
@@ -153,17 +152,17 @@ get_filename <- function(bbox, zoom, crop, project, cachedir, url){
 }
 
 # display info if verbose
-display_infos <- function(verbose, zoom, citation, cachedir){
+display_infos <- function(verbose, zoom, citation, cachedir) {
   if (verbose) {
-    message("Zoom: ", zoom, "\n","Source(s): ", citation, "\n",
+    message("Zoom: ", zoom, "\n", "Source(s): ", citation, "\n",
             "Cache directory: ", cachedir)
   }
   return(invisible(NULL))
 }
 
 # Use cache raster
-get_cached_raster <- function(filename, forceDownload, verbose){
-  if(file.exists(filename) && isFALSE(forceDownload)){
+get_cached_raster <- function(filename, forceDownload, verbose) {
+  if (file.exists(filename) && isFALSE(forceDownload)) {
     if (verbose) {
       message("The resulting raster is a previously cached raster.")
     }
@@ -178,18 +177,18 @@ get_cached_raster <- function(filename, forceDownload, verbose){
 download_tiles <- function(tile_grid, param, apikey, verbose,
                            cachedir, forceDownload) {
   images <- vector("list", length = nrow(tile_grid$tiles))
-  if (missing(apikey)){apikey <- ""}
+  if (missing(apikey)) {apikey <- ""}
   zoom <- tile_grid$zoom
   ext <- param$ext
   src <- param$src
   cpt <- 0
-  for (i in seq_along(images)){
+  for (i in seq_along(images)) {
     x <- tile_grid$tiles[i, ]
     x <- trimws(x)
     outfile <- paste0(cachedir, "/", src, "_", zoom, "_", x[1], "_",
                       x[2], ".", ext)
     if (!file.exists(outfile) || isTRUE(forceDownload)) {
-      q <- gsub(pattern = "{s}", replacement = sample(param$sub, 1, T),
+      q <- gsub(pattern = "{s}", replacement = sample(param$sub, 1, TRUE),
                 x = param$q, fixed = TRUE)
       q <- gsub(pattern = "{x}", replacement = x[1], x = q, fixed = TRUE)
       q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
@@ -207,10 +206,10 @@ download_tiles <- function(tile_grid, param, apikey, verbose,
     }
     images[[i]] <- outfile
   }
-  if (verbose){
+  if (verbose) {
     ntiles <- length(images)
     message(ntiles, " tile", ifelse(ntiles > 1, "s", ""))
-    if (cpt != length(images)){
+    if (cpt != length(images)) {
       message("The resulting raster is built with previously cached tiles.")
     }
   }
@@ -249,7 +248,7 @@ compose_tiles <- function(tile_grid, images) {
       terra::RGB(r_img) <- c(1, 2, 3)
     }
     # add extent
-    terra::ext(r_img) <- terra::ext(bbox[c("xmin", "xmax","ymin", "ymax")])
+    terra::ext(r_img) <- terra::ext(bbox[c("xmin", "xmax", "ymin", "ymax")])
     bricks[[i]] <- r_img
   }
   # if only one tile is needed
@@ -263,7 +262,7 @@ compose_tiles <- function(tile_grid, images) {
 }
 
 
-project_and_crop_raster <- function(ras, project, res, crop){
+project_and_crop_raster <- function(ras, project, res, crop) {
   # set the projection
   w_mercator <- "epsg:3857"
   terra::crs(ras) <- w_mercator
@@ -290,6 +289,3 @@ project_and_crop_raster <- function(ras, project, res, crop){
   RGB(ras) <- 1:3
   return(ras)
 }
-
-
-
