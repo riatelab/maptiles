@@ -49,7 +49,6 @@ You can install the development version of `maptiles` from GitHub with:
 remotes::install_github("riatelab/maptiles")
 ```
 
-
 ## Demo
 
 This is a basic example which shows you how to dowload and display OpenStreetMap 

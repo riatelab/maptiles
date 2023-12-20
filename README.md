@@ -86,17 +86,10 @@ nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,
   cachedir = tempdir(), verbose = TRUE
 )
-#> https://a.basemaps.cartocdn.com/light_all/7/34/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_34_50.png
-#> https://b.basemaps.cartocdn.com/light_all/7/35/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_35_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/36/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_36_50.png
-#> https://a.basemaps.cartocdn.com/light_all/7/37/50.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_37_50.png
-#> https://d.basemaps.cartocdn.com/light_all/7/34/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_34_51.png
-#> https://c.basemaps.cartocdn.com/light_all/7/35/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_35_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/36/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_36_51.png
-#> https://d.basemaps.cartocdn.com/light_all/7/37/51.png => /tmp/RtmpE33qH2/CARTO.POSITRON/CARTO.POSITRON_7_37_51.png
-#> Zoom:7
-#> Data and map tiles sources:
-#> © OpenStreetMap contributors © CARTO
+#> Zoom: 7
+#> Source(s): © OpenStreetMap contributors © CARTO 
+#> Cache directory: /tmp/Rtmpcn8iFm/CARTO.POSITRON
+#> 8 tiles
 # display map
 plot_tiles(nc_osmpos)
 # display credits
