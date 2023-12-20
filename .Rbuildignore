@@ -7,3 +7,4 @@ data-raw
 ^codecov\.yml$
 ^codemeta\.json$
 ^CITATION\.cff$
+^codecov\.yml$
