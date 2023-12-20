@@ -276,7 +276,7 @@ if (home){
   x <- get_tiles(x = input, zoom = 4, project = T, crop = TRUE)
   expect_message(plot_tiles(x, adjust = TRUE))
   x <- get_tiles(x = input, zoom = 4, project = FALSE)
-  expect_message(plot_tiles(x, adjust = TRUE))
+  expect_silent(plot_tiles(x, adjust = TRUE))
 
 }
 

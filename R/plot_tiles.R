@@ -39,7 +39,7 @@ plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
   # Add margins if the raster is smaller than the device
   # Zoom-in if the raster is larger than the device
   if (adjust == TRUE && add == FALSE) {
-    if (!terra::is.lonlat(ops$x)) {
+    if (terra::is.lonlat(ops$x)) {
       message(paste0("The 'adjust' feature does not work with",
                      " an unprojected (lon/lat) raster."))
     } else {
