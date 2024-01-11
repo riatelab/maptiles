@@ -1,11 +1,23 @@
 # maptiles 0.7.0
 
+This release is a refactoring of the package, functions has been exploded to be 
+better tested and inspected.
+
 ## fix
 - update tests with valid provider
+- remove (not functioning) Esri Delorme provider
+- better management of cache, tiles and composed raster are cached 
+(huge speed gain)
+- remove the gdal-based merging mechanism, not efficient anymore. 
 
 ## feat
-- improve doc in create_provider() for wms inspection (#)
-- add *.webp tile extension support
+- improve doc in create_provider() for wms inspection (#22 @paul-carteron)
+- add *.webp tile extension support (#28 @tadhg-moore)
+- change the output of verbose
+- cache composed raster for future use
+- API keys management for Stadia and Thunderforest with env variable
+
+
 
 # maptiles 0.6.1
 

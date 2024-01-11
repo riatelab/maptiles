@@ -117,15 +117,27 @@
     },
     "4": {
       "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
       "identifier": "graphics",
       "name": "graphics"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "grDevices",
       "name": "grDevices"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "png",
       "name": "png",
@@ -137,7 +149,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=png"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -149,12 +161,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=terra"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "tools",
       "name": "tools"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "slippymath",
       "name": "slippymath",
@@ -166,7 +178,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=slippymath"
     },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "1160.077KB"
+  "fileSize": "1140.47KB"
 }

@@ -34,7 +34,7 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2023'
+  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
   version: '>= 3.5.0'
@@ -49,7 +49,7 @@ references:
     given-names: Edzer
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2023'
+  year: '2024'
   version: '>= 0.9-5'
 - type: software
   title: curl
@@ -62,7 +62,64 @@ references:
     given-names: Jeroen
     email: jeroen@berkeley.edu
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2023'
+  year: '2024'
+- type: software
+  title: digest
+  abstract: 'digest: Create Compact Hash Digests of R Objects'
+  notes: Imports
+  url: https://dirk.eddelbuettel.com/code/digest.html
+  repository: https://CRAN.R-project.org/package=digest
+  authors:
+  - family-names: Lucas
+    given-names: Dirk Eddelbuettel with contributions by Antoine
+    email: edd@debian.org
+  - family-names: Tuszynski
+    given-names: Jarek
+  - family-names: Bengtsson
+    given-names: Henrik
+  - family-names: Urbanek
+    given-names: Simon
+  - family-names: Frasca
+    given-names: Mario
+  - family-names: Lewis
+    given-names: Bryan
+  - family-names: Stokely
+    given-names: Murray
+  - family-names: Muehleisen
+    given-names: Hannes
+  - family-names: Murdoch
+    given-names: Duncan
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Wu
+    given-names: Wush
+  - family-names: Kou
+    given-names: Qiang
+  - family-names: Onkelinx
+    given-names: Thierry
+  - family-names: Lang
+    given-names: Michel
+  - family-names: Simko
+    given-names: Viliam
+  - family-names: Hornik
+    given-names: Kurt
+  - family-names: Neal
+    given-names: Radford
+  - family-names: Bell
+    given-names: Kendon
+  - family-names: de Queljoe
+    given-names: Matthew
+  - family-names: Suruceanu
+    given-names: Ion
+  - family-names: Denney
+    given-names: Bill
+  - family-names: Schumacher
+    given-names: Dirk
+  - family-names: Chang
+    given-names: Winston
+  - family-names: Attali.
+    given-names: Dean
+  year: '2024'
 - type: software
   title: graphics
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -71,7 +128,7 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2023'
+  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
 - type: software
@@ -82,7 +139,7 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2023'
+  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
 - type: software
@@ -95,7 +152,7 @@ references:
   - family-names: Urbanek
     given-names: Simon
     email: Simon.Urbanek@r-project.org
-  year: '2023'
+  year: '2024'
 - type: software
   title: terra
   abstract: 'terra: Spatial Data Analysis'
@@ -107,7 +164,7 @@ references:
     given-names: Robert J.
     email: r.hijmans@gmail.com
     orcid: https://orcid.org/0000-0001-5872-2872
-  year: '2023'
+  year: '2024'
 - type: software
   title: tools
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -116,7 +173,7 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2023'
+  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
 - type: software
@@ -133,7 +190,18 @@ references:
   - family-names: Sumner
     given-names: Michael
     email: mdsumner@gmail.com
-  year: '2023'
+  year: '2024'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2024'
+  institution:
+    name: R Foundation for Statistical Computing
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
@@ -144,7 +212,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: tinytest
   abstract: 'tinytest: Lightweight and Feature Complete Unit Testing Framework'
@@ -156,4 +224,4 @@ references:
     given-names: Mark
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
-  year: '2023'
+  year: '2024'
