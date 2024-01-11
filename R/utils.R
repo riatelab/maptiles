@@ -95,11 +95,9 @@ get_param <- function(provider) {
     param <- provider
   } else {
     stamen_provider <- c(
-      "Stamen.Toner", "Stamen.TonerBackground",
-      "Stamen.TonerHybrid", "Stamen.TonerLines",
-      "Stamen.TonerLabels", "Stamen.TonerLite",
-      "Stamen.Watercolor", "Stamen.Terrain",
-      "Stamen.TerrainBackground",
+      "Stamen.Toner", "Stamen.TonerBackground", "Stamen.TonerHybrid",
+      "Stamen.TonerLines", "Stamen.TonerLabels", "Stamen.TonerLite",
+      "Stamen.Watercolor", "Stamen.Terrain", "Stamen.TerrainBackground",
       "Stamen.TerrainLabels"
     )
     if (provider %in% stamen_provider) {
@@ -114,11 +112,10 @@ get_param <- function(provider) {
         call. = FALSE
       )
     }
-    param <- maptiles_providers[[provider]]
+    param <- .global_maptiles$providers[[provider]]
   }
-  param$q <- gsub("XXXXXX", "{apikey}", param$q, perl = TRUE)
   param$ext <- get_extension(param$q)
-  param
+  return(param)
 }
 
 # get zoom
@@ -174,13 +171,22 @@ get_cached_raster <- function(filename, forceDownload, verbose) {
 
 
 # get the tiles according to the grid
-download_tiles <- function(tile_grid, param, apikey, verbose,
-                           cachedir, forceDownload) {
+download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
+                           forceDownload) {
   images <- vector("list", length = nrow(tile_grid$tiles))
-  if (missing(apikey)) {apikey <- ""}
   zoom <- tile_grid$zoom
   ext <- param$ext
   src <- param$src
+  if (missing(apikey)) {
+    apikey <- ""
+    if (startsWith(src, "Stadia") && Sys.getenv("STADIA_MAPS") != "") {
+      apikey <- Sys.getenv("STADIA_MAPS")
+    }
+    if (startsWith(src, "Thunderforest") &&
+        Sys.getenv("THUNDERFOREST_MAPS") != "") {
+      apikey <- Sys.getenv("THUNDERFOREST_MAPS")
+    }
+  }
   cpt <- 0
   for (i in seq_along(images)) {
     x <- tile_grid$tiles[i, ]

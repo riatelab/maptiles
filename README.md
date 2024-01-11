@@ -17,7 +17,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 <!-- badges: end -->
 
 To create maps from tiles, `maptiles` downloads, composes and displays
-tiles from a large number of providers (e.g. OpenStreetMap, Stamen,
+tiles from a large number of providers (e.g. OpenStreetMap, Stadia,
 Esri, CARTO, or Thunderforest).
 
 ## Installation
@@ -88,7 +88,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/Rtmpcn8iFm/CARTO.POSITRON
+#> Cache directory: /tmp/Rtmpjmeafm/CARTO.POSITRON
 #> 8 tiles
 # display map
 plot_tiles(nc_osmpos)

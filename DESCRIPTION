@@ -34,7 +34,8 @@ Imports:
     png, 
     terra,
     tools, 
-    slippymath
+    slippymath, 
+    utils
 Suggests:
     covr,
     tinytest

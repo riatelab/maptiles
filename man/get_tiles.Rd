@@ -17,15 +17,15 @@ get_tiles(
 )
 }
 \arguments{
-\item{x}{an sf, sfc, bbox, SpatRaster, SpatVector or SpatExtent object.
+\item{x}{sf, sfc, bbox, SpatRaster, SpatVector or SpatExtent object.
 If \code{x} is a SpatExtent it
 must express coordinates in lon/lat WGS84 (epsg:4326).}
 
-\item{provider}{the tile server from which to get the map. It can be one of
+\item{provider}{tile server to get the tiles from. It can be one of
 the builtin providers (see Details for the list) or a named list produced
 by \link{create_provider} (see Examples).}
 
-\item{zoom}{the zoom level (see Details).}
+\item{zoom}{zoom level (see Details).}
 
 \item{crop}{TRUE if results should be cropped to the specified x extent,
 FALSE otherwise. If x is an sf object with one POINT, crop is set to FALSE.}
@@ -36,10 +36,10 @@ If FALSE the output uses "EPSG:3857" (Web Mercator).}
 \item{verbose}{if TRUE, tiles filepaths, zoom level and
 attribution are displayed.}
 
-\item{apikey}{API key, needed for Thunderforest or Stadia servers for
-example.}
+\item{apikey}{API key. Not needed for Thunderforest or Stadia servers if
+environment variables named "THUNDERFOREST_MAPS" or "STADIA_MAPS" are set.}
 
-\item{cachedir}{name of a directory used to cache tiles. If not set, tiles
+\item{cachedir}{name of a folder used to cache tiles. If not set, tiles
 are cached in a \link[base:tempfile]{tempdir} folder.}
 
 \item{forceDownload}{if TRUE, existing cached tiles may be overwritten.}
@@ -52,7 +52,7 @@ Get map tiles based on a spatial object extent. Maps can be
 fetched from various map servers.
 }
 \details{
-Zoom levels are described on the OpenStreetMap wiki:
+Zoom levels are described in the OpenStreetMap wiki:
 \url{https://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
 Providers: \cr
 "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
@@ -63,10 +63,11 @@ Providers: \cr
 "Stadia.Stamen.Watercolor", "Stadia.Stamen.Terrain",
 "Stadia.Stamen.TerrainBackground",
 "Stadia.Stamen.TerrainLabels", \cr
-"Esri.WorldStreetMap", "Esri.DeLorme",
+"Esri.WorldStreetMap",
 "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
-"Esri.WorldGrayCanvas", "CartoDB.Positron", "CartoDB.PositronNoLabels", \cr
+"Esri.WorldGrayCanvas", \cr
+"CartoDB.Positron", "CartoDB.PositronNoLabels",
 "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
 "CartoDB.DarkMatterNoLabels",
 "CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
@@ -85,13 +86,14 @@ library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 plot_tiles(nc_osm)
-# Download tiles from a custom url
+
+# Create a provider from a custom url
 osm_tiles <- create_provider(
   name = "osm_tiles",
   url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   citation = "© OpenStreetMap contributors."
 )
-# dowload tiles and compose raster (SpatRaster)
+# Download tiles and compose raster (SpatRaster)
 nc_osm2 <- get_tiles(
   x = nc, provider = osm_tiles, crop = FALSE,
   zoom = 6, project = FALSE, verbose = TRUE
