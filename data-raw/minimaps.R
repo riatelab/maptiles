@@ -4,10 +4,10 @@ providers <- list(
   "Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
   "Stadia.Stamen.TonerLite", "Stadia.Stamen.Watercolor",
   "Stadia.Stamen.Terrain", "Stadia.Stamen.TerrainBackground",
-  "Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap",
+  "Esri.WorldStreetMap", "Esri.WorldTopoMap",
   "Esri.WorldImagery", "Esri.WorldTerrain", "Esri.WorldShadedRelief",
   "Esri.OceanBasemap", "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",
-  "CartoDB.Positron", "CartoDB.PositronNoLabels",
+  "CartoDB.Positron", "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
   "CartoDB.DarkMatter",
   "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
   "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
@@ -18,8 +18,6 @@ providers <- list(
 )
 library(sf)
 library(maptiles)
-stadiakey <- "xxx"
-thunderkey <- "xxx"
 nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
 library(mapsf)
@@ -29,7 +27,7 @@ for (i in 1:length(providers)) {
   t <- get_tiles(nc,
     provider = providers[[i]],
     zoom = 5, cachedir = "tiles",
-    crop = T, apikey = thunderkey
+    crop = T, verbose = T
   )
   plot_tiles(t)
   mf_title(
@@ -38,3 +36,4 @@ for (i in 1:length(providers)) {
   )
 }
 dev.off()
+(!dir.exists("tiles"))

@@ -46,9 +46,7 @@ library(sf)
 #> Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
-nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"),
-  quiet = TRUE
-)
+nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 # Project to EPSG:3857
 nc <- st_transform(nc_raw, "EPSG:3857")
 # dowload tiles and compose raster (SpatRaster)
@@ -58,16 +56,10 @@ plot_tiles(nc_osm)
 # add Norh Carolina counties
 plot(st_geometry(nc), col = NA, add = TRUE)
 # add credit
-mtext(
-  text = get_credit("OpenStreetMap"),
-  side = 1, line = -1, adj = 1,
-  cex = .9, font = 3
-)
+mtext(text = get_credit("OpenStreetMap"), side = 1, line = -1, adj = .99)
 ```
 
-<!-- ![](man/figures/README-example-1.png){width=852px} -->
-
-<img src="man/figures/README-example-1.png" width="808" height="303"/>
+![](man/figures/README-example-1.png)
 
 `maptiles` gives access to a lot of tiles servers, but it is possible to
 add others. The following example demonstrates the setting of a map
@@ -75,41 +67,29 @@ tiles server and how to cache the original tiles for future use:
 
 ``` r
 # define the tile server parameters
-osmpos <- create_provider(
-  name = "CARTO.POSITRON",
-  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
-  sub = c("a", "b", "c", "d"),
-  citation = "© OpenStreetMap contributors © CARTO "
-)
+osmpos <- create_provider(name = "CARTO.POSITRON",
+                          url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+                          sub = c("a", "b", "c", "d"),
+                          citation = "© OpenStreetMap contributors © CARTO ")
 # dowload tiles and compose raster (SpatRaster)
-nc_osmpos <- get_tiles(
-  x = nc, provider = osmpos, crop = TRUE,
-  cachedir = tempdir(), verbose = TRUE
-)
+nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
+                       cachedir = tempdir(), verbose = TRUE)
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/Rtmpjmeafm/CARTO.POSITRON
+#> Cache directory: /tmp/RtmpdG8qYB/CARTO.POSITRON
 #> 8 tiles
 # display map
 plot_tiles(nc_osmpos)
 # display credits
-mtext(
-  text = get_credit(osmpos),
-  side = 1, line = -1, adj = 1,
-  cex = .9, font = 3
-)
+mtext(text = get_credit(osmpos), side = 1, line = -1, adj = .99)
 ```
 
-<!-- ![](man/figures/README-example2-1.png){width=852px}    -->
-
-<img src="man/figures/README-example2-1.png" width="808" height="303"/>
+![](man/figures/README-example2-1.png)
 
 The following figure shows mini maps for most of the tiles providers
 available:
 
-<!-- ![](man/figures/README-front.png){width=840px} -->
-
-<img src="man/figures/README-front.png" width="808"/>
+![](man/figures/README-front.png)
 
 ## Projection
 
@@ -126,19 +106,11 @@ providers. The only counterpart from the user is to properly display an
 attribution text on the maps. `get_credit()` displays a short
 attribution text to add on each map using the downloaded tiles.
 
-## Background
-
-Most of `maptiles`code comes from `getTiles()` and `tilesLayer()`
-functions in [`cartography`](https://github.com/riatelab/cartography).
-It appears useful to me to have a package focused on the download and
-display of map tiles only. On the technical side, it uses `terra`
-instead of `raster` for managing raster data.
-
 ## Alternatives
 
 There are many alternative packages that pursue the same objective as
-`maptiles`. Some focus on a specific map tiles provider (e.g. mapbox,
-google, OpenStreetMap) or on a specific graphics device (`ggplot2`). The
+`maptiles`. Some focus on a specific map tiles provider (e.g. Mapbox,
+Google, OpenStreetMap) or on a specific graphics device (`ggplot2`). The
 goal of `maptiles` is to be flexible enough to allow the use of
 different providers and to have a minimal number of robust and modern
 dependencies. However, depending on the use case, one of following
