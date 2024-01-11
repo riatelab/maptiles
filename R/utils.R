@@ -100,6 +100,10 @@ get_param <- function(provider) {
       "Stamen.Watercolor", "Stamen.Terrain", "Stamen.TerrainBackground",
       "Stamen.TerrainLabels"
     )
+    builtin_provider <- c(stamen_provider, names(.global_maptiles$providers))
+    if (!provider %in% builtin_provider){
+      stop(paste0("'",provider,"' is not a builtin provider."), call. = FALSE)
+    }
     if (provider %in% stamen_provider) {
       provider <- paste0("Stadia.", provider)
       warning(

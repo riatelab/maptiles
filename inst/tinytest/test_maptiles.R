@@ -128,7 +128,7 @@ stadia <- list(src = "Stadia.Stamen.Toner",
                ext = "png")
 expect_identical(maptiles:::get_param("OpenStreetMap"), osm)
 expect_warning(maptiles:::get_param("Stamen.Toner"))
-
+expect_error(maptiles:::get_param("Esri.Delorme"))
 
 # get_zoom() ----
 expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 7)
