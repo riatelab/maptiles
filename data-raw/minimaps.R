@@ -1,9 +1,9 @@
 providers <- list(
   "OpenStreetMap", "OpenStreetMap.France",
   "OpenStreetMap.HOT", "OpenTopoMap",
-  "Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
-  "Stadia.Stamen.TonerLite", "Stadia.Stamen.Watercolor",
-  "Stadia.Stamen.Terrain", "Stadia.Stamen.TerrainBackground",
+  "Stadia.StamenToner", "Stadia.StamenTonerBackground",
+  "Stadia.StamenTonerLite", "Stadia.StamenWatercolor",
+  "Stadia.StamenTerrain", "Stadia.StamenTerrainBackground",
   "Esri.WorldStreetMap", "Esri.WorldTopoMap",
   "Esri.WorldImagery", "Esri.WorldTerrain", "Esri.WorldShadedRelief",
   "Esri.OceanBasemap", "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",
@@ -36,4 +36,3 @@ for (i in 1:length(providers)) {
   )
 }
 dev.off()
-(!dir.exists("tiles"))
