@@ -26,12 +26,12 @@
 #' Providers: \cr
 #' "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
 #' "OpenStreetMap.HOT", "OpenTopoMap", \cr
-#' "Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
-#' "Stadia.Stamen.TonerLines", "Stadia.Stamen.TonerLabels",
-#' "Stadia.Stamen.TonerLite",
-#' "Stadia.Stamen.Watercolor", "Stadia.Stamen.Terrain",
-#' "Stadia.Stamen.TerrainBackground",
-#' "Stadia.Stamen.TerrainLabels", \cr
+#' "Stadia.StamenToner", "Stadia.StamenTonerBackground",
+#' "Stadia.StamenTonerLines", "Stadia.StamenTonerLabels",
+#' "Stadia.StamenTonerLite",
+#' "Stadia.StamenWatercolor", "Stadia.StamenTerrain",
+#' "Stadia.StamenTerrainBackground",
+#' "Stadia.StamenTerrainLabels", \cr
 #' "Esri.WorldStreetMap",
 #' "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 #' "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
@@ -49,7 +49,7 @@
 #' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
-#' @importFrom terra ext project rast as.polygons 'RGB<-' gdal writeRaster
+#' @importFrom terra ext project rast as.polygons gdal writeRaster
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @importFrom tools file_path_sans_ext

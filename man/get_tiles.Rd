@@ -57,12 +57,12 @@ Zoom levels are described in the OpenStreetMap wiki:
 Providers: \cr
 "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
 "OpenStreetMap.HOT", "OpenTopoMap", \cr
-"Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
-"Stadia.Stamen.TonerLines", "Stadia.Stamen.TonerLabels",
-"Stadia.Stamen.TonerLite",
-"Stadia.Stamen.Watercolor", "Stadia.Stamen.Terrain",
-"Stadia.Stamen.TerrainBackground",
-"Stadia.Stamen.TerrainLabels", \cr
+"Stadia.StamenToner", "Stadia.StamenTonerBackground",
+"Stadia.StamenTonerLines", "Stadia.StamenTonerLabels",
+"Stadia.StamenTonerLite",
+"Stadia.StamenWatercolor", "Stadia.StamenTerrain",
+"Stadia.StamenTerrainBackground",
+"Stadia.StamenTerrainLabels", \cr
 "Esri.WorldStreetMap",
 "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",

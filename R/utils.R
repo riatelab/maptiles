@@ -105,6 +105,7 @@ get_param <- function(provider) {
       stop(paste0("'",provider,"' is not a builtin provider."), call. = FALSE)
     }
     if (provider %in% stamen_provider) {
+      provider <- gsub("\\.", "", provider)
       provider <- paste0("Stadia.", provider)
       warning(
         paste0(
@@ -296,6 +297,6 @@ project_and_crop_raster <- function(ras, project, res, crop) {
     ras <- terra::crop(x = ras, y = bbox_output[c(1, 3, 2, 4)], snap = "out")
   }
   # set R, G, B channels, such that plot(ras) will go to plotRGB
-  RGB(ras) <- 1:3
+  terra::RGB(ras) <- 1:3
   return(ras)
 }

@@ -34,56 +34,56 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     sub = c("a", "b", "c"),
     cit = "Map data: \ua9 OpenStreetMap contributors | Map style: \ua9 OpenTopoMap (CC-BY-SA)"
   ),
-  Stadia.Stamen.Toner = list(
-    src = "Stadia.Stamen.Toner",
+  Stadia.StamenToner = list(
+    src = "Stadia.StamenToner",
     q = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TonerBackground = list(
-    src = "Stadia.Stamen.TonerBackground",
+  Stadia.StamenTonerBackground = list(
+    src = "Stadia.StamenTonerBackground",
     q = "https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TonerLines = list(
-    src = "Stadia.Stamen.TonerLines",
+  Stadia.StamenTonerLines = list(
+    src = "Stadia.StamenTonerLines",
     q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lines/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TonerLabels = list(
-    src = "Stadia.Stamen.TonerLabels",
+  Stadia.StamenTonerLabels = list(
+    src = "Stadia.StamenTonerLabels",
     q = "https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TonerLite = list(
-    src = "Stadia.Stamen.TonerLite",
+  Stadia.StamenTonerLite = list(
+    src = "Stadia.StamenTonerLite",
     q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.Watercolor = list(
-    src = "Stadia.Stamen.Watercolor",
+  Stadia.StamenWatercolor = list(
+    src = "Stadia.StamenWatercolor",
     q = "https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.Terrain = list(
-    src = "Stadia.Stamen.Terrain",
+  Stadia.StamenTerrain = list(
+    src = "Stadia.StamenTerrain",
     q = "https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TerrainBackground = list(
-    src = "Stadia.Stamen.TerrainBackground",
+  Stadia.StamenTerrainBackground = list(
+    src = "Stadia.StamenTerrainBackground",
     q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_background/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
-  Stadia.Stamen.TerrainLabels = list(
-    src = "Stadia.Stamen.TerrainLabels",
+  Stadia.StamenTerrainLabels = list(
+    src = "Stadia.StamenTerrainLabels",
     q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_labels/{z}/{x}/{y}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"

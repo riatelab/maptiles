@@ -2,8 +2,8 @@
 % Please edit documentation in R/pkg.R
 \docType{package}
 \name{maptiles}
-\alias{maptiles}
 \alias{maptiles-package}
+\alias{maptiles}
 \title{Download and Display Map Tiles}
 \description{
 To create maps from tiles, maptiles downloads, composes and displays tiles
