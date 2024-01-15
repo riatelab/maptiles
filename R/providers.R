@@ -20,7 +20,7 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     src = "OpenStreetMap.France",
     q = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
     sub = c("a", "b", "c"),
-    cit = "\ua9 Openstreetmap France | \ua9 OpenStreetMap contributors"
+    cit = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
   ),
   OpenStreetMap.HOT = list(
     src = "OpenStreetMap.HOT",
