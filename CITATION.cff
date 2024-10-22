@@ -1,14 +1,15 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.7.0
+version: 0.8.0
+doi: 10.32614/CRAN.package.maptiles
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
   or 'Thunderforest').
@@ -32,11 +33,10 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
   version: '>= 3.5.0'
 - type: software
   title: sf
@@ -50,6 +50,7 @@ references:
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
   year: '2024'
+  doi: 10.32614/CRAN.package.sf
   version: '>= 0.9-5'
 - type: software
   title: curl
@@ -60,9 +61,10 @@ references:
   authors:
   - family-names: Ooms
     given-names: Jeroen
-    email: jeroen@berkeley.edu
+    email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2024'
+  doi: 10.32614/CRAN.package.curl
 - type: software
   title: digest
   abstract: 'digest: Create Compact Hash Digests of R Objects'
@@ -70,78 +72,32 @@ references:
   url: https://dirk.eddelbuettel.com/code/digest.html
   repository: https://CRAN.R-project.org/package=digest
   authors:
-  - family-names: Lucas
-    given-names: Dirk Eddelbuettel with contributions by Antoine
-    email: edd@debian.org
-  - family-names: Tuszynski
-    given-names: Jarek
-  - family-names: Bengtsson
-    given-names: Henrik
-  - family-names: Urbanek
-    given-names: Simon
-  - family-names: Frasca
-    given-names: Mario
-  - family-names: Lewis
-    given-names: Bryan
-  - family-names: Stokely
-    given-names: Murray
-  - family-names: Muehleisen
-    given-names: Hannes
-  - family-names: Murdoch
-    given-names: Duncan
-  - family-names: Hester
-    given-names: Jim
-  - family-names: Wu
-    given-names: Wush
-  - family-names: Kou
-    given-names: Qiang
-  - family-names: Onkelinx
-    given-names: Thierry
-  - family-names: Lang
-    given-names: Michel
-  - family-names: Simko
-    given-names: Viliam
-  - family-names: Hornik
-    given-names: Kurt
-  - family-names: Neal
-    given-names: Radford
-  - family-names: Bell
-    given-names: Kendon
-  - family-names: de Queljoe
-    given-names: Matthew
-  - family-names: Suruceanu
-    given-names: Ion
-  - family-names: Denney
-    given-names: Bill
-  - family-names: Schumacher
+  - family-names: Eddelbuettel
     given-names: Dirk
-  - family-names: Chang
-    given-names: Winston
-  - family-names: Attali.
-    given-names: Dean
+    email: edd@debian.org
+    orcid: https://orcid.org/0000-0001-6419-907X
   year: '2024'
+  doi: 10.32614/CRAN.package.digest
 - type: software
   title: graphics
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: png
   abstract: 'png: Read and write PNG images'
@@ -153,6 +109,7 @@ references:
     given-names: Simon
     email: Simon.Urbanek@r-project.org
   year: '2024'
+  doi: 10.32614/CRAN.package.png
 - type: software
   title: terra
   abstract: 'terra: Spatial Data Analysis'
@@ -165,17 +122,17 @@ references:
     email: r.hijmans@gmail.com
     orcid: https://orcid.org/0000-0001-5872-2872
   year: '2024'
+  doi: 10.32614/CRAN.package.terra
 - type: software
   title: tools
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: slippymath
   abstract: 'slippymath: Slippy Map Tile Tools'
@@ -191,17 +148,17 @@ references:
     given-names: Michael
     email: mdsumner@gmail.com
   year: '2024'
+  doi: 10.32614/CRAN.package.slippymath
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
@@ -213,6 +170,7 @@ references:
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2024'
+  doi: 10.32614/CRAN.package.covr
 - type: software
   title: tinytest
   abstract: 'tinytest: Lightweight and Feature Complete Unit Testing Framework'
@@ -220,8 +178,11 @@ references:
   url: https://github.com/markvanderloo/tinytest
   repository: https://CRAN.R-project.org/package=tinytest
   authors:
-  - family-names: van der Loo
+  - family-names: Loo
     given-names: Mark
+    name-particle: van der
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
   year: '2024'
+  doi: 10.32614/CRAN.package.tinytest
+

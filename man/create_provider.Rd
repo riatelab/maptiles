@@ -59,12 +59,12 @@ path <- "https://data.geopf.fr/wmts?"
 param_info <- "service=wmts&request=GetCapabilities&version=1.0.0"
 url <- paste0("WMTS:", path, param_info, ",layer=", layer)
 \dontrun{
-  tmp <- tempfile(fileext = ".xml")
-  sf::gdal_utils(
-    util = "translate",
-    source = url, destination = tmp,
-    options = c("-of", "WMTS")
-  )
-  readLines(tmp)
+tmp <- tempfile(fileext = ".xml")
+sf::gdal_utils(
+  util = "translate",
+  source = url, destination = tmp,
+  options = c("-of", "WMTS")
+)
+readLines(tmp)
 }
 }

@@ -1,3 +1,14 @@
+# maptiles 0.8.0
+
+## fix
+- use the same provider names as leaflet (#31 @mtennekes)
+- correct a typo in attribution for OSM FR provider
+
+## feat
+- add get_providers() to export the provider list with URLS, subdomains, name and attribution (#31)
+
+
+
 # maptiles 0.7.0
 
 This release is a refactoring of the package, functions has been exploded to be 
