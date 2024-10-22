@@ -67,16 +67,20 @@ tiles server and how to cache the original tiles for future use:
 
 ``` r
 # define the tile server parameters
-osmpos <- create_provider(name = "CARTO.POSITRON",
-                          url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
-                          sub = c("a", "b", "c", "d"),
-                          citation = "© OpenStreetMap contributors © CARTO ")
+osmpos <- create_provider(
+  name = "CARTO.POSITRON",
+  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c", "d"),
+  citation = "© OpenStreetMap contributors © CARTO "
+)
 # dowload tiles and compose raster (SpatRaster)
-nc_osmpos <- get_tiles(x = nc, provider = osmpos, crop = TRUE, 
-                       cachedir = tempdir(), verbose = TRUE)
+nc_osmpos <- get_tiles(
+  x = nc, provider = osmpos, crop = TRUE,
+  cachedir = tempdir(), verbose = TRUE
+)
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/RtmpdG8qYB/CARTO.POSITRON
+#> Cache directory: /tmp/RtmpQKpnO9/CARTO.POSITRON
 #> 8 tiles
 # display map
 plot_tiles(nc_osmpos)

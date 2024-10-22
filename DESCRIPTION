@@ -40,4 +40,4 @@ Suggests:
     covr,
     tinytest
 Encoding: UTF-8
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2

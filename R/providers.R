@@ -1,4 +1,3 @@
-
 #' @importFrom utils globalVariables
 .global_maptiles <- new.env(parent = emptyenv())
 globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
@@ -201,7 +200,7 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     q = "https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={apikey}",
     sub = NA,
     cit = "\ua9 Thunderforest \ua9 OpenStreetMap contributors"
-    ),
+  ),
   Thunderforest.TransportDark = list(
     src = "Thunderforest.TransportDark",
     q = "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}",
@@ -245,5 +244,3 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     cit = "\ua9 Thunderforest \ua9 OpenStreetMap contributors"
   )
 )
-
-

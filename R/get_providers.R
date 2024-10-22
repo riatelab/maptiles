@@ -6,6 +6,6 @@
 #' @export
 #' @examples
 #' get_providers()
-get_providers <- function(){
+get_providers <- function() {
   return(.global_maptiles$providers)
 }

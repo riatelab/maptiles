@@ -2,9 +2,13 @@
 test_gdal_version <- function() {
   v <- gdal()
   if (v < "2.2.3") {
-    stop(paste0("Your GDAL version is ", v,
-                ". You need GDAL >= 2.2.3 to use maptiles."),
-         call. = FALSE)
+    stop(
+      paste0(
+        "Your GDAL version is ", v,
+        ". You need GDAL >= 2.2.3 to use maptiles."
+      ),
+      call. = FALSE
+    )
   }
   return(invisible(NULL))
 }
@@ -14,9 +18,13 @@ test_gdal_version <- function() {
 test_input <- function(x) {
   ok_classes <- c("sf", "sfc", "bbox", "SpatRaster", "SpatVector", "SpatExtent")
   if (!inherits(x, ok_classes)) {
-    stop(paste0("x should be an sf, sfc, bbox, SpatRaster, ",
-                "SpatVector or SpatExtent object"),
-         call. = FALSE)
+    stop(
+      paste0(
+        "x should be an sf, sfc, bbox, SpatRaster, ",
+        "SpatVector or SpatExtent object"
+      ),
+      call. = FALSE
+    )
   }
   return(invisible(NULL))
 }
@@ -68,8 +76,10 @@ get_bbox_and_proj <- function(x) {
   bbox_input <- st_bbox(obj = bbox_input, crs = st_crs(crs_input))
   bbox_lonlat <- st_bbox(bbox_lonlat, crs = lonlat)
 
-  return(list(crs_input = crs_input, bbox_input = bbox_input,
-              bbox_lonlat = bbox_lonlat))
+  return(list(
+    crs_input = crs_input, bbox_input = bbox_input,
+    bbox_lonlat = bbox_lonlat
+  ))
 }
 
 # get fle extension from url
@@ -101,8 +111,8 @@ get_param <- function(provider) {
       "Stamen.TerrainLabels"
     )
     builtin_provider <- c(stamen_provider, names(.global_maptiles$providers))
-    if (!provider %in% builtin_provider){
-      stop(paste0("'",provider,"' is not a builtin provider."), call. = FALSE)
+    if (!provider %in% builtin_provider) {
+      stop(paste0("'", provider, "' is not a builtin provider."), call. = FALSE)
     }
     if (provider %in% stamen_provider) {
       provider <- gsub("\\.", "", provider)
@@ -148,7 +158,8 @@ get_cachedir <- function(cachedir, src) {
 # create a filename with hash
 get_filename <- function(bbox, zoom, crop, project, cachedir, url) {
   filename <- digest::digest(paste0(bbox, zoom, crop, project, cachedir, url),
-                             algo = "md5", serialize = FALSE)
+    algo = "md5", serialize = FALSE
+  )
   full_filename <- file.path(cachedir, paste0(filename, ".tif"))
   full_filename
 }
@@ -156,8 +167,10 @@ get_filename <- function(bbox, zoom, crop, project, cachedir, url) {
 # display info if verbose
 display_infos <- function(verbose, zoom, citation, cachedir) {
   if (verbose) {
-    message("Zoom: ", zoom, "\n", "Source(s): ", citation, "\n",
-            "Cache directory: ", cachedir)
+    message(
+      "Zoom: ", zoom, "\n", "Source(s): ", citation, "\n",
+      "Cache directory: ", cachedir
+    )
   }
   return(invisible(NULL))
 }
@@ -196,11 +209,15 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   for (i in seq_along(images)) {
     x <- tile_grid$tiles[i, ]
     x <- trimws(x)
-    outfile <- paste0(cachedir, "/", src, "_", zoom, "_", x[1], "_",
-                      x[2], ".", ext)
+    outfile <- paste0(
+      cachedir, "/", src, "_", zoom, "_", x[1], "_",
+      x[2], ".", ext
+    )
     if (!file.exists(outfile) || isTRUE(forceDownload)) {
-      q <- gsub(pattern = "{s}", replacement = sample(param$sub, 1, TRUE),
-                x = param$q, fixed = TRUE)
+      q <- gsub(
+        pattern = "{s}", replacement = sample(param$sub, 1, TRUE),
+        x = param$q, fixed = TRUE
+      )
       q <- gsub(pattern = "{x}", replacement = x[1], x = q, fixed = TRUE)
       q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
       q <- gsub(pattern = "{z}", replacement = zoom, x = q, fixed = TRUE)
@@ -209,9 +226,13 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
       e <- try(curl::curl_download(url = q, destfile = outfile), silent = TRUE)
 
       if (inherits(e, "try-error")) {
-        stop(paste0("A problem occurred while downloading the tiles.\n",
-                    "Please check the tile provider address."),
-             call. = FALSE)
+        stop(
+          paste0(
+            "A problem occurred while downloading the tiles.\n",
+            "Please check the tile provider address."
+          ),
+          call. = FALSE
+        )
       }
       cpt <- cpt + 1
     }
@@ -232,9 +253,11 @@ compose_tiles <- function(tile_grid, images) {
   bricks <- vector("list", nrow(tile_grid$tiles))
   ext <- unique(tools::file_ext(images))[1]
   for (i in seq_along(bricks)) {
-    bbox <- slippymath::tile_bbox(x = tile_grid$tiles$x[i],
-                                  y = tile_grid$tiles$y[i],
-                                  zoom = tile_grid$zoom)
+    bbox <- slippymath::tile_bbox(
+      x = tile_grid$tiles$x[i],
+      y = tile_grid$tiles$y[i],
+      zoom = tile_grid$zoom
+    )
     img <- images[[i]]
 
     # special for png tiles

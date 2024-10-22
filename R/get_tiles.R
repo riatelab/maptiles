@@ -105,22 +105,28 @@ get_tiles <- function(x,
   cachedir <- get_cachedir(cachedir, param$src)
 
   # get file name
-  filename <- get_filename(res$bbox_input, zoom, crop, project, cachedir,
-                           param$q)
+  filename <- get_filename(
+    res$bbox_input, zoom, crop, project, cachedir,
+    param$q
+  )
 
   # display info
   display_infos(verbose, zoom, param$cit, cachedir = cachedir)
 
   # get cached raster if it already exists
   ras <- get_cached_raster(filename, forceDownload, verbose)
-  if (!is.null(ras)) {return(ras)}
+  if (!is.null(ras)) {
+    return(ras)
+  }
 
   # get tile list
   tile_grid <- slippymath::bbox_to_tile_grid(res$bbox_lonlat, zoom)
 
   # download images
-  images <- download_tiles(tile_grid, param, apikey, verbose,
-                           cachedir, forceDownload)
+  images <- download_tiles(
+    tile_grid, param, apikey, verbose,
+    cachedir, forceDownload
+  )
 
   # compose images
   ras <- compose_tiles(tile_grid, images)

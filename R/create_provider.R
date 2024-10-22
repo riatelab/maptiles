@@ -49,9 +49,11 @@
 #' url <- paste0("WMTS:", path, param_info, ",layer=", layer)
 #' \dontrun{
 #' tmp <- tempfile(fileext = ".xml")
-#' sf::gdal_utils(util = "translate",
-#'                source = url, destination = tmp,
-#'                options = c("-of", "WMTS"))
+#' sf::gdal_utils(
+#'   util = "translate",
+#'   source = url, destination = tmp,
+#'   options = c("-of", "WMTS")
+#' )
 #' readLines(tmp)
 #' }
 create_provider <- function(name, url, sub = NA, citation) {

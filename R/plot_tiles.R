@@ -40,8 +40,10 @@ plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
   # Zoom-in if the raster is larger than the device
   if (adjust == TRUE && add == FALSE) {
     if (terra::is.lonlat(ops$x)) {
-      message(paste0("The 'adjust' feature does not work with",
-                     " an unprojected (lon/lat) raster."))
+      message(paste0(
+        "The 'adjust' feature does not work with",
+        " an unprojected (lon/lat) raster."
+      ))
     } else {
       tsp <- dim(ops$x)[2:1]
       dsp <- dev.size("px")
@@ -55,8 +57,10 @@ plot_tiles <- function(x, adjust = FALSE, add = FALSE, ...) {
         rt <- terra::res(ops$x)[1]
         wp <- (tsp[1] - dsp[1]) / 2
         hp <- (tsp[2] - dsp[2]) / 2
-        et[1:4] <- c(et[1] + wp * rt, et[2] - wp * rt,
-                     et[3] + hp * rt, et[4] - hp * rt)
+        et[1:4] <- c(
+          et[1] + wp * rt, et[2] - wp * rt,
+          et[3] + hp * rt, et[4] - hp * rt
+        )
         ops$ext <- et
       }
       ops$smooth <- FALSE
