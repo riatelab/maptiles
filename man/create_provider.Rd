@@ -38,12 +38,12 @@ opentopomap <- create_provider(
 IGN <- create_provider(
   name = "orthophoto_IGN",
   url = paste0(
-    "https://wxs.ign.fr/ortho/geoportail/wmts?",
+    "https://data.geopf.fr/wmts?",
     "request=GetTile",
     "&service=WMTS",
     "&version=1.0.0",
     "&style=normal",
-    "&tilematrixset=PM",
+    "&tilematrixset=PM_6_18",
     "&format=image/jpeg",
     "&layer=ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO",
     "&tilematrix={z}",
@@ -54,18 +54,17 @@ IGN <- create_provider(
 )
 
 # Find TileMatrixSet and Style values
-
 layer <- "ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO"
-path <- "https://wxs.ign.fr/ortho/geoportail/wmts?"
+path <- "https://data.geopf.fr/wmts?"
 param_info <- "service=wmts&request=GetCapabilities&version=1.0.0"
 url <- paste0("WMTS:", path, param_info, ",layer=", layer)
 \dontrun{
-tmp <- tempfile(fileext = ".xml")
-sf::gdal_utils(
-  util = "translate",
-  source = url, destination = tmp,
-  options = c("-of", "WMTS")
-)
-readLines(tmp)
+  tmp <- tempfile(fileext = ".xml")
+  sf::gdal_utils(
+    util = "translate",
+    source = url, destination = tmp,
+    options = c("-of", "WMTS")
+  )
+  readLines(tmp)
 }
 }

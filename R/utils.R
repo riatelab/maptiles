@@ -185,7 +185,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
       apikey <- Sys.getenv("STADIA_MAPS")
     }
     if (startsWith(src, "Thunderforest") &&
-        Sys.getenv("THUNDERFOREST_MAPS") != "") {
+      Sys.getenv("THUNDERFOREST_MAPS") != "") {
       apikey <- Sys.getenv("THUNDERFOREST_MAPS")
     }
   }

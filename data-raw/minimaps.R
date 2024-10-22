@@ -21,9 +21,10 @@ library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
 t <- get_tiles(nc,
-               provider = "OpenStreetMap",
-               zoom = 5, cachedir = "tiles",
-               crop = T, verbose = T, forceDownload = T)
+  provider = "OpenStreetMap",
+  zoom = 5, cachedir = "tiles",
+  crop = T, verbose = T, forceDownload = T
+)
 
 library(mapsf)
 mf_raster(t)
