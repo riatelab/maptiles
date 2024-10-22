@@ -1,19 +1,3 @@
-# test if gdal version is obsolete.
-test_gdal_version <- function() {
-  v <- gdal()
-  if (v < "2.2.3") {
-    stop(
-      paste0(
-        "Your GDAL version is ", v,
-        ". You need GDAL >= 2.2.3 to use maptiles."
-      ),
-      call. = FALSE
-    )
-  }
-  return(invisible(NULL))
-}
-
-
 # test if input is correct
 test_input <- function(x) {
   ok_classes <- c("sf", "sfc", "bbox", "SpatRaster", "SpatVector", "SpatExtent")

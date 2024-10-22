@@ -16,17 +16,6 @@ st_geometry(nc_sf_centro) <- st_centroid(st_geometry(nc_sf_centro))
 nc_SpatVector_centro <- vect(nc_sf_centro)
 
 
-
-
-
-
-
-
-
-# test_gdal_version() ----
-expect_equal(maptiles:::test_gdal_version(), NULL)
-
-
 # test_input() ----
 expect_silent(maptiles:::test_input(nc_sf))
 expect_silent(maptiles:::test_input(nc_sfc))

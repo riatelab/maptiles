@@ -86,9 +86,6 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-  # test gdal version
-  test_gdal_version()
-
   # test input valididy
   test_input(x)
 
