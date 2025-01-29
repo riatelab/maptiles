@@ -17,29 +17,17 @@ providers <- list(
   "Thunderforest.Neighbourhood"
 )
 library(sf)
+library(mapsf)
 library(maptiles)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 nc <- st_transform(nc, 3857)
-t <- get_tiles(nc,
-  provider = "OpenStreetMap",
-  zoom = 5, cachedir = "tiles",
-  crop = T, verbose = T, forceDownload = T
-)
-
-library(mapsf)
-mf_raster(t)
-plot_tiles(t, adjust = T)
-
-get_providers()
-
-library(mapsf)
 png("man/figures/README-front.png", width = 202 * 4, height = 76 * 8)
 par(mar = c(0, 0, 0, 0), mfrow = c(8, 4))
 for (i in 1:length(providers)) {
   t <- get_tiles(nc,
     provider = providers[[i]],
-    zoom = 5, cachedir = "tiles",
-    crop = T, verbose = T
+    zoom = 6, cachedir = "tiles",
+    crop = T, verbose = T, retina = FALSE
   )
   plot_tiles(t)
   mf_title(
