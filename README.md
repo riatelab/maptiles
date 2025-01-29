@@ -43,7 +43,7 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.13.0, GDAL 3.10.1, PROJ 9.5.1; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
@@ -69,19 +69,20 @@ tiles server and how to cache the original tiles for future use:
 # define the tile server parameters
 osmpos <- create_provider(
   name = "CARTO.POSITRON",
-  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
   sub = c("a", "b", "c", "d"),
   citation = "© OpenStreetMap contributors © CARTO "
 )
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,
-  cachedir = tempdir(), verbose = TRUE
+  cachedir = tempdir(), verbose = TRUE, retina = TRUE
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/RtmpQKpnO9/CARTO.POSITRON
+#> Cache directory: /tmp/Rtmpfvd4hn/CARTO.POSITRON
 #> 8 tiles
+#> The resulting raster uses high resolution tiles.
 # display map
 plot_tiles(nc_osmpos)
 # display credits
