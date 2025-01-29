@@ -8,4 +8,4 @@ data-raw
 ^codemeta\.json$
 ^CITATION\.cff$
 ^codecov\.yml$
-tiles
+^tiles/

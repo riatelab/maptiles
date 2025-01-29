@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.8.0
+Version: 0.9.0
 Authors@R: c(person(given = "Timothée", 
                     family = "Giraud",
                     email = "timothee.giraud@cnrs.fr", 
@@ -26,7 +26,7 @@ License: GPL-3
 Depends: 
     R (>= 3.5.0)
 Imports: 
-    sf (>= 0.9-5),
+    sf,
     curl,
     digest,
     graphics, 
