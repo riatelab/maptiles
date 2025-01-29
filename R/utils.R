@@ -140,8 +140,16 @@ get_cachedir <- function(cachedir, src) {
 }
 
 # create a filename with hash
-get_filename <- function(bbox, zoom, crop, project, cachedir, url) {
-  filename <- digest::digest(paste0(bbox, zoom, crop, project, cachedir, url),
+get_filename <- function(bbox, zoom, crop, project, cachedir,
+                         url, retina, flip) {
+  if (missing(flip)) {
+    flip <- ""
+  }
+  filename <- digest::digest(
+    paste0(
+      bbox, zoom, crop, project,
+      cachedir, url, retina, flip
+    ),
     algo = "md5", serialize = FALSE
   )
   full_filename <- file.path(cachedir, paste0(filename, ".tif"))
@@ -174,7 +182,7 @@ get_cached_raster <- function(filename, forceDownload, verbose) {
 
 # get the tiles according to the grid
 download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
-                           forceDownload) {
+                           forceDownload, retina) {
   images <- vector("list", length = nrow(tile_grid$tiles))
   zoom <- tile_grid$zoom
   ext <- param$ext
@@ -193,9 +201,11 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   for (i in seq_along(images)) {
     x <- tile_grid$tiles[i, ]
     x <- trimws(x)
+    is_retina <- grepl(pattern = "{r}", x = param$q, fixed = TRUE)
+    ret <- ifelse(isTRUE(retina) && isTRUE(is_retina), "@2x", "")
     outfile <- paste0(
       cachedir, "/", src, "_", zoom, "_", x[1], "_",
-      x[2], ".", ext
+      x[2], "_", ret, ".", ext
     )
     if (!file.exists(outfile) || isTRUE(forceDownload)) {
       q <- gsub(
@@ -206,6 +216,12 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
       q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
       q <- gsub(pattern = "{z}", replacement = zoom, x = q, fixed = TRUE)
       q <- gsub(pattern = "{apikey}", replacement = apikey, x = q, fixed = TRUE)
+
+      if (isTRUE(retina)) {
+        q <- gsub(pattern = "{r}", replacement = "@2x", x = q, fixed = TRUE)
+      } else {
+        q <- gsub(pattern = "{r}", replacement = "", x = q, fixed = TRUE)
+      }
 
       e <- try(curl::curl_download(url = q, destfile = outfile), silent = TRUE)
 
@@ -225,15 +241,24 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   if (verbose) {
     ntiles <- length(images)
     message(ntiles, " tile", ifelse(ntiles > 1, "s", ""))
+
     if (cpt != length(images)) {
       message("The resulting raster is built with previously cached tiles.")
+    } else {
+      if (isTRUE(retina)) {
+        if (isTRUE(is_retina)) {
+          message("The resulting raster uses high resolution tiles.")
+        } else {
+          message("High resolution tiles are unavailable on this server.")
+        }
+      }
     }
   }
   return(images)
 }
 
 # compose tiles
-compose_tiles <- function(tile_grid, images) {
+compose_tiles <- function(tile_grid, images, flip) {
   bricks <- vector("list", nrow(tile_grid$tiles))
   ext <- unique(tools::file_ext(images))[1]
   for (i in seq_along(bricks)) {
@@ -261,6 +286,19 @@ compose_tiles <- function(tile_grid, images) {
 
     # warning is: [rast] unknown extent
     r_img <- suppressWarnings(terra::rast(img))
+
+    # flip tiles
+    if (missing(flip)) {
+      flip <- FALSE
+      if (ext == "jpg") {
+        flip <- TRUE
+      }
+    }
+    if (isTRUE(flip)) {
+      r_img <- terra::flip(r_img)
+    }
+
+
     # add RGB info
     if (is.null(terra::RGB(r_img))) {
       terra::RGB(r_img) <- c(1, 2, 3)

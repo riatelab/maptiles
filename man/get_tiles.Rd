@@ -13,7 +13,9 @@ get_tiles(
   verbose = FALSE,
   apikey,
   cachedir,
-  forceDownload = FALSE
+  forceDownload = FALSE,
+  retina = TRUE,
+  flip
 )
 }
 \arguments{
@@ -43,40 +45,53 @@ environment variables named "THUNDERFOREST_MAPS" or "STADIA_MAPS" are set.}
 are cached in a \link[base:tempfile]{tempdir} folder.}
 
 \item{forceDownload}{if TRUE, existing cached tiles may be overwritten.}
+
+\item{retina}{if TRUE, tiles are downloaded in high resolution if they exist.
+Stadia and CARTO provide such tiles.}
+
+\item{flip}{if TRUE, tiles are vertically flipped. The default is TRUE for
+providers serving JPG files and FALSE for others.}
 }
 \value{
 A SpatRaster is returned.
 }
 \description{
 Get map tiles based on a spatial object extent. Maps can be
-fetched from various map servers.
+fetched from various map servers ('OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
+or 'Thunderforest').
 }
 \details{
 Zoom levels are described in the OpenStreetMap wiki:
 \url{https://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
-Providers: \cr
+
+Here is the complete list of builtin providers: \cr
+
 "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
-"OpenStreetMap.HOT", "OpenTopoMap", \cr
+"OpenStreetMap.HOT", "OpenTopoMap",
+
+"Stadia.AlidadeSmooth", "Stadia.AlidadeSmoothDark",
+"Stadia.OSMBright", "Stadia.Outdoors",
 "Stadia.StamenToner", "Stadia.StamenTonerBackground",
-"Stadia.StamenTonerLines", "Stadia.StamenTonerLabels",
-"Stadia.StamenTonerLite",
-"Stadia.StamenWatercolor", "Stadia.StamenTerrain",
-"Stadia.StamenTerrainBackground",
-"Stadia.StamenTerrainLabels", \cr
-"Esri.WorldStreetMap",
-"Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
-"Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
-"Esri.WorldGrayCanvas", \cr
-"CartoDB.Positron", "CartoDB.PositronNoLabels",
-"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
-"CartoDB.DarkMatterNoLabels",
-"CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
-"CartoDB.VoyagerOnlyLabels", \cr
+"Stadia.StamenTonerLines",
+"Stadia.StamenTonerLabels", "Stadia.StamenTonerLite",
+"Stadia.StamenWatercolor",
+"Stadia.StamenTerrain", "Stadia.StamenTerrainBackground",
+"Stadia.StamenTerrainLabels",
+
+"Esri.WorldStreetMap", "Esri.WorldTopoMap", "Esri.WorldImagery",
+"Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
+"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+
+"CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
+"CartoDB.DarkMatter",
+"CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
+"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",
+
 "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
-"Thunderforest.TransportDark", "Thunderforest.SpinalMap",
-"Thunderforest.Landscape",
-"Thunderforest.Outdoors", "Thunderforest.Pioneer",
-"Thunderforest.MobileAtlas",
+"Thunderforest.TransportDark",
+"Thunderforest.SpinalMap", "Thunderforest.Landscape",
+"Thunderforest.Outdoors",
+"Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
 "Thunderforest.Neighbourhood"
 }
 \examples{

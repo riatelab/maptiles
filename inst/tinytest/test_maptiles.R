@@ -130,8 +130,9 @@ expect_true(dir.exists(file.path(tempdir(), "pop")))
 # get_filename() ----
 expect_equal(maptiles:::get_filename(bbox = nc_bbox, zoom = 7, crop = TRUE,
                                      project = FALSE,
-                                     cachedir = "/dummy/folder", url = osm$q),
-             "/dummy/folder/cf34f67f2c00b60def2ecea6a61976d7.tif")
+                                     cachedir = "/dummy/folder",
+                                     url = osm$q, retina = TRUE, flip = FALSE),
+             "/dummy/folder/b65a2ceb6cb4f13a626b86d05438ce96.tif")
 
 
 # display_infos() ----

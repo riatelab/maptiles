@@ -1,7 +1,8 @@
 #' @title Get basemap tiles from map servers
 #' @name get_tiles
 #' @description Get map tiles based on a spatial object extent. Maps can be
-#' fetched from various map servers.
+#' fetched from various map servers ('OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
+#' or 'Thunderforest').
 #' @param x sf, sfc, bbox, SpatRaster, SpatVector or SpatExtent object.
 #' If \code{x} is a SpatExtent it
 #' must express coordinates in lon/lat WGS84 (epsg:4326).
@@ -20,32 +21,42 @@
 #' @param cachedir name of a folder used to cache tiles. If not set, tiles
 #' are cached in a \link[base:tempfile]{tempdir} folder.
 #' @param forceDownload if TRUE, existing cached tiles may be overwritten.
+#' @param flip if TRUE, tiles are vertically flipped. The default is TRUE for
+#' providers serving JPG files and FALSE for others.
+#' @param retina if TRUE, tiles are downloaded in high resolution if they exist.
+#' Stadia and CARTO provide such tiles.
 #' @details
 #' Zoom levels are described in the OpenStreetMap wiki:
 #' \url{https://wiki.openstreetmap.org/wiki/Zoom_levels}. \cr\cr
-#' Providers: \cr
+#'
+#' Here is the complete list of builtin providers: \cr
+#'
 #' "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
-#' "OpenStreetMap.HOT", "OpenTopoMap", \cr
+#' "OpenStreetMap.HOT", "OpenTopoMap",
+#'
+#' "Stadia.AlidadeSmooth", "Stadia.AlidadeSmoothDark",
+#' "Stadia.OSMBright", "Stadia.Outdoors",
 #' "Stadia.StamenToner", "Stadia.StamenTonerBackground",
-#' "Stadia.StamenTonerLines", "Stadia.StamenTonerLabels",
-#' "Stadia.StamenTonerLite",
-#' "Stadia.StamenWatercolor", "Stadia.StamenTerrain",
-#' "Stadia.StamenTerrainBackground",
-#' "Stadia.StamenTerrainLabels", \cr
-#' "Esri.WorldStreetMap",
-#' "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
-#' "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
-#' "Esri.WorldGrayCanvas", \cr
-#' "CartoDB.Positron", "CartoDB.PositronNoLabels",
-#' "CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter",
-#' "CartoDB.DarkMatterNoLabels",
-#' "CartoDB.DarkMatterOnlyLabels", "CartoDB.Voyager", "CartoDB.VoyagerNoLabels",
-#' "CartoDB.VoyagerOnlyLabels", \cr
+#' "Stadia.StamenTonerLines",
+#' "Stadia.StamenTonerLabels", "Stadia.StamenTonerLite",
+#' "Stadia.StamenWatercolor",
+#' "Stadia.StamenTerrain", "Stadia.StamenTerrainBackground",
+#' "Stadia.StamenTerrainLabels",
+#'
+#' "Esri.WorldStreetMap", "Esri.WorldTopoMap", "Esri.WorldImagery",
+#' "Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
+#' "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+#'
+#' "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
+#' "CartoDB.DarkMatter",
+#' "CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
+#' "CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",
+#'
 #' "Thunderforest.OpenCycleMap", "Thunderforest.Transport",
-#' "Thunderforest.TransportDark", "Thunderforest.SpinalMap",
-#' "Thunderforest.Landscape",
-#' "Thunderforest.Outdoors", "Thunderforest.Pioneer",
-#' "Thunderforest.MobileAtlas",
+#' "Thunderforest.TransportDark",
+#' "Thunderforest.SpinalMap", "Thunderforest.Landscape",
+#' "Thunderforest.Outdoors",
+#' "Thunderforest.Pioneer", "Thunderforest.MobileAtlas",
 #' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
@@ -85,7 +96,9 @@ get_tiles <- function(x,
                       verbose = FALSE,
                       apikey,
                       cachedir,
-                      forceDownload = FALSE) {
+                      forceDownload = FALSE,
+                      retina = TRUE,
+                      flip) {
   # test input valididy
   test_input(x)
 
@@ -104,11 +117,11 @@ get_tiles <- function(x,
   # get file name
   filename <- get_filename(
     res$bbox_input, zoom, crop, project, cachedir,
-    param$q
+    param$q, retina, flip
   )
 
   # display info
-  display_infos(verbose, zoom, param$cit, cachedir = cachedir)
+  display_infos(verbose, zoom, param$cit, cachedir)
 
   # get cached raster if it already exists
   ras <- get_cached_raster(filename, forceDownload, verbose)
@@ -122,11 +135,11 @@ get_tiles <- function(x,
   # download images
   images <- download_tiles(
     tile_grid, param, apikey, verbose,
-    cachedir, forceDownload
+    cachedir, forceDownload, retina
   )
 
   # compose images
-  ras <- compose_tiles(tile_grid, images)
+  ras <- compose_tiles(tile_grid, images, flip)
 
 
   # project if needed
