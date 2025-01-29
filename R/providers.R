@@ -23,8 +23,8 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
   ),
   OpenStreetMap.HOT = list(
     src = "OpenStreetMap.HOT",
-    q = "https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-    sub = NA,
+    q = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+    sub = c("a", "b", "c"),
     cit = "\ua9 OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France"
   ),
   OpenTopoMap = list(
@@ -33,33 +33,57 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     sub = c("a", "b", "c"),
     cit = "Map data: \ua9 OpenStreetMap contributors | Map style: \ua9 OpenTopoMap (CC-BY-SA)"
   ),
+  Stadia.AlidadeSmooth = list(
+    src = "Stadia.AlidadeSmooth",
+    q = "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key={apikey}",
+    sub = NA,
+    cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
+  ),
+  Stadia.AlidadeSmoothDark = list(
+    src = "Stadia.AlidadeSmoothDark",
+    q = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key={apikey}",
+    sub = NA,
+    cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
+  ),
+  Stadia.OSMBright = list(
+    src = "Stadia.OSMBright",
+    q = "https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key={apikey}",
+    sub = NA,
+    cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
+  ),
+  Stadia.Outdoors = list(
+    src = "Stadia.OSMBright",
+    q = "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png?api_key={apikey}",
+    sub = NA,
+    cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
+  ),
   Stadia.StamenToner = list(
     src = "Stadia.StamenToner",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTonerBackground = list(
     src = "Stadia.StamenTonerBackground",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTonerLines = list(
     src = "Stadia.StamenTonerLines",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lines/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lines/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTonerLabels = list(
     src = "Stadia.StamenTonerLabels",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_labels/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTonerLite = list(
     src = "Stadia.StamenTonerLite",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
@@ -71,19 +95,19 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
   ),
   Stadia.StamenTerrain = list(
     src = "Stadia.StamenTerrain",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTerrainBackground = list(
     src = "Stadia.StamenTerrainBackground",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_background/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_background/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.StamenTerrainLabels = list(
     src = "Stadia.StamenTerrainLabels",
-    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_labels/{z}/{x}/{y}.png?api_key={apikey}",
+    q = "https://tiles.stadiamaps.com/tiles/stamen_terrain_labels/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 Stamen Design \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
@@ -137,55 +161,55 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
   ),
   CartoDB.Positron = list(
     src = "CartoDB.Positron",
-    q = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.PositronNoLabels = list(
     src = "CartoDB.PositronNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.PositronOnlyLabels = list(
     src = "CartoDB.PositronOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatter = list(
     src = "CartoDB.DarkMatter",
-    q = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatterNoLabels = list(
     src = "CartoDB.DarkMatterNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatterOnlyLabels = list(
     src = "CartoDB.DarkMatterOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.Voyager = list(
     src = "CartoDB.Voyager",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.VoyagerNoLabels = list(
     src = "CartoDB.VoyagerNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.VoyagerOnlyLabels = list(
     src = "CartoDB.VoyagerOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
