@@ -141,14 +141,11 @@ get_cachedir <- function(cachedir, src) {
 
 # create a filename with hash
 get_filename <- function(bbox, zoom, crop, project, cachedir,
-                         url, retina, flip) {
-  if (missing(flip)) {
-    flip <- ""
-  }
+                         url, retina) {
   filename <- digest::digest(
     paste0(
       bbox, zoom, crop, project,
-      cachedir, url, retina, flip
+      cachedir, url, retina
     ),
     algo = "md5", serialize = FALSE
   )
@@ -258,7 +255,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
 }
 
 # compose tiles
-compose_tiles <- function(tile_grid, images, flip) {
+compose_tiles <- function(tile_grid, images) {
   bricks <- vector("list", nrow(tile_grid$tiles))
   ext <- unique(tools::file_ext(images))[1]
   for (i in seq_along(bricks)) {
@@ -287,19 +284,12 @@ compose_tiles <- function(tile_grid, images, flip) {
     # warning is: [rast] unknown extent
     r_img <- suppressWarnings(terra::rast(img))
 
-    # use terra::is.flipped in next version
-
-    # flip tiles
-    if (missing(flip)) {
-      flip <- FALSE
-      if (ext == "jpg") {
-        flip <- TRUE
-      }
-    }
-    if (isTRUE(flip)) {
+    ############ use terra::is.flipped in next version
+    # flip jpg tiles
+    if (ext == "jpg") {
       r_img <- terra::flip(r_img)
     }
-
+    ###################################################""
 
     # add RGB info
     if (is.null(terra::RGB(r_img))) {

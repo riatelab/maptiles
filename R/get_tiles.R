@@ -21,9 +21,6 @@
 #' @param cachedir name of a folder used to cache tiles. If not set, tiles
 #' are cached in a \link[base:tempfile]{tempdir} folder.
 #' @param forceDownload if TRUE, existing cached tiles may be overwritten.
-#' @param flip if TRUE, tiles are vertically flipped. The default is TRUE for
-#' providers serving JPG files and FALSE for others. This argumet may be removed
-#' at any time.
 #' @param retina if TRUE, tiles are downloaded in high resolution if they exist.
 #' Stadia and CARTO provide such tiles.
 #' @details
@@ -98,8 +95,7 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE,
-                      retina = TRUE,
-                      flip) {
+                      retina = TRUE) {
   # test input valididy
   test_input(x)
 
@@ -118,7 +114,7 @@ get_tiles <- function(x,
   # get file name
   filename <- get_filename(
     res$bbox_input, zoom, crop, project, cachedir,
-    param$q, retina, flip
+    param$q, retina
   )
 
   # display info
@@ -140,7 +136,7 @@ get_tiles <- function(x,
   )
 
   # compose images
-  ras <- compose_tiles(tile_grid, images, flip)
+  ras <- compose_tiles(tile_grid, images)
 
 
   # project if needed

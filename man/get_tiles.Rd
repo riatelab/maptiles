@@ -14,8 +14,7 @@ get_tiles(
   apikey,
   cachedir,
   forceDownload = FALSE,
-  retina = TRUE,
-  flip
+  retina = TRUE
 )
 }
 \arguments{
@@ -48,9 +47,6 @@ are cached in a \link[base:tempfile]{tempdir} folder.}
 
 \item{retina}{if TRUE, tiles are downloaded in high resolution if they exist.
 Stadia and CARTO provide such tiles.}
-
-\item{flip}{if TRUE, tiles are vertically flipped. The default is TRUE for
-providers serving JPG files and FALSE for others.}
 }
 \value{
 A SpatRaster is returned.
