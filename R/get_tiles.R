@@ -22,7 +22,8 @@
 #' are cached in a \link[base:tempfile]{tempdir} folder.
 #' @param forceDownload if TRUE, existing cached tiles may be overwritten.
 #' @param flip if TRUE, tiles are vertically flipped. The default is TRUE for
-#' providers serving JPG files and FALSE for others.
+#' providers serving JPG files and FALSE for others. This argumet may be removed
+#' at any time.
 #' @param retina if TRUE, tiles are downloaded in high resolution if they exist.
 #' Stadia and CARTO provide such tiles.
 #' @details
@@ -45,9 +46,9 @@
 #'
 #' "Esri.WorldStreetMap", "Esri.WorldTopoMap", "Esri.WorldImagery",
 #' "Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
-#' "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+#' "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",
 #'
-#' "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
+#' "CartoDB.Positron", "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
 #' "CartoDB.DarkMatter",
 #' "CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
 #' "CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",

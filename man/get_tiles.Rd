@@ -80,9 +80,9 @@ Here is the complete list of builtin providers: \cr
 
 "Esri.WorldStreetMap", "Esri.WorldTopoMap", "Esri.WorldImagery",
 "Esri.WorldTerrain", "Esri.WorldShadedRelief", "Esri.OceanBasemap",
-"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", "CartoDB.Positron",
+"Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas",
 
-"CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
+"CartoDB.Positron", "CartoDB.PositronNoLabels", "CartoDB.PositronOnlyLabels",
 "CartoDB.DarkMatter",
 "CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels",
 "CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels",
