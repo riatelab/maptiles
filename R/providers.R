@@ -52,7 +52,7 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
     cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
   ),
   Stadia.Outdoors = list(
-    src = "Stadia.OSMBright",
+    src = "Stadia.Outdoors",
     q = "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png?api_key={apikey}",
     sub = NA,
     cit = "\ua9 Stadia Maps \ua9 OpenMapTiles \ua9 OpenStreetMap contributors"
