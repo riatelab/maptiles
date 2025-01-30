@@ -1,3 +1,16 @@
+# maptiles 0.9.0
+
+## fix
+- manage "inverted" jpg images (see #34 and https://github.com/rspatial/terra/issues/1627)
+- fix OpenStreetMap.HOT server address
+
+## feat
+- add 'retina' argument in get_tiles() to download high resolution tiles when 
+available (#33 and #35)
+- add some Stadia variants (AlidadeSmooth, AlidadeSmoothDark, OSMBright and Outdoors)
+
+
+
 # maptiles 0.8.0
 
 ## fix

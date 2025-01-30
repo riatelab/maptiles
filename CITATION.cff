@@ -8,7 +8,7 @@ message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.8.0
+version: 0.9.0
 doi: 10.32614/CRAN.package.maptiles
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
@@ -36,7 +36,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
   version: '>= 3.5.0'
 - type: software
   title: sf
@@ -49,9 +49,8 @@ references:
     given-names: Edzer
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.sf
-  version: '>= 0.9-5'
 - type: software
   title: curl
   abstract: 'curl: A Modern and Flexible Web Client for R'
@@ -63,7 +62,7 @@ references:
     given-names: Jeroen
     email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.curl
 - type: software
   title: digest
@@ -76,7 +75,7 @@ references:
     given-names: Dirk
     email: edd@debian.org
     orcid: https://orcid.org/0000-0001-6419-907X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.digest
 - type: software
   title: graphics
@@ -87,7 +86,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -97,7 +96,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: png
   abstract: 'png: Read and write PNG images'
@@ -108,7 +107,7 @@ references:
   - family-names: Urbanek
     given-names: Simon
     email: Simon.Urbanek@r-project.org
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.png
 - type: software
   title: terra
@@ -121,7 +120,7 @@ references:
     given-names: Robert J.
     email: r.hijmans@gmail.com
     orcid: https://orcid.org/0000-0001-5872-2872
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.terra
 - type: software
   title: tools
@@ -132,7 +131,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: slippymath
   abstract: 'slippymath: Slippy Map Tile Tools'
@@ -147,7 +146,7 @@ references:
   - family-names: Sumner
     given-names: Michael
     email: mdsumner@gmail.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.slippymath
 - type: software
   title: utils
@@ -158,7 +157,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
@@ -169,7 +168,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.covr
 - type: software
   title: tinytest
@@ -183,6 +182,6 @@ references:
     name-particle: van der
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.tinytest
 
