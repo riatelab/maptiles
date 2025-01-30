@@ -198,15 +198,18 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
     }
   }
   cpt <- 0
+
+  is_retina <- grepl(pattern = "{r}", x = param$q, fixed = TRUE)
+  ret <- ifelse(isTRUE(retina) && isTRUE(is_retina), "_@2x", "")
+
   for (i in seq_along(images)) {
     x <- tile_grid$tiles[i, ]
     x <- trimws(x)
-    is_retina <- grepl(pattern = "{r}", x = param$q, fixed = TRUE)
-    ret <- ifelse(isTRUE(retina) && isTRUE(is_retina), "@2x", "")
+
     outfile <- paste0(
-      cachedir, "/", src, "_", zoom, "_", x[1], "_",
-      x[2], "_", ret, ".", ext
+      cachedir, "/", src, "_", zoom, "_", x[1], "_", x[2], ret, ".", ext
     )
+
     if (!file.exists(outfile) || isTRUE(forceDownload)) {
       q <- gsub(
         pattern = "{s}", replacement = sample(param$sub, 1, TRUE),
@@ -216,12 +219,10 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
       q <- gsub(pattern = "{y}", replacement = x[2], x = q, fixed = TRUE)
       q <- gsub(pattern = "{z}", replacement = zoom, x = q, fixed = TRUE)
       q <- gsub(pattern = "{apikey}", replacement = apikey, x = q, fixed = TRUE)
-
-      if (isTRUE(retina)) {
-        q <- gsub(pattern = "{r}", replacement = "@2x", x = q, fixed = TRUE)
-      } else {
-        q <- gsub(pattern = "{r}", replacement = "", x = q, fixed = TRUE)
-      }
+      q <- gsub(
+        pattern = "{r}", replacement = substr(ret, 2, 4), x = q,
+        fixed = TRUE
+      )
 
       e <- try(curl::curl_download(url = q, destfile = outfile), silent = TRUE)
 
@@ -241,8 +242,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   if (verbose) {
     ntiles <- length(images)
     message(ntiles, " tile", ifelse(ntiles > 1, "s", ""))
-
-    if (cpt != length(images)) {
+    if (cpt != ntiles) {
       message("The resulting raster is built with previously cached tiles.")
     } else {
       if (isTRUE(retina)) {
@@ -286,6 +286,8 @@ compose_tiles <- function(tile_grid, images, flip) {
 
     # warning is: [rast] unknown extent
     r_img <- suppressWarnings(terra::rast(img))
+
+    # use terra::is.flipped in next version
 
     # flip tiles
     if (missing(flip)) {
