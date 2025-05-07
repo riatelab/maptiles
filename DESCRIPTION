@@ -32,7 +32,7 @@ Imports:
     graphics, 
     grDevices,
     png, 
-    terra,
+    terra (>= 1.8-21),
     tools, 
     slippymath, 
     utils

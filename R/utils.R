@@ -284,12 +284,10 @@ compose_tiles <- function(tile_grid, images) {
     # warning is: [rast] unknown extent
     r_img <- suppressWarnings(terra::rast(img))
 
-    ############ use terra::is.flipped in next version
     # flip jpg tiles
-    if (ext == "jpg") {
+    if (terra::is.flipped(r_img)) {
       r_img <- terra::flip(r_img)
     }
-    ###################################################""
 
     # add RGB info
     if (is.null(terra::RGB(r_img))) {
