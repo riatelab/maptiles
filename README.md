@@ -43,7 +43,7 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.13.0, GDAL 3.10.1, PROJ 9.5.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.13.1, GDAL 3.10.3, PROJ 9.6.0; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
@@ -80,7 +80,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/Rtmpfvd4hn/CARTO.POSITRON
+#> Cache directory: /tmp/RtmpShod4e/CARTO.POSITRON
 #> 8 tiles
 #> The resulting raster uses high resolution tiles.
 # display map

@@ -26,7 +26,7 @@ par(mar = c(0, 0, 0, 0), mfrow = c(8, 4))
 for (i in 1:length(providers)) {
   t <- get_tiles(nc,
     provider = providers[[i]],
-    zoom = 5, cachedir = "tiles",
+    zoom = 5, cachedir = "tiles", forceDownload = T,
     crop = T, verbose = T, retina = FALSE
   )
   plot_tiles(t)
