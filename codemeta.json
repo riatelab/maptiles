@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/riatelab/maptiles/",
   "issueTracker": "https://github.com/riatelab/maptiles/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "runtimePlatform": "R version 4.5.0 (2025-04-11)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -152,6 +152,7 @@
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
+      "version": ">= 1.8-21",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -184,5 +185,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1450.571KB"
+  "fileSize": "1452.47KB"
 }

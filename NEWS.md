@@ -1,3 +1,9 @@
+# maptiles 0.10.0
+
+## fix
+- manage "inverted" jpg/jpeg images with terra::is.flipped (#36)
+
+
 # maptiles 0.9.0
 
 ## fix
