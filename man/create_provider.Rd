@@ -4,7 +4,7 @@
 \alias{create_provider}
 \title{Create a new tile provider}
 \usage{
-create_provider(name, url, sub = NA, citation)
+create_provider(name, url, sub = c("a", "b", "c"), citation)
 }
 \arguments{
 \item{name}{name of the provider.}
@@ -24,9 +24,9 @@ a list is returned. This list can be used by \link{get_tiles}.
 Use this function to create new tiles provider.
 }
 \examples{
-statdia_toner <- create_provider(
-  name = "stadia_stamen_toner",
-  url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
+stadia_toner <- create_provider(
+  name = "Stadia_stamen_toner",
+  url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png?api_key={apikey}",
   citation = "© Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors"
 )
 opentopomap <- create_provider(

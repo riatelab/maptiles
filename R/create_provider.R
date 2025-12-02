@@ -12,9 +12,9 @@
 #' @return a list is returned. This list can be used by \link{get_tiles}.
 #' @export
 #' @examples
-#' statdia_toner <- create_provider(
-#'   name = "stadia_stamen_toner",
-#'   url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
+#' stadia_toner <- create_provider(
+#'   name = "Stadia_stamen_toner",
+#'   url = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png?api_key={apikey}",
 #'   citation = "© Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors"
 #' )
 #' opentopomap <- create_provider(
@@ -55,6 +55,6 @@
 #' )
 #' readLines(tmp)
 #' }
-create_provider <- function(name, url, sub = NA, citation) {
+create_provider <- function(name, url, sub = c("a", "b", "c"), citation) {
   return(list(src = name, q = url, sub = sub, cit = citation))
 }
