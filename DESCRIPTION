@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.10.0
+Version: 0.10.0.9999
 Authors@R: c(person(given = "Timothée", 
                     family = "Giraud",
                     email = "timothee.giraud@cnrs.fr", 
@@ -16,7 +16,12 @@ Authors@R: c(person(given = "Timothée",
 			        comment = c(ORCID = "0000-0001-5872-2872")), 
 			 person(given = "Hugh A.", 
                     family = "Graham", 
-                    role = c("ctb")))
+                    role = c("ctb")), 
+             person(given = "Miles",
+                   family = "McBain",
+                   role = "cph",
+                   comment = 
+                   "Slippy map tiles functions, from slippymath package"))
 Description: To create maps from tiles, 'maptiles' downloads, composes and
     displays tiles from a large number of providers (e.g. 'OpenStreetMap',
     'Stadia', 'Esri', 'CARTO', or 'Thunderforest').
@@ -34,10 +39,9 @@ Imports:
     png, 
     terra (>= 1.8-21),
     tools, 
-    slippymath, 
     utils
 Suggests:
     covr,
     tinytest
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

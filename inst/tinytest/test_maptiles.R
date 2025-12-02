@@ -115,7 +115,7 @@ expect_warning(maptiles:::get_param("Stamen.Toner"))
 expect_error(maptiles:::get_param("Esri.Delorme"))
 
 # get_zoom() ----
-expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 7)
+expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 6)
 expect_equal(maptiles:::get_zoom(zoom = 8, bbox_lonlat = nc_bbox), 8)
 
 
@@ -177,7 +177,7 @@ if (home){
   # download_tiles() ----
   input <- nc_sf
   res <- maptiles:::get_bbox_and_proj(input)
-  tile_grid <- slippymath::bbox_to_tile_grid(bbox = res$bbox_lonlat, zoom = 6)
+  tile_grid <- maptiles:::bbox_to_tile_grid(bbox = res$bbox_lonlat, zoom = 6)
   param <- param2 <- maptiles:::get_param("OpenStreetMap")
   param2$q <- "ppp"
   cachedir <- maptiles:::get_cachedir(src = "OSM")
@@ -210,7 +210,7 @@ if (home){
 
   input2 <- nc_sf_centro
   res2 <- maptiles:::get_bbox_and_proj(input2)
-  tile_grid2 <- slippymath::bbox_to_tile_grid(bbox = res2$bbox_lonlat, zoom = 4)
+  tile_grid2 <- maptiles:::bbox_to_tile_grid(bbox = res2$bbox_lonlat, zoom = 4)
   param2 <- maptiles:::get_param("CartoDB.PositronOnlyLabels")
   cachedir2 <- maptiles:::get_cachedir(src = "CartoDBxPos")
   images2 <- maptiles:::download_tiles(tile_grid = tile_grid2, param = param2,

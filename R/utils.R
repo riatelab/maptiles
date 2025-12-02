@@ -82,7 +82,6 @@ get_extension <- function(q) {
 }
 
 
-
 # providers parameters
 get_param <- function(provider) {
   if (is.list(provider) && length(provider) == 4) {
@@ -121,8 +120,9 @@ get_param <- function(provider) {
 get_zoom <- function(zoom, bbox_lonlat) {
   # select a default zoom level
   if (missing(zoom)) {
-    gz <- slippymath::bbox_tile_query(bbox_lonlat)
-    zoom <- min(gz[gz$total_tiles %in% 4:10, "zoom"])
+    gz <- bbox_tile_query(bbox_lonlat)
+    suitable_zooms <- gz$total_tiles <= 4
+    zoom <- gz$zoom[max(which(suitable_zooms))]
   }
   return(zoom)
 }
@@ -259,7 +259,7 @@ compose_tiles <- function(tile_grid, images) {
   bricks <- vector("list", nrow(tile_grid$tiles))
   ext <- unique(tools::file_ext(images))[1]
   for (i in seq_along(bricks)) {
-    bbox <- slippymath::tile_bbox(
+    bbox <- tile_bbox(
       x = tile_grid$tiles$x[i],
       y = tile_grid$tiles$y[i],
       zoom = tile_grid$zoom

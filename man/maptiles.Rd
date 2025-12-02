@@ -26,6 +26,7 @@ Other contributors:
   \item Diego Hernangómez (\href{https://orcid.org/0000-0001-8457-4658}{ORCID}) [contributor]
   \item Robert J. Hijmans (\href{https://orcid.org/0000-0001-5872-2872}{ORCID}) [contributor]
   \item Hugh A. Graham [contributor]
+  \item Miles McBain (Slippy map tiles functions, from slippymath package) [copyright holder]
 }
 
 }

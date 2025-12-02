@@ -127,7 +127,7 @@ get_tiles <- function(x,
   }
 
   # get tile list
-  tile_grid <- slippymath::bbox_to_tile_grid(res$bbox_lonlat, zoom)
+  tile_grid <- bbox_to_tile_grid(res$bbox_lonlat, zoom)
 
   # download images
   images <- download_tiles(
