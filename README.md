@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/check-standard.yaml)
+[![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/riatelab/maptiles/branch/main/graph/badge.svg)](https://app.codecov.io/gh/riatelab/maptiles?branch=main)
+coverage](https://codecov.io/gh/riatelab/maptiles/graph/badge.svg)](https://app.codecov.io/gh/riatelab/maptiles)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
 ![](https://cranlogs.r-pkg.org/badges/maptiles) [![Project Status:
@@ -80,7 +80,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/RtmpShod4e/CARTO.POSITRON
+#> Cache directory: /tmp/RtmpLSQP7d/CARTO.POSITRON
 #> 8 tiles
 #> The resulting raster uses high resolution tiles.
 # display map
