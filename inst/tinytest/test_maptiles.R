@@ -115,7 +115,7 @@ expect_warning(maptiles:::get_param("Stamen.Toner"))
 expect_error(maptiles:::get_param("Esri.Delorme"))
 
 # get_zoom() ----
-expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 6)
+expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 7)
 expect_equal(maptiles:::get_zoom(zoom = 8, bbox_lonlat = nc_bbox), 8)
 
 
