@@ -122,7 +122,7 @@ get_zoom <- function(zoom, bbox_lonlat) {
   if (missing(zoom)) {
     gz <- bbox_tile_query(bbox_lonlat)
     suitable_zooms <- gz$total_tiles <= 4
-    zoom <- gz$zoom[max(which(suitable_zooms))]
+    zoom <- gz$zoom[max(which(suitable_zooms))] + 1
   }
   return(zoom)
 }

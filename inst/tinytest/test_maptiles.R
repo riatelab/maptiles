@@ -10,7 +10,7 @@ nc_sfc <- st_geometry(nc_sf)
 nc_bbox <- st_bbox(nc_sf)
 nc_SpatVector <- vect(nc_sf)
 nc_SpatRaster <- rast(nc_SpatVector)
-nc_SpatExtent <- ext(project(nc_SpatVector, "epsg:4326"))
+nc_SpatExtent <- ext(project(nc_SpatVector, "EPSG:4326"))
 nc_sf_centro <- nc_sf[1, ]
 st_geometry(nc_sf_centro) <- st_centroid(st_geometry(nc_sf_centro))
 nc_SpatVector_centro <- vect(nc_sf_centro)
