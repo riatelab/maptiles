@@ -8,7 +8,7 @@ message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.10.0
+version: 0.11.0
 doi: 10.32614/CRAN.package.maptiles
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
@@ -68,7 +68,7 @@ references:
   title: digest
   abstract: 'digest: Create Compact Hash Digests of R Objects'
   notes: Imports
-  url: https://dirk.eddelbuettel.com/code/digest.html
+  url: https://eddelbuettel.github.io/digest/
   repository: https://CRAN.R-project.org/package=digest
   authors:
   - family-names: Eddelbuettel
@@ -133,22 +133,6 @@ references:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
   year: '2025'
-- type: software
-  title: slippymath
-  abstract: 'slippymath: Slippy Map Tile Tools'
-  notes: Imports
-  url: https://www.github.com/milesmcbain/slippymath
-  repository: https://CRAN.R-project.org/package=slippymath
-  authors:
-  - family-names: McBain
-    given-names: Miles
-    email: miles.mcbain@gmail.com
-    orcid: https://orcid.org/0000-0003-2865-2548
-  - family-names: Sumner
-    given-names: Michael
-    email: mdsumner@gmail.com
-  year: '2025'
-  doi: 10.32614/CRAN.package.slippymath
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'

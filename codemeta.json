@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/riatelab/maptiles/",
   "issueTracker": "https://github.com/riatelab/maptiles/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.5.0 (2025-04-11)",
+  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -46,6 +46,13 @@
       "@type": "Person",
       "givenName": "Hugh A.",
       "familyName": "Graham"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Miles",
+      "familyName": "McBain"
     }
   ],
   "maintainer": [
@@ -168,22 +175,10 @@
     },
     "10": {
       "@type": "SoftwareApplication",
-      "identifier": "slippymath",
-      "name": "slippymath",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=slippymath"
-    },
-    "11": {
-      "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
     "SystemRequirements": null
   },
-  "fileSize": "1452.47KB"
+  "fileSize": "1460.717KB"
 }

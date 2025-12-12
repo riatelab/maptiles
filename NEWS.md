@@ -1,3 +1,9 @@
+# maptiles 0.11.0
+
+## fix
+- refactor package to use code directly extracted from slippymath (thanks @milesmcbain)
+
+
 # maptiles 0.10.0
 
 ## fix
