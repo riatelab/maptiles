@@ -3,18 +3,11 @@
 
 # maptiles <img src="man/figures/logo.png" align="right" width="140"/>
 
-<!-- badges: start -->
-
 [![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/riatelab/maptiles/graph/badge.svg)](https://app.codecov.io/gh/riatelab/maptiles)
+[![codecov](https://codecov.io/gh/riatelab/maptiles/branch/dev/graph/badge.svg?token=R7T2PCTERH)](https://app.codecov.io/github/riatelab/maptiles)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
-![](https://cranlogs.r-pkg.org/badges/maptiles) [![Project Status:
-Active – The project has reached a stable, usable state and is being
-actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-<!-- badges: end -->
+![](https://cranlogs.r-pkg.org/badges/maptiles)
 
 To create maps from tiles, `maptiles` downloads, composes and displays
 tiles from a large number of providers (e.g. OpenStreetMap, Stadia,
@@ -29,11 +22,12 @@ You can install the released version of `maptiles` from
 install.packages("maptiles")
 ```
 
-You can install the development version of `maptiles` from GitHub with:
+Alternatively, you can install the development version of `osrm` (the
+dev branch) from [r-universe](https://riatelab.r-universe.dev/maptiles)
+with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("riatelab/maptiles")
+install.packages('maptiles', repos = 'https://riatelab.r-universe.dev')
 ```
 
 ## Demo
@@ -80,7 +74,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/RtmpLSQP7d/CARTO.POSITRON
+#> Cache directory: /tmp/Rtmp1Uv7sr/CARTO.POSITRON
 #> 8 tiles
 #> The resulting raster uses high resolution tiles.
 # display map
