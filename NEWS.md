@@ -1,3 +1,9 @@
+# maptiles unreleased
+
+## fix 
+- fix issue on autozoom for world polygon #38 (thanks @dieghernan)
+
+
 # maptiles 0.11.0
 
 ## fix

@@ -14,7 +14,7 @@ nc_SpatExtent <- ext(project(nc_SpatVector, "EPSG:4326"))
 nc_sf_centro <- nc_sf[1, ]
 st_geometry(nc_sf_centro) <- st_centroid(st_geometry(nc_sf_centro))
 nc_SpatVector_centro <- vect(nc_sf_centro)
-
+bb_world <- st_bbox(c(xmin = -180, ymin = -90, xmax = 180, ymax = 90))
 
 # test_input() ----
 expect_silent(maptiles:::test_input(nc_sf))
@@ -114,9 +114,13 @@ expect_identical(maptiles:::get_param("OpenStreetMap"), osm)
 expect_warning(maptiles:::get_param("Stamen.Toner"))
 expect_error(maptiles:::get_param("Esri.Delorme"))
 
+
 # get_zoom() ----
 expect_equal(maptiles:::get_zoom(bbox_lonlat = nc_bbox), 7)
 expect_equal(maptiles:::get_zoom(zoom = 8, bbox_lonlat = nc_bbox), 8)
+expect_equal(maptiles:::get_zoom(bbox_lonlat =  bb_world), 2)
+input <- maptiles:::get_bbox_and_proj(nc_sf_centro)$bbox_lonlat
+expect_equal(maptiles:::get_zoom(bbox_lonlat = input), 16)
 
 
 # get_cachedir() ----

@@ -77,7 +77,7 @@ sm_clamp <- function(x, mn, mx) {
   x
 }
 
-bbox_tile_query <- function(bbox, zoom_levels = 2:18) {
+bbox_tile_query <- function(bbox, zoom_levels = 0:20) {
   l <- list()
   for (i in seq_along(zoom_levels)) {
     l[[i]] <- bbox_tile_extent(bbox, zoom = zoom_levels[i])
