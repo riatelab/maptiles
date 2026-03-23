@@ -38,7 +38,7 @@ You can install the released version of `maptiles` from [CRAN](https://CRAN.R-pr
 install.packages("maptiles")
 ```
 
-Alternatively, you can install the development version of `osrm` (the dev branch) from [r-universe](https://riatelab.r-universe.dev/maptiles) with:
+Alternatively, you can install the development version of `maptiles` (the dev branch) from [r-universe](https://riatelab.r-universe.dev/maptiles) with:
 
 ``` r
 install.packages('maptiles', repos = 'https://riatelab.r-universe.dev')
