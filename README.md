@@ -27,7 +27,7 @@ Alternatively, you can install the development version of `maptiles`
 [r-universe](https://riatelab.r-universe.dev/maptiles) with:
 
 ``` r
-install.packages('maptiles', repos = 'https://riatelab.r-universe.dev')
+install.packages('maptiles', repos = c('https://riatelab.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Demo
@@ -37,7 +37,7 @@ OpenStreetMap tiles over North Carolina:
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
+#> Linking to GEOS 3.13.1, GDAL 3.10.3, PROJ 9.6.0; sf_use_s2() is TRUE
 library(maptiles)
 # import North Carolina counties
 nc_raw <- st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
@@ -74,7 +74,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/Rtmpu8Y3DZ/CARTO.POSITRON
+#> Cache directory: /tmp/RtmpInTQ8E/CARTO.POSITRON
 #> 8 tiles
 #> The resulting raster uses high resolution tiles.
 # display map
