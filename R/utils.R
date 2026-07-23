@@ -77,6 +77,8 @@ get_extension <- function(q) {
     ext <- "png"
   } else if (length(grep(".webp", q)) > 0) {
     ext <- "webp"
+  } else {
+    ext <- ""
   }
   return(ext)
 }
@@ -183,6 +185,11 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   images <- vector("list", length = nrow(tile_grid$tiles))
   zoom <- tile_grid$zoom
   ext <- param$ext
+  if (ext != ""){
+    ext <- paste0(".", ext)
+  } else {
+    ext <- ".png"
+  }
   src <- param$src
   if (missing(apikey)) {
     apikey <- ""
@@ -204,7 +211,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
     x <- trimws(x)
 
     outfile <- paste0(
-      cachedir, "/", src, "_", zoom, "_", x[1], "_", x[2], ret, ".", ext
+      cachedir, "/", src, "_", zoom, "_", x[1], "_", x[2], ret, ext
     )
 
     if (!file.exists(outfile) || isTRUE(forceDownload)) {
