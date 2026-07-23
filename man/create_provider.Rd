@@ -11,7 +11,8 @@ create_provider(name, url, sub = c("a", "b", "c"), citation)
 
 \item{url}{url of the provider.
 The url must contain \{x\}, \{y\} and \{z\} placeholders. It may also contain
-\{s\} for sub-domains or \{apikey\} for API keys (see Examples).}
+\{s\} for sub-domains, \{r\} for retina display or
+\{apikey\} for API keys (see Examples).}
 
 \item{sub}{sub-domains.}
 

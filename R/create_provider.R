@@ -5,7 +5,8 @@
 #' @param name name of the provider.
 #' @param url url of the provider.
 #' The url must contain \{x\}, \{y\} and \{z\} placeholders. It may also contain
-#' \{s\} for sub-domains or \{apikey\} for API keys (see Examples).
+#' \{s\} for sub-domains, \{r\} for retina display or
+#' \{apikey\} for API keys (see Examples).
 #' @param sub sub-domains.
 #' @param citation attribution text of the provider.
 #'
