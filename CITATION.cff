@@ -1,14 +1,14 @@
-# --------------------------------------------
-# CITATION file created with {cffr} R package
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# --------------------------------------------
+# ------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.11.0
+version: 0.12.0
 doi: 10.32614/CRAN.package.maptiles
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
@@ -33,10 +33,13 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
+  doi: 10.32614/R.manuals
   version: '>= 3.5.0'
 - type: software
   title: sf
@@ -49,7 +52,7 @@ references:
     given-names: Edzer
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.sf
 - type: software
   title: curl
@@ -62,7 +65,7 @@ references:
     given-names: Jeroen
     email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.curl
 - type: software
   title: digest
@@ -75,7 +78,7 @@ references:
     given-names: Dirk
     email: edd@debian.org
     orcid: https://orcid.org/0000-0001-6419-907X
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.digest
 - type: software
   title: graphics
@@ -83,31 +86,38 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: png
   abstract: 'png: Read and write PNG images'
   notes: Imports
-  url: http://www.rforge.net/png/
+  url: https://www.rforge.net/png/
   repository: https://CRAN.R-project.org/package=png
   authors:
   - family-names: Urbanek
     given-names: Simon
     email: Simon.Urbanek@r-project.org
-  year: '2025'
+    orcid: https://orcid.org/0000-0003-2297-1732
+  year: '2026'
   doi: 10.32614/CRAN.package.png
 - type: software
   title: terra
@@ -120,7 +130,13 @@ references:
     given-names: Robert J.
     email: r.hijmans@gmail.com
     orcid: https://orcid.org/0000-0001-5872-2872
-  year: '2025'
+  - family-names: Brown
+    given-names: Andrew
+    orcid: https://orcid.org/0000-0002-4565-533X
+  - family-names: Barbosa
+    given-names: Márcia
+    orcid: https://orcid.org/0000-0001-8972-7713
+  year: '2026'
   doi: 10.32614/CRAN.package.terra
   version: '>= 1.8-21'
 - type: software
@@ -129,20 +145,26 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
@@ -153,7 +175,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.covr
 - type: software
   title: tinytest
@@ -167,6 +189,6 @@ references:
     name-particle: van der
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.tinytest
 

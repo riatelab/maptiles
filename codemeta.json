@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/riatelab/maptiles/",
   "issueTracker": "https://github.com/riatelab/maptiles/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
+  "runtimePlatform": "R version 4.6.1 (2026-06-24)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -180,5 +180,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1460.717KB"
+  "fileSize": "1467.939KB"
 }
