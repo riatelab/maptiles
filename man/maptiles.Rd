@@ -21,6 +21,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Timothée Giraud \email{timothee.giraud@cnrs.fr} (\href{https://orcid.org/0000-0002-1932-3323}{ORCID})
 
+Authors:
+\itemize{
+  \item Timothée Giraud \email{timothee.giraud@cnrs.fr} (\href{https://orcid.org/0000-0002-1932-3323}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Diego Hernangómez (\href{https://orcid.org/0000-0001-8457-4658}{ORCID}) [contributor]

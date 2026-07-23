@@ -60,7 +60,7 @@
 #' @return A SpatRaster is returned.
 #' @importFrom terra ext project rast as.polygons gdal writeRaster
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
-#' st_bbox st_as_sfc st_crs
+#' @importFrom sf st_bbox st_as_sfc st_crs
 #' @importFrom tools file_path_sans_ext
 #' @examples
 #' \dontrun{
