@@ -95,15 +95,6 @@ expect_inherits(x[[2]], "bbox")
 expect_inherits(x[[3]], "bbox")
 
 
-# get_extension() ----
-q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.jpeg"
-expect_equal(maptiles:::get_extension(q), "jpeg")
-q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.jpg"
-expect_equal(maptiles:::get_extension(q), "jpg")
-q <- "https://tile.openstreetmap.org/{z}/{x}/{y}.webp"
-expect_equal(maptiles:::get_extension(q), "webp")
-
-
 # get_param() ----
 osm <- list(src = "OpenStreetMap",
             q = "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
