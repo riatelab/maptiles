@@ -206,17 +206,16 @@ if (home){
   input2 <- nc_sf_centro
   res2 <- maptiles:::get_bbox_and_proj(input2)
   tile_grid2 <- maptiles:::bbox_to_tile_grid(bbox = res2$bbox_lonlat, zoom = 4)
-  param2 <- maptiles:::get_param("CartoDB.PositronOnlyLabels")
-  cachedir2 <- maptiles:::get_cachedir(src = "CartoDBxPos")
+  param2 <- maptiles:::get_param("OpenStreetMap")
+  cachedir2 <- maptiles:::get_cachedir(src = "OpenStreetMapx")
   images2 <- maptiles:::download_tiles(tile_grid = tile_grid2, param = param2,
-                                      verbose = FALSE, cachedir = cachedir2,
-                                      forceDownload = TRUE, retina = TRUE)
+                                      verbose = TRUE, cachedir = cachedir2,
+                                      forceDownload = TRUE, retina = FALSE)
   ras2 <- maptiles:::compose_tiles(tile_grid2, images2)
   expect_inherits(ras2, "SpatRaster")
-  expect_equal(dim(ras2), c(512, 512, 4))
+  expect_equal(dim(ras2), c(256, 256, 3))
 
-
-  # project_and_crop_raster() ----
+    # project_and_crop_raster() ----
   ras <- maptiles:::compose_tiles(tile_grid, images)
   unmodified <- maptiles:::project_and_crop_raster(ras = ras, project = FALSE,
                                                    res = res, crop = FALSE)
