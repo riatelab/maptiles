@@ -8,7 +8,7 @@ message: 'To cite package "maptiles" in publications use:'
 type: software
 license: GPL-3.0-only
 title: 'maptiles: Download and Display Map Tiles'
-version: 0.12.0
+version: 0.13.0
 doi: 10.32614/CRAN.package.maptiles
 abstract: To create maps from tiles, 'maptiles' downloads, composes and displays tiles
   from a large number of providers (e.g. 'OpenStreetMap', 'Stadia', 'Esri', 'CARTO',
@@ -134,8 +134,14 @@ references:
     given-names: Andrew
     orcid: https://orcid.org/0000-0002-4565-533X
   - family-names: Barbosa
-    given-names: Márcia
+    given-names: A. Márcia
     orcid: https://orcid.org/0000-0001-8972-7713
+  - family-names: Cordano
+    given-names: Emanuele
+    orcid: https://orcid.org/0000-0002-3508-5898
+  - family-names: Dyba
+    given-names: Krzysztof
+    orcid: https://orcid.org/0000-0002-8614-3816
   year: '2026'
   doi: 10.32614/CRAN.package.terra
   version: '>= 1.8-21'

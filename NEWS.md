@@ -1,3 +1,12 @@
+# maptiles 0.13.0
+
+## fix 
+- update CARTO provider URLs to use an API key
+
+## feat
+- API key management for CARTO with env variable
+
+
 # maptiles 0.12.0
 
 ## fix 
