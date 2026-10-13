@@ -161,55 +161,55 @@ globalVariables(".global_maptiles", package = "maptiles", add = FALSE)
   ),
   CartoDB.Positron = list(
     src = "CartoDB.Positron",
-    q = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.PositronNoLabels = list(
     src = "CartoDB.PositronNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.PositronOnlyLabels = list(
     src = "CartoDB.PositronOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatter = list(
     src = "CartoDB.DarkMatter",
-    q = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatterNoLabels = list(
     src = "CartoDB.DarkMatterNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.DarkMatterOnlyLabels = list(
     src = "CartoDB.DarkMatterOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.Voyager = list(
     src = "CartoDB.Voyager",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.VoyagerNoLabels = list(
     src = "CartoDB.VoyagerNoLabels",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
   CartoDB.VoyagerOnlyLabels = list(
     src = "CartoDB.VoyagerOnlyLabels",
-    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+    q = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png?key={apikey}",
     sub = c("a", "b", "c", "d"),
     cit = "\ua9 OpenStreetMap contributors \ua9 CARTO"
   ),
