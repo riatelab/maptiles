@@ -200,6 +200,9 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
       Sys.getenv("THUNDERFOREST_MAPS") != "") {
       apikey <- Sys.getenv("THUNDERFOREST_MAPS")
     }
+    if (startsWith(src, "CartoDB") && Sys.getenv("CARTO_MAPS") != "") {
+      apikey <- Sys.getenv("CARTO_MAPS")
+    }
   }
   cpt <- 0
 

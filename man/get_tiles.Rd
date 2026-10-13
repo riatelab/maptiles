@@ -37,8 +37,9 @@ If FALSE the output uses "EPSG:3857" (Web Mercator).}
 \item{verbose}{if TRUE, tiles filepaths, zoom level and
 attribution are displayed.}
 
-\item{apikey}{API key. Not needed for Thunderforest or Stadia servers if
-environment variables named "THUNDERFOREST_MAPS" or "STADIA_MAPS" are set.}
+\item{apikey}{API key. Not needed for Thunderforest, Stadia or CARTO servers
+if environment variables named "THUNDERFOREST_MAPS", "STADIA_MAPS" or
+"CARTO_MAPS" are set.}
 
 \item{cachedir}{name of a folder used to cache tiles. If not set, tiles
 are cached in a \link[base:tempfile]{tempdir} folder.}
