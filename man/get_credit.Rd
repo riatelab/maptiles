@@ -10,6 +10,9 @@ get_credit(provider)
 \item{provider}{provider name or provider object
 (as produced by \link{create_provider}).}
 }
+\value{
+The attributtion text for the tile provider is returned.
+}
 \description{
 Get the attribution of map tiles.
 }

@@ -13,6 +13,7 @@
 #' @note This function is a wrapper for \code{\link[terra:plotRGB]{plotRGB}}
 #' from the terra package.
 #' @export
+#' @returns Nothing is returned, tiles are plotted.
 #' @importFrom graphics plot.new plot.window
 #' @importFrom grDevices dev.size
 #' @examples

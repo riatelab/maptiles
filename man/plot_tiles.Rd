@@ -20,6 +20,9 @@ not (FALSE).}
 \item{...}{bgalpha, smooth, or other arguments passed to be passed to
 \code{\link[terra:plotRGB]{plotRGB}}}
 }
+\value{
+Nothing is returned, tiles are plotted.
+}
 \description{
 Plot map tiles.
 }

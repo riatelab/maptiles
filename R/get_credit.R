@@ -4,6 +4,7 @@
 #' @param provider provider name or provider object
 #' (as produced by \link{create_provider}).
 #' @export
+#' @returns The attributtion text for the tile provider is returned.
 #' @examples
 #' get_credit("OpenStreetMap")
 get_credit <- function(provider) {
