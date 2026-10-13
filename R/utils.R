@@ -66,6 +66,24 @@ get_bbox_and_proj <- function(x) {
   ))
 }
 
+# get fle extension from url
+get_extension <- function(q) {
+  # extension management
+  if (length(grep(".jpg", q)) > 0) {
+    ext <- "jpg"
+  } else if (length(grep(".jpeg", q)) > 0) {
+    ext <- "jpeg"
+  } else if (length(grep(".png", q)) > 0) {
+    ext <- "png"
+  } else if (length(grep(".webp", q)) > 0) {
+    ext <- "webp"
+  } else {
+    ext <- ""
+  }
+  return(ext)
+}
+
+
 # providers parameters
 get_param <- function(provider) {
   if (is.list(provider) && length(provider) == 4) {
@@ -96,7 +114,7 @@ get_param <- function(provider) {
     }
     param <- .global_maptiles$providers[[provider]]
   }
-  param$ext <- tools::file_ext(param$q)
+  param$ext <- get_extension(param$q)
   return(param)
 }
 
