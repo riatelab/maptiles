@@ -62,11 +62,11 @@ tiles server and how to cache the original tiles for future use:
 ``` r
 # define the tile server parameters
 osmpos <- create_provider(
-    name = "OpenStreetMapFrance", 
-    url = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
-    sub = c("a", "b", "c"),
-    citation = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
-  )
+  name = "OpenStreetMapFrance",
+  url = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c"),
+  citation = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
+)
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,
@@ -74,7 +74,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap France | © OpenStreetMap contributors
-#> Cache directory: /tmp/RtmpWprqgf/OpenStreetMapFrance
+#> Cache directory: /tmp/RtmpI93tPo/OpenStreetMapFrance
 #> 8 tiles
 #> High resolution tiles are unavailable on this server.
 # display map
@@ -115,7 +115,7 @@ different providers and to have a minimal number of robust and modern
 dependencies. However, depending on the use case, one of following
 packages may better suit your needs:
 
-- [`ceramic`](https://github.com/hypertidy/ceramic)\
+- [`ceramic`](https://github.com/hypertidy/ceramic)
 - [`ggmap`](https://github.com/dkahle/ggmap) (`ggplot2` focused)
 - [`ggspatial`](https://github.com/paleolimbot/ggspatial) (`ggplot2`
   focused, based on `rosm`)
