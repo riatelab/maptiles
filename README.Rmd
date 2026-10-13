@@ -78,11 +78,11 @@ and how to cache the original tiles for future use:
 ```{r example2,fig.ext="png", margin = TRUE, fig.width=808/96, fig.height = 303/96, fig.show='hide', dpi = 96}
 # define the tile server parameters
 osmpos <- create_provider(
-    name = "OpenStreetMapFrance", 
-    url = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
-    sub = c("a", "b", "c"),
-    citation = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
-  )
+  name = "OpenStreetMapFrance",
+  url = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c"),
+  citation = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
+)
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,

@@ -185,7 +185,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   images <- vector("list", length = nrow(tile_grid$tiles))
   zoom <- tile_grid$zoom
   ext <- param$ext
-  if (ext != ""){
+  if (ext != "") {
     ext <- paste0(".", ext)
   } else {
     ext <- ".png"
