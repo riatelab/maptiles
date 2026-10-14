@@ -137,6 +137,21 @@ suit your needs:
 * [`rosm`](https://github.com/paleolimbot/rosm)
 * ...
 
+
+## Community Guidelines
+
+One can contribute to the package through pull requests and report issues or
+ask questions [here](https://github.com/riatelab/maptiles/issues). See the
+[CONTRIBUTING.md](https://github.com/riatelab/maptiles/blob/master/CONTRIBUTING.md)
+file for detailed instructions on how to contribute.
+This project uses [conventional
+commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/) and
+[semantic versioning](https://semver.org/).
+
+
+
 ## Note
 
 Not to be confused with [`tilemaps`](https://github.com/kaerosen/tilemaps), that "implements an algorithm for generating maps, known as tile maps, in which each region is represented by a single tile of the same shape and size."
+
+

@@ -74,7 +74,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap France | © OpenStreetMap contributors
-#> Cache directory: /tmp/RtmpI93tPo/OpenStreetMapFrance
+#> Cache directory: /tmp/RtmpcW8srp/OpenStreetMapFrance
 #> 8 tiles
 #> High resolution tiles are unavailable on this server.
 # display map
@@ -126,6 +126,17 @@ packages may better suit your needs:
 - [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps) (google)
 - [`rosm`](https://github.com/paleolimbot/rosm)
 - …
+
+## Community Guidelines
+
+One can contribute to the package through pull requests and report
+issues or ask questions
+[here](https://github.com/riatelab/maptiles/issues). See the
+[CONTRIBUTING.md](https://github.com/riatelab/maptiles/blob/master/CONTRIBUTING.md)
+file for detailed instructions on how to contribute. This project uses
+[conventional
+commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/) and
+[semantic versioning](https://semver.org/).
 
 ## Note
 

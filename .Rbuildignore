@@ -9,3 +9,4 @@ data-raw
 ^CITATION\.cff$
 ^codecov\.yml$
 ^tiles/
+^CONTRIBUTING\.md$
