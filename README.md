@@ -3,11 +3,12 @@
 
 # maptiles <img src="man/figures/logo.png" align="right" width="140"/>
 
-[![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/riatelab/maptiles/branch/dev/graph/badge.svg?token=R7T2PCTERH)](https://app.codecov.io/github/riatelab/maptiles)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
-![](https://cranlogs.r-pkg.org/badges/maptiles)
+[![CRAN](https://www.r-pkg.org/badges/version-ago/maptiles)](https://cran.r-project.org/package=maptiles)
+[![maptiles status
+badge](https://riatelab.r-universe.dev/maptiles/badges/version)](https://riatelab.r-universe.dev/maptiles)
+![code coverage:
+93%](https://img.shields.io/badge/code_coverage-93%25-green)
+[![downloads](https://cranlogs.r-pkg.org/badges/maptiles?color=brightgreen)](https://cran.r-project.org/package=maptiles)
 
 To create maps from tiles, `maptiles` downloads, composes and displays
 tiles from a large number of providers (e.g. OpenStreetMap, Stadia,
@@ -74,7 +75,7 @@ nc_osmpos <- get_tiles(
 )
 #> Zoom: 7
 #> Source(s): © OpenStreetMap France | © OpenStreetMap contributors
-#> Cache directory: /tmp/RtmpcW8srp/OpenStreetMapFrance
+#> Cache directory: /tmp/RtmpDPCxIv/OpenStreetMapFrance
 #> 8 tiles
 #> High resolution tiles are unavailable on this server.
 # display map
